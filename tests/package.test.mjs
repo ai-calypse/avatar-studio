@@ -31,6 +31,9 @@ test('package contains the complete runtime and excludes the demo', async () => 
   const required = [
     'agent-robot-avatar.js',
     'index.d.ts',
+    'src/avatar-studio-customization.js',
+    'src/avatar-studio-accessories.js',
+    'src/agent-cat-avatar.js',
     'src/agent-robot-avatar-core.js',
     'src/agent-robot-avatar-geometry.js',
     'src/agent-robot-avatar-actions.js',
@@ -49,6 +52,7 @@ test('package contains the complete runtime and excludes the demo', async () => 
 
   for (const file of required) assert.ok(files.has(file), `Missing package file: ${file}`);
   assert.ok([...files].every(file => !file.startsWith('demo/')), 'Demo files must not ship in the package');
+  assert.ok([...files].every(file => !file.startsWith('mcp/') && !file.includes('node_modules') && !file.endsWith('.tgz')), 'Server dependencies and local artifacts must not ship in the browser package');
 
   for (const file of required.filter(file => file.endsWith('.js'))) {
     const source = await readFile(path.join(root, file), 'utf8');
@@ -101,11 +105,11 @@ test('packed package installs and can be imported without browser globals', asyn
     const imported = run(process.execPath, [
       '--input-type=module',
       '--eval',
-      "import('agent-robot-avatar').then(module => console.log(Object.keys(module).sort().join(',')))",
+      "import('@ai-calypse/avatar-studio').then(module => console.log(Object.keys(module).sort().join(',')))",
     ], { cwd: consumer });
-    assert.match(imported, /AgentRobotAvatar,VERSION,default/);
+    assert.match(imported, /AgentRobotAvatar,VERSION,accessories,customizeAvatar,default,exportAvatarSVG/);
 
-    const packageJson = JSON.parse(await readFile(path.join(consumer, 'node_modules', 'agent-robot-avatar', 'package.json'), 'utf8'));
+    const packageJson = JSON.parse(await readFile(path.join(consumer, 'node_modules', '@ai-calypse', 'avatar-studio', 'package.json'), 'utf8'));
     assert.notEqual(packageJson.sideEffects, false);
     assert.equal(packageJson.types, './index.d.ts');
     assert.equal(packageJson.exports['.'].types, './index.d.ts');

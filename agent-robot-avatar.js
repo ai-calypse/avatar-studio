@@ -27,3 +27,5 @@ if (typeof window !== 'undefined') {
 
 export { AgentRobotAvatar, AgentCatAvatar, VERSION };
 export default AgentRobotAvatar;
+
+export { customizeAvatar, exportAvatarSVG, accessories } from './src/avatar-studio-customization.js';

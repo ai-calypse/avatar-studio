@@ -1,4 +1,5 @@
-import { ACCESSORY_OPTIONS, ACCESSORY_GROUPS, HEADWEAR, accessoryMarkup } from './avatar-studio-accessories.js';
+import { ACCESSORY_OPTIONS, ACCESSORY_GROUPS } from './avatar-studio-accessories.js';
+import { customizeAvatar, exportAvatarSVG } from '../agent-robot-avatar.js';
 const face = document.getElementById('face');
 const defaults = { body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, eyeSize: 100, spacing: 0, accessory: 'none' };
 let settings = { ...defaults };
@@ -20,45 +21,16 @@ panel.innerHTML = `
     <button type="button" id="robot-custom-export">Download SVG</button>
   </div>`;
 document.querySelector('.demo-control-stack').appendChild(panel);
-const namespace = 'http://www.w3.org/2000/svg';
-const wrappers = ['leftEye', 'rightEye'].map(id => {
-  const eye = face.shadowRoot.getElementById(id);
-  const wrapper = document.createElementNS(namespace, 'g');
-  eye.parentNode.insertBefore(wrapper, eye);
-  wrapper.appendChild(eye);
-  return wrapper;
-});
-const accessory = document.createElementNS(namespace, 'g');
-accessory.id = 'personal-accessory';
-face._headMotion.appendChild(accessory);
-const eyeStyle = document.createElement('style');
-eyeStyle.textContent = '#leftBase,#rightBase,#leftInputBase,#rightInputBase{fill:var(--robot-eye-color,#fff)!important}';
-face.shadowRoot.appendChild(eyeStyle);
-const accessoryStyle = document.createElement('style');
-face.shadowRoot.appendChild(accessoryStyle);
-face.shadowRoot.querySelector('svg').setAttribute('viewBox', '-16 -48 272 320');
-function renderAccessory() {
-  accessory.innerHTML = accessoryMarkup(face, settings);
-  accessoryStyle.textContent = HEADWEAR.has(settings.accessory) ? '#antennaDot{display:none!important}' : '';
-}
-new MutationObserver(renderAccessory).observe(face._headShape, { attributes: true, attributeFilter: ['d'] });
 function apply() {
+  settings = Object.fromEntries(Object.keys(defaults).map(key => [key, settings[key] ?? defaults[key]]));
   if (!/^#[0-9a-f]{6}$/i.test(settings.body)) settings.body = defaults.body;
   if (!/^#[0-9a-f]{6}$/i.test(settings.eyes)) settings.eyes = defaults.eyes;
   if (!/^#[0-9a-f]{6}$/i.test(settings.accessoryColor)) settings.accessoryColor = defaults.accessoryColor;
   settings.eyeSize = Math.max(60, Math.min(125, Number(settings.eyeSize) || 100));
   settings.spacing = Math.max(-12, Math.min(12, Number(settings.spacing) || 0));
   settings.matchEyes = settings.matchEyes === true;
-  if (!(settings.accessory in ACCESSORY_OPTIONS)) settings.accessory = 'none';
-  face.setAttribute('color', settings.body);
-  face.style.setProperty('--robot-eye-color', settings.eyes);
-  face.style.setProperty('--robot-accessory-color', settings.matchEyes ? settings.eyes : settings.accessoryColor);
-  wrappers.forEach((wrapper, index) => {
-    const x = index ? 154 : 86;
-    const spacing = settings.spacing * (index ? 1 : -1);
-    wrapper.setAttribute('transform', `translate(${spacing} 0) translate(${x} 126) scale(${settings.eyeSize / 100}) translate(${-x} -126)`);
-  });
-  renderAccessory();
+  if (!Object.hasOwn(ACCESSORY_OPTIONS, settings.accessory)) settings.accessory = 'none';
+  customizeAvatar(face, settings);
   panel.querySelector('[data-setting="accessoryColor"]').disabled = Boolean(settings.matchEyes);
   try { localStorage.setItem('robot-personalization', JSON.stringify(settings)); } catch (_) {}
 }
@@ -77,17 +49,7 @@ panel.querySelector('#robot-custom-reset').addEventListener('click', () => {
   apply();
 });
 export function avatarSVG() {
-  const svg = face.shadowRoot.querySelector('svg').cloneNode(true);
-  svg.setAttribute('xmlns', namespace);
-  svg.setAttribute('width', '256');
-  svg.setAttribute('height', '256');
-  svg.style.setProperty('--robot-eye-color', settings.eyes);
-  svg.style.setProperty('--robot-accessory-color', settings.matchEyes ? settings.eyes : settings.accessoryColor);
-  svg.setAttribute('viewBox', '-16 -48 272 320');
-  const exportedStyle = document.createElementNS(namespace, 'style');
-  exportedStyle.textContent = eyeStyle.textContent + accessoryStyle.textContent;
-  svg.prepend(exportedStyle);
-  return new XMLSerializer().serializeToString(svg);
+  return exportAvatarSVG(face);
 }
 export function saveDownload(blob, filename) {
   const url = URL.createObjectURL(blob);

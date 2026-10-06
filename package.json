@@ -1,7 +1,7 @@
 {
-  "name": "agent-robot-avatar",
-  "version": "0.5.2",
-  "description": "A lightweight expressive robot avatar Web Component for AI agents and interactive applications.",
+  "name": "@ai-calypse/avatar-studio",
+  "version": "0.1.0",
+  "description": "Personalized animated robot avatars with 50 shape-fitting accessories, color controls, and SVG export.",
   "type": "module",
   "main": "./agent-robot-avatar.js",
   "module": "./agent-robot-avatar.js",
@@ -35,8 +35,6 @@
     "agent-robot-avatar.js",
     "index.d.ts",
     "src/",
-    "assets/support/",
-    "docs/",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
@@ -54,19 +52,15 @@
     "vanilla-javascript",
     "ui"
   ],
-  "author": "CX ArtLab",
+  "author": "ai-calypse",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CX-ArtLab/agent-robot-avatar.git"
+    "url": "git+https://github.com/ai-calypse/avatar-studio.git"
   },
-  "homepage": "https://github.com/CX-ArtLab/agent-robot-avatar#readme",
+  "homepage": "https://github.com/ai-calypse/avatar-studio#readme",
   "bugs": {
-    "url": "https://github.com/CX-ArtLab/agent-robot-avatar/issues"
-  },
-  "funding": {
-    "type": "individual",
-    "url": "https://ko-fi.com/P0E625WIOI"
+    "url": "https://github.com/ai-calypse/avatar-studio/issues"
   },
   "publishConfig": {
     "access": "public",
@@ -75,5 +69,8 @@
   "devDependencies": {
     "@playwright/test": "1.62.1",
     "typescript": "7.0.2"
-  }
+  },
+  "contributors": [
+    "CX ArtLab (original Agent Robot Avatar)"
+  ]
 }

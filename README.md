@@ -161,24 +161,54 @@ Inputs use strict allowlisted schemas. Rendering has bounded image sizes, output
 
 These controls do not make the process an operating-system sandbox or a public multi-tenant service. Read [the security model and limitations](mcp/SECURITY.md) before integrating or hosting it. Remote access would require a separate authentication, isolation, and deployment design.
 
-## Embed the animated component
+## npm package for applications
 
-The original robot component remains available for interactive app interfaces. Serve these repository files with your application:
+The browser package is **`@ai-calypse/avatar-studio`**. It includes the animated robot and cat components, the 50-accessory catalog, programmatic customization, and SVG snapshots with TypeScript declarations. It has no runtime dependencies. The website controls and Node.js MCP server are separate.
 
-```html
-<script type="module" src="./agent-robot-avatar.js"></script>
-<agent-robot-avatar id="avatar" size="160" color="#182725"></agent-robot-avatar>
+Once published to npm:
+
+```sh
+npm install @ai-calypse/avatar-studio
 ```
+
+Import it in your browser application's entrypoint:
 
 ```js
-const avatar = document.querySelector('#avatar');
-avatar.setHeadRoundness(70);
+import { customizeAvatar, exportAvatarSVG, accessories } from '@ai-calypse/avatar-studio';
+
+const avatar = document.createElement('agent-robot-avatar');
+avatar.setAttribute('size', '160');
+document.querySelector('#avatar-container').appendChild(avatar);
+
+customizeAvatar(avatar, {
+  body: '#182725',
+  eyes: '#dbf59d',
+  accessory: 'headphones',
+  matchEyes: true,
+  headRoundness: 70
+});
+
 avatar.startWaiting();
-// Once your operation completes:
+// When your operation completes:
 await avatar.play('success');
+
+const svg = exportAvatarSVG(avatar, 256);
+console.log(accessories); // 50 entries with id, name, and category
 ```
 
-See [the basic example](examples/basic.html), [the accessible request lifecycle example](examples/accessibility.html), and [TypeScript declarations](index.d.ts). The studio's full customization UI lives in `demo/`; importing the base component alone does not mount that UI.
+Call `customizeAvatar` after attaching the element to the page. It accepts partial appearance updates using the color, accessory, eye-size, spacing, and head-roundness controls listed above. Unsupported fields, accessory IDs, and out-of-range values are rejected. Set expressions through the component's animation API, such as `avatar.play('success')`; the MCP-only `expression` field is not accepted by `customizeAvatar`. Settings are isolated per element and are not automatically saved to browser storage.
+
+`exportAvatarSVG` returns a string snapshot of the current pose at a size from 32 to 512. Use the website for PNG/GIF downloads or MCP for generated PNG/GIF artifacts. In a server-rendered application, create and customize elements on the client after mounting.
+
+Before registry publication, install directly from a local tarball:
+
+```sh
+npm pack --pack-destination /tmp
+# Run in your application's directory:
+npm install /tmp/ai-calypse-avatar-studio-0.1.0.tgz
+```
+
+See [the basic example](examples/basic.html), [the accessible request lifecycle example](examples/accessibility.html), and [TypeScript declarations](index.d.ts) for the underlying component API. [Publishing instructions](RELEASING.md) explain npm login, validation, and release automation.
 
 ## Development checks
 

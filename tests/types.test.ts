@@ -8,7 +8,7 @@ import AgentRobotAvatar, {
   type AgentRobotAvatarMotion,
   type AgentRobotAvatarState,
   type AgentRobotAvatarWakeOn,
-} from 'agent-robot-avatar';
+} from '@ai-calypse/avatar-studio';
 
 const avatar = new AgentRobotAvatar();
 const action: AgentRobotAvatarAction = 'success';
@@ -81,3 +81,10 @@ void wakeOn;
 void motion;
 void invalidWakeOn;
 void invalidMotion;
+
+import { customizeAvatar, exportAvatarSVG, accessories } from "@ai-calypse/avatar-studio";
+const appearance = customizeAvatar(avatar, { accessory: "headphones", matchEyes: true, eyes: "#dbf59d" });
+const svg: string = exportAvatarSVG(avatar, 256);
+void appearance; void svg; void accessories;
+// @ts-expect-error Only supported accessory IDs are allowed.
+customizeAvatar(avatar, { accessory: "unknown" });

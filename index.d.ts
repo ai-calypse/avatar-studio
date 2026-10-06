@@ -128,3 +128,20 @@ declare global {
     'agent-cat-avatar': AgentCatAvatar;
   }
 }
+
+export type AvatarAccessory = 'none' | 'glasses' | 'headphones' | 'bow' | 'sunglasses' | 'crown' | 'party' | 'halo' | 'beanie' | 'moustache' | 'flower' | 'round-glasses' | 'square-glasses' | 'cat-eye' | 'aviators' | 'heart-glasses' | 'star-glasses' | 'monocle' | 'goggles' | 'visor' | 'eye-patch' | 'top-hat' | 'fedora' | 'cowboy' | 'cap' | 'beret' | 'bucket' | 'wizard' | 'santa' | 'chef' | 'graduation' | 'pirate' | 'cat-ears' | 'bunny-ears' | 'bear-ears' | 'fox-ears' | 'horns' | 'antlers' | 'alien-antennae' | 'scarf' | 'tie' | 'necklace' | 'medal' | 'choker' | 'bandana' | 'star-pin' | 'heart-pin' | 'lightning-pin' | 'leaf-pin' | 'snowflake-pin' | 'butterfly-pin';
+
+export interface AvatarAppearance {
+  body?: string;
+  eyes?: string;
+  accessoryColor?: string;
+  matchEyes?: boolean;
+  eyeSize?: number;
+  spacing?: number;
+  headRoundness?: number;
+  accessory?: AvatarAccessory;
+}
+
+export declare function customizeAvatar(avatar: AgentRobotAvatar, appearance?: AvatarAppearance): Readonly<Required<AvatarAppearance>>;
+export declare function exportAvatarSVG(avatar: AgentRobotAvatar, size?: number): string;
+export declare const accessories: readonly Readonly<{ id: Exclude<AvatarAccessory, "none">; name: string; category: string }>[];

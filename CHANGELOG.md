@@ -1,5 +1,16 @@
 # Changelog
 
+## Avatar Studio 0.1.0
+
+- First release under `@ai-calypse/avatar-studio`, based on Agent Robot Avatar 0.5.2.
+- Export `customizeAvatar`, `exportAvatarSVG`, and a catalog of 50 accessories for app integrations.
+- Support independent body, eye, and accessory colors, matching eye colors, eye geometry, and head roundness.
+- Share shape-fitting accessories between the browser creator, npm runtime, and local MCP.
+- Include TypeScript declarations and retain the original robot and cat components.
+
+The entries below describe the upstream Agent Robot Avatar releases.
+
+
 All notable user-facing changes to Agent Robot Avatar are documented here.
 
 The project follows Semantic Versioning for public releases. Internal development build numbers are not part of the public version history.
