@@ -5,7 +5,7 @@ import {Marked} from 'marked';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const repo='https://github.com/ai-calypse/avatar-studio/blob/main/';
 const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-const slug=value=>value.toLowerCase().replace(/<[^>]+>/g,'').replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-');
+const slug=value=>value.toLowerCase().replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-');
 const section=(source,title)=>{
  const marker=`\n## ${title}\n`;
  const start=source.indexOf(marker);
