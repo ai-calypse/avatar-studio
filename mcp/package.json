@@ -1,6 +1,6 @@
 {
   "name": "avatar-studio-mcp",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "Local MCP avatar workflows: stable identities, brand palettes, batch exports, variants, expression packs, and sprite sheets.",

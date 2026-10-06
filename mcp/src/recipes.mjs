@@ -16,7 +16,7 @@ export function generateIdentity(input) {
   const { seed, overrides } = IdentityInput.parse(input);
   const hash = digest(seed);
   const body = colors[hash[0] % colors.length];
-  const config = AvatarConfig.parse({ body, eyes: eyeColor(body), accessory: ids[hash[1] % ids.length], matchEyes: true, eyeSize: 80 + hash[2] % 36, spacing: -6 + hash[3] % 13, headRoundness: hash[4] % 101, ...overrides });
+  const config = AvatarConfig.parse({ body, eyes: eyeColor(body), accessory: ids[hash[1] % ids.length], matchEyes: true, eyeSize: 80 + hash[2] % 36, spacing: -6 + hash[3] % 13, headRoundness: hash[4] % 101, shapeSeed: hash.readUInt32BE(5), ...overrides });
   // The raw user ID is never returned. This fingerprint is not an anonymity guarantee.
   return { recipeVersion: RECIPE_VERSION, fingerprint: hash.toString('hex'), config };
 }
@@ -41,7 +41,7 @@ export function variantItems(input) {
       config.body = color(base.map((channel, n) => channel + index * (n + 1)));
       config.eyes = eyeColor(config.body);
     }
-    if (parsed.vary === 'look') { config.eyeSize = 80 + (hash[2] + index * 7) % 36; config.spacing = -6 + (hash[3] + index) % 13; config.headRoundness = (hash[4] + index * 17) % 101; }
+    if (parsed.vary === 'look') { config.shapeSeed = (hash.readUInt32BE(5) + index) >>> 0; config.eyeSize = 80 + (hash[2] + index * 7) % 36; config.spacing = -6 + (hash[3] + index) % 13; config.headRoundness = (hash[4] + index * 17) % 101; }
     return { id: `variant-${index + 1}`, config: AvatarConfig.parse(config) };
   });
 }

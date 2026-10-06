@@ -32,6 +32,7 @@ test('package contains the complete runtime and excludes the demo', async () => 
     'agent-robot-avatar.js',
     'index.d.ts',
     'src/avatar-studio-customization.js',
+    'src/avatar-studio-body-shape.js',
     'src/avatar-studio-accessories.js',
     'src/agent-cat-avatar.js',
     'src/agent-robot-avatar-core.js',

@@ -1,5 +1,13 @@
 # Changelog
 
+## Avatar Studio 0.2.0
+
+- Add repeatable fluid body silhouettes alongside classic square-to-circle roundness.
+- Add website body mode and Shuffle controls, with browser-persisted shape seeds.
+- Add `bodyShape` and `shapeSeed` to the npm customization API, plus component setters/getters and body-shape events.
+- Share random geometry across browser, SVG/PNG/GIF exports, and MCP; accessories fit the generated contour.
+
+
 ## Avatar Studio 0.1.0
 
 - First release under `@ai-calypse/avatar-studio`, based on Agent Robot Avatar 0.5.2.

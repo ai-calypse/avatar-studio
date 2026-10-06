@@ -135,3 +135,34 @@ test('dropdown provides 50 distinct rendered accessories plus none', async ({ pa
   await select.selectOption('none');
   expect(await page.locator('#face').evaluate(f => f.shadowRoot.getElementById('personal-accessory').innerHTML)).toBe('');
 });
+
+test('fluid body shuffle persists and classic roundness remains available', async ({ page }) => {
+  await page.goto('/demo/?lang=en');
+  const select = page.getByLabel('Robot body shape', { exact: true });
+  const shuffle = page.getByRole('button', { name: 'Shuffle body shape' });
+  await expect(select).toHaveValue('classic');
+  await expect(shuffle).toBeDisabled();
+  const original = await page.locator('#face').evaluate(face => face._baseHeadPathD);
+  await page.getByLabel('Robot accessory', { exact: true }).selectOption('headphones');
+  await select.selectOption('random');
+  await expect(shuffle).toBeEnabled();
+  const first = await page.locator('#face').evaluate(face => ({ d: face._baseHeadPathD, seed: face.getShapeSeed(), accessory: face.shadowRoot.getElementById('personal-accessory').innerHTML }));
+  expect(first.d).not.toBe(original);
+  await shuffle.click();
+  const second = await page.locator('#face').evaluate(face => ({ d: face._baseHeadPathD, seed: face.getShapeSeed(), accessory: face.shadowRoot.getElementById('personal-accessory').innerHTML }));
+  expect(second.d).not.toBe(first.d);
+  expect(second.accessory).not.toBe(first.accessory);
+  await page.reload();
+  await expect(select).toHaveValue('random');
+  expect(await page.locator('#face').evaluate(face => face._baseHeadPathD)).toBe(second.d);
+  expect(await page.locator('#face').evaluate(face => face.getShapeSeed())).toBe(second.seed);
+  await select.selectOption('classic');
+  expect(await page.locator('#face').evaluate(face => face._baseHeadPathD)).toBe(original);
+  await page.getByRole('button', { name: 'Reset look', exact: true }).click();
+  await expect(select).toHaveValue('classic');
+  await expect(shuffle).toBeDisabled();
+  const download = page.waitForEvent('download');
+  await page.locator('#studio-svg').click();
+  const binary = await bytes(await download);
+  expect(binary.toString()).not.toContain('NaN');
+});

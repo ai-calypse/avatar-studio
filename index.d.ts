@@ -85,6 +85,7 @@ export interface AgentRobotAvatarActionStateDetail {
 export interface AgentRobotAvatarEventMap extends HTMLElementEventMap {
   'face-state': CustomEvent<{ state: AgentRobotAvatarState }>;
   'action-state': CustomEvent<AgentRobotAvatarActionStateDetail>;
+  'body-shape-change': CustomEvent<{ mode: 'classic' | 'random'; seed: number; version: string }>;
   'head-roundness-change': CustomEvent<{ value: number; version: string }>;
 }
 
@@ -102,6 +103,9 @@ export declare class AgentRobotAvatar extends HTMLElement {
   setAntennaDrag(enabled?: boolean): this;
   setHeadRoundness(value?: number): this;
   getHeadRoundness(): number;
+  setBodyShape(mode: 'classic' | 'random', seed?: number): this;
+  getBodyShape(): 'classic' | 'random';
+  getShapeSeed(): number;
   noteActivity(wake?: boolean): void;
 
   addEventListener<K extends keyof AgentRobotAvatarEventMap>(
@@ -139,6 +143,8 @@ export interface AvatarAppearance {
   eyeSize?: number;
   spacing?: number;
   headRoundness?: number;
+  bodyShape?: 'classic' | 'random';
+  shapeSeed?: number;
   accessory?: AvatarAccessory;
 }
 

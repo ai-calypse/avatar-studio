@@ -1,6 +1,7 @@
 import { Resvg } from '@resvg/resvg-js';
 import { createHash } from 'node:crypto';
 import { accessoryMarkup, HEADWEAR } from '../../src/avatar-studio-accessories.js';
+import { randomBodyPath } from '../../src/avatar-studio-body-shape.js';
 import { encodeGIF } from '../../demo/avatar-studio-gif.js';
 import { CreateInput, LIMITS, AvatarConfig, Presentation } from './schema.mjs';
 
@@ -18,7 +19,7 @@ function headPath(roundness) {
 }
 
 export function renderSVG(config, size, blink = 1) {
-  const d = headPath(config.headRoundness);
+  const d = config.bodyShape === 'random' ? randomBodyPath(config.shapeSeed, config.headRoundness) : headPath(config.headRoundness);
   const facade = {
     _headShape: { getAttribute: () => d },
     _parseHeadPoints: value => {

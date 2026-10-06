@@ -49,6 +49,7 @@ for (const key of ['body', 'eyes']) colorGroup.querySelector('.color-swatches').
 const faceGroup = document.createElement('fieldset');
 faceGroup.className = 'custom-group custom-face';
 faceGroup.innerHTML = '<legend>Face</legend>';
+faceGroup.appendChild(fields.querySelector('.body-shape-row'));
 for (const key of ['eyeSize', 'spacing']) {
   const label = fields.querySelector(`[data-setting="${key}"]`).closest('label');
   faceGroup.appendChild(label);
@@ -122,10 +123,6 @@ async function download(format) {
   }
 }
 for (const format of ['svg', 'png', 'gif']) document.getElementById(`studio-${format}`).addEventListener('click', () => download(format));
-const stylesheet = document.createElement('link');
-stylesheet.rel = 'stylesheet';
-stylesheet.href = new URL('./avatar-studio.css', import.meta.url).href;
-document.head.appendChild(stylesheet);
 
 // Keep expression rows balanced as labels and available width change.
 const actionPanel = shell.querySelector('.studio-actions');
@@ -152,7 +149,7 @@ function scheduleBalance() { cancelAnimationFrame(balanceFrame); balanceFrame = 
 window.addEventListener('resize', scheduleBalance);
 shell.querySelector('.studio-expression').addEventListener('toggle', scheduleBalance);
 new MutationObserver(scheduleBalance).observe(actionButtons, { childList: true, subtree: true, characterData: true });
-stylesheet.addEventListener('load', scheduleBalance);
+scheduleBalance();
 document.fonts?.ready.then(scheduleBalance);
 
 let showcaseVisible = false;

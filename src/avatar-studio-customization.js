@@ -2,7 +2,7 @@ import { ACCESSORY_OPTIONS, ACCESSORY_GROUPS, HEADWEAR, accessoryMarkup } from '
 
 const namespace = 'http://www.w3.org/2000/svg';
 const instances = new WeakMap();
-const defaults = Object.freeze({ body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, eyeSize: 100, spacing: 0, accessory: 'none' });
+const defaults = Object.freeze({ body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, eyeSize: 100, spacing: 0, accessory: 'none', bodyShape: 'classic', shapeSeed: 0 });
 const ranges = { eyeSize: [60, 125], spacing: [-12, 12], headRoundness: [0, 100] };
 
 function validate(patch) {
@@ -11,6 +11,8 @@ function validate(patch) {
     if (!Object.hasOwn(defaults, key) && key !== 'headRoundness') throw new TypeError(`Unknown appearance field: ${key}`);
     if (['body', 'eyes', 'accessoryColor'].includes(key) && (typeof value !== 'string' || !/^#[0-9a-f]{6}$/i.test(value))) throw new TypeError(`${key} must be a six-digit hex color.`);
     if (key === 'accessory' && !Object.hasOwn(ACCESSORY_OPTIONS, value)) throw new TypeError('Unknown accessory.');
+    if (key === 'bodyShape' && !['classic', 'random'].includes(value)) throw new TypeError('Unknown body shape.');
+    if (key === 'shapeSeed' && (!Number.isInteger(value) || value < 0 || value > 0xffffffff)) throw new RangeError('Shape seed must be an unsigned 32-bit integer.');
     if (key === 'matchEyes' && typeof value !== 'boolean') throw new TypeError('matchEyes must be a boolean.');
     if (Object.hasOwn(ranges, key) && (typeof value !== 'number' || !Number.isFinite(value) || value < ranges[key][0] || value > ranges[key][1])) throw new RangeError(`${key} is outside its supported range.`);
   }
@@ -31,7 +33,7 @@ function initialize(avatar) {
   const style = document.createElement('style');
   avatar.shadowRoot.appendChild(style);
   avatar.shadowRoot.querySelector('svg').setAttribute('viewBox', '-16 -48 272 320');
-  const state = { wrappers, accessory, style, config: { ...defaults, body: avatar.getAttribute('color') || defaults.body, headRoundness: avatar.getHeadRoundness() } };
+  const state = { wrappers, accessory, style, config: { ...defaults, body: avatar.getAttribute('color') || defaults.body, headRoundness: avatar.getHeadRoundness(), bodyShape: avatar.getBodyShape(), shapeSeed: avatar.getShapeSeed() } };
   state.render = () => {
     state.accessory.innerHTML = accessoryMarkup(avatar, state.config);
     state.style.textContent = '#leftBase,#rightBase,#leftInputBase,#rightInputBase{fill:var(--robot-eye-color,#fff)!important}' + (HEADWEAR.has(state.config.accessory) ? '#antennaDot{display:none!important}' : '');
@@ -46,11 +48,12 @@ function initialize(avatar) {
 export function customizeAvatar(avatar, appearance = {}) {
   validate(appearance);
   const state = instances.get(avatar) || initialize(avatar);
-  state.config = { ...state.config, ...appearance };
+  state.config = { ...state.config, headRoundness: avatar.getHeadRoundness(), bodyShape: avatar.getBodyShape(), shapeSeed: avatar.getShapeSeed(), ...appearance };
   const config = state.config;
   avatar.setAttribute('color', config.body);
   avatar.style.setProperty('--robot-eye-color', config.eyes);
   avatar.style.setProperty('--robot-accessory-color', config.matchEyes ? config.eyes : config.accessoryColor);
+  if (Object.hasOwn(appearance, 'bodyShape') || Object.hasOwn(appearance, 'shapeSeed')) avatar.setBodyShape(config.bodyShape, config.shapeSeed);
   if (Object.hasOwn(appearance, 'headRoundness')) avatar.setHeadRoundness(config.headRoundness);
   state.wrappers.forEach((wrapper, index) => {
     const x = index ? 154 : 86;
@@ -58,7 +61,7 @@ export function customizeAvatar(avatar, appearance = {}) {
     wrapper.setAttribute('transform', `translate(${spacing} 0) translate(${x} 126) scale(${config.eyeSize / 100}) translate(${-x} -126)`);
   });
   state.render();
-  return Object.freeze({ ...config, headRoundness: avatar.getHeadRoundness() });
+  return Object.freeze({ ...config, headRoundness: avatar.getHeadRoundness(), bodyShape: avatar.getBodyShape(), shapeSeed: avatar.getShapeSeed() });
 }
 
 /** Capture the current animated pose as a standalone, transparent SVG string. */

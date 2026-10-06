@@ -11,7 +11,7 @@ The browser package is `@ai-calypse/avatar-studio`. It has no runtime dependenci
 5. Run `npm publish --access public --tag latest`. The prepublish hook runs validation again. Complete npm's authentication prompts if required.
 6. Verify `npm view @ai-calypse/avatar-studio@0.1.0 version` and install it into a new application.
 
-For local installation before registry publication, run `npm pack --pack-destination /tmp` and install the resulting `.tgz` with `npm install /tmp/ai-calypse-avatar-studio-0.1.0.tgz`.
+For local installation before registry publication, run `npm pack --pack-destination /tmp` and install the resulting `.tgz` with `npm install /tmp/ai-calypse-avatar-studio-0.2.0.tgz`.
 
 ## Subsequent releases with GitHub Actions
 

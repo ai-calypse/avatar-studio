@@ -24,7 +24,7 @@ npm run dev -- --port 4175
 The creator opens immediately, with a live preview and downloads alongside the customization controls:
 
 - Choose body, eye, and accessory colors independently, or enable **Match eyes** for the accessory.
-- Adjust eye size, eye spacing, and head roundness.
+- Adjust eye size, eye spacing, and head roundness. Choose **Fluid / random** for an organic body, then **Shuffle** to find a unique silhouette. Your shape seed is saved with your look.
 - Choose from **50 accessories**, plus None, in a grouped dropdown. Accessories fit the changing body outline.
 - Try expressions and movement settings, including blinking, pointer following, and interactive head movement.
 - See your avatar in live examples of chat, profile cards, an app companion, and project branding.
@@ -138,6 +138,8 @@ All configuration fields are optional; omitted fields use the defaults below. Un
 | `accessory` | An ID returned by `list_accessories`, or `none`. | `none` |
 | `eyeSize` | Number from 60 to 125. | `100` |
 | `spacing` | Number from −12 to 12. | `0` |
+| `bodyShape` | `classic` (square-to-circle) or `random` (fluid silhouette). | `classic` |
+| `shapeSeed` | Integer from 0 to 4294967295; repeats the same fluid shape. | `0` |
 | `headRoundness` | Number from 0 to 100. | `50` |
 | `expression` | `idle`, `happy`, `sad`, `angry`, `sleep`, or `surprise`. | `idle` |
 
@@ -197,7 +199,9 @@ customizeAvatar(avatar, {
   eyes: '#dbf59d',
   accessory: 'headphones',
   matchEyes: true,
-  headRoundness: 70
+  headRoundness: 70,
+  bodyShape: 'random',
+  shapeSeed: 42
 });
 
 avatar.startWaiting();
@@ -208,7 +212,7 @@ const svg = exportAvatarSVG(avatar, 256);
 console.log(accessories); // 50 entries with id, name, and category
 ```
 
-Call `customizeAvatar` after attaching the element to the page. It accepts partial appearance updates using the color, accessory, eye-size, spacing, and head-roundness controls listed above. Unsupported fields, accessory IDs, and out-of-range values are rejected. Set expressions through the component's animation API, such as `avatar.play('success')`; the MCP-only `expression` field is not accepted by `customizeAvatar`. Settings are isolated per element and are not automatically saved to browser storage.
+Call `customizeAvatar` after attaching the element to the page. It accepts partial appearance updates using the color, accessory, eye-size, spacing, and head-roundness controls listed above. Unsupported fields, accessory IDs, and out-of-range values are rejected. Set expressions through the component's animation API, such as `avatar.play('success')`; the MCP-only `expression` field is not accepted by `customizeAvatar`. With `bodyShape: "random"`, the same `shapeSeed` and `headRoundness` reproduce the same silhouette in the browser and MCP. Roundness still controls the underlying softness; changing the seed changes the outline. The shape stays stable while blinking, dragging, and exporting. Shape uniqueness is visual variety, not an authentication guarantee. Settings are isolated per element and are not automatically saved to browser storage.
 
 `exportAvatarSVG` returns a string snapshot of the current pose at a size from 32 to 512. Use the website for PNG/GIF downloads or MCP for generated PNG/GIF artifacts. In a server-rendered application, create and customize elements on the client after mounting.
 
@@ -217,7 +221,7 @@ To test local changes before publishing a new version, install from a local tarb
 ```sh
 npm pack --pack-destination /tmp
 # Run in your application's directory:
-npm install /tmp/ai-calypse-avatar-studio-0.1.0.tgz
+npm install /tmp/ai-calypse-avatar-studio-0.2.0.tgz
 ```
 
 See [the basic example](examples/basic.html), [the accessible request lifecycle example](examples/accessibility.html), and [TypeScript declarations](index.d.ts) for the underlying component API. [Publishing instructions](RELEASING.md) explain npm login, validation, and release automation.

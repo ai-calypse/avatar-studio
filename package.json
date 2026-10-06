@@ -1,6 +1,6 @@
 {
   "name": "@ai-calypse/avatar-studio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Personalized animated robot avatars with 50 shape-fitting accessories, color controls, and SVG export.",
   "type": "module",
   "main": "./agent-robot-avatar.js",

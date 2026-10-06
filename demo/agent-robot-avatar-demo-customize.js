@@ -1,7 +1,7 @@
 import { ACCESSORY_OPTIONS, ACCESSORY_GROUPS } from './avatar-studio-accessories.js';
 import { customizeAvatar, exportAvatarSVG } from '../agent-robot-avatar.js';
 const face = document.getElementById('face');
-const defaults = { body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, eyeSize: 100, spacing: 0, accessory: 'none' };
+const defaults = { body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, eyeSize: 100, spacing: 0, accessory: 'none', bodyShape: 'classic', shapeSeed: 0 };
 let settings = { ...defaults };
 try { settings = { ...defaults, ...JSON.parse(localStorage.getItem('robot-personalization') || '{}') }; } catch (_) {}
 const panel = document.createElement('section');
@@ -13,6 +13,7 @@ panel.innerHTML = `
     <label>Body <input type="color" data-setting="body" aria-label="Robot body color"></label>
     <label>Eyes <input type="color" data-setting="eyes" aria-label="Robot eye color"></label>
     <label>Accessory color <input type="color" data-setting="accessoryColor" aria-label="Robot accessory color"></label>
+    <div class="body-shape-row"><label>Body shape <select data-setting="bodyShape" aria-label="Robot body shape"><option value="classic">Square → circle</option><option value="random">Fluid / random</option></select></label><button type="button" id="robot-shape-shuffle" aria-label="Shuffle body shape" title="New random shape">Shuffle</button></div>
     <label>Eye size <input type="range" min="60" max="125" data-setting="eyeSize" aria-label="Robot eye size"></label>
     <label>Eye spacing <input type="range" min="-12" max="12" data-setting="spacing" aria-label="Robot eye spacing"></label>
     <label>Accessory <select data-setting="accessory" aria-label="Robot accessory"><option value="none">None</option>${Object.entries(ACCESSORY_GROUPS).map(([group, values]) => `<optgroup label="${group}">${values.map(value => `<option value="${value}">${ACCESSORY_OPTIONS[value][0]}</option>`).join('')}</optgroup>`).join('')}</select></label>
@@ -30,7 +31,10 @@ function apply() {
   settings.spacing = Math.max(-12, Math.min(12, Number(settings.spacing) || 0));
   settings.matchEyes = settings.matchEyes === true;
   if (!Object.hasOwn(ACCESSORY_OPTIONS, settings.accessory)) settings.accessory = 'none';
+  if (!['classic', 'random'].includes(settings.bodyShape)) settings.bodyShape = 'classic';
+  if (!Number.isInteger(settings.shapeSeed) || settings.shapeSeed < 0 || settings.shapeSeed > 0xffffffff) settings.shapeSeed = 0;
   customizeAvatar(face, settings);
+  panel.querySelector('#robot-shape-shuffle').disabled = settings.bodyShape !== 'random';
   panel.querySelector('[data-setting="accessoryColor"]').disabled = Boolean(settings.matchEyes);
   try { localStorage.setItem('robot-personalization', JSON.stringify(settings)); } catch (_) {}
 }
@@ -41,6 +45,11 @@ panel.addEventListener('input', event => {
   const key = event.target.dataset.setting;
   if (!key) return;
   settings[key] = event.target.type === 'checkbox' ? event.target.checked : event.target.type === 'range' ? Number(event.target.value) : event.target.value;
+  if (key === 'bodyShape' && settings.bodyShape === 'random') settings.shapeSeed = crypto.getRandomValues(new Uint32Array(1))[0];
+  apply();
+});
+panel.querySelector('#robot-shape-shuffle').addEventListener('click', () => {
+  settings.shapeSeed = crypto.getRandomValues(new Uint32Array(1))[0];
   apply();
 });
 panel.querySelector('#robot-custom-reset').addEventListener('click', () => {

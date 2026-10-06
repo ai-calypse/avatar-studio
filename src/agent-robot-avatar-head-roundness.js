@@ -1,5 +1,6 @@
 import AgentRobotAvatar from './agent-robot-avatar-extension-host.js';
 import { flattenHeadPoints } from './agent-robot-avatar-geometry.js';
+import { randomBodyPoints } from './avatar-studio-body-shape.js';
 import { VERSION } from './agent-robot-avatar-version.js';
 
 const proto = AgentRobotAvatar.prototype;
@@ -77,6 +78,8 @@ proto.setHeadRoundness = function(value = DEFAULT_ROUNDNESS) {
     points = mixPoints(baseline, rounder, (roundness - DEFAULT_ROUNDNESS) / DEFAULT_ROUNDNESS);
   }
 
+  if (this.getBodyShape() === 'random') points = randomBodyPoints(this.getShapeSeed(), roundness);
+
   this._headRoundness = roundness;
   this._baseHeadPoints = points;
   this._baseHeadPathD = this._pointsToPath(points);
@@ -89,6 +92,20 @@ proto.setHeadRoundness = function(value = DEFAULT_ROUNDNESS) {
   }));
   return this;
 };
+
+proto.setBodyShape = function(mode = 'classic', seed = this.getShapeSeed()) {
+  if (!['classic', 'random'].includes(mode)) throw new TypeError('Body shape must be classic or random.');
+  if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new RangeError('Shape seed must be an unsigned 32-bit integer.');
+  if (!ensureDefaultGeometry(this)) return this;
+  this._bodyShape = mode;
+  this._shapeSeed = seed;
+  this.setHeadRoundness(this.getHeadRoundness());
+  this.dispatchEvent(new CustomEvent('body-shape-change', { detail: { mode, seed, version: VERSION } }));
+  return this;
+};
+
+proto.getBodyShape = function() { return this._bodyShape === 'random' ? 'random' : 'classic'; };
+proto.getShapeSeed = function() { return this._shapeSeed ?? 0; };
 
 proto.getHeadRoundness = function() {
   return Number.isFinite(this._headRoundness) ? this._headRoundness : DEFAULT_ROUNDNESS;

@@ -1,6 +1,6 @@
 # Avatar Studio MCP
 
-A local **stdio MCP server** for developers and agents to build avatar workflows in memory. Version **0.2.0** provides 10 tools for user identities, branded teams, app states, bulk assets, and sprite sheets. It uses the same 50-accessory catalog and shape-fitting accessory renderer as the website. Node.js 22 or newer is required.
+A local **stdio MCP server** for developers and agents to build avatar workflows in memory. Version **0.3.0** provides 10 tools for user identities, branded teams, app states, bulk assets, and sprite sheets. It uses the same 50-accessory catalog and shape-fitting accessory renderer as the website. Node.js 22 or newer is required.
 
 ## Install and connect
 
@@ -131,6 +131,19 @@ To pack configurations into a sheet, call `create_sprite_sheet`:
 ```
 
 You can also use the ID/config pairs from a variant or expression manifest as sheet items. The result has a single artifact plus `structuredContent.frames`, with `id`, `config`, `x`, `y`, `width`, and `height` for each cell. Use those coordinates for CSS `background-position` or canvas `drawImage` source rectangles. Cells are 32–128 pixels, columns 1–4, and total dimensions at most 512 × 512. Unused cells are transparent.
+
+## Fluid and repeatable body shapes
+
+Use `bodyShape: "classic"` for the existing square-to-circle range, or `"random"` for a smooth asymmetric silhouette. `shapeSeed` is an unsigned 32-bit integer (0–4294967295), default 0. Together with `headRoundness` it determines the shape, and accessories follow the outline. The shape does not change randomly between GIF frames or exports.
+
+```json
+{
+  "format": "svg",
+  "config": { "bodyShape": "random", "shapeSeed": 42, "headRoundness": 75, "accessory": "headphones" }
+}
+```
+
+For unique default user profiles, use `generate_identity` with `overrides: { "bodyShape": "random" }`. Each identity seed derives its own shape seed. Existing classic identities retain their appearance. `create_avatar_variants` with `vary: "look"` varies the shape seed when the base config uses random bodies; accessory-only and color-only variants preserve it. Browser and MCP random geometry share the same generator. Store the full config to reproduce an avatar later.
 
 ## Single avatar controls and artifacts
 

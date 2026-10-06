@@ -88,3 +88,11 @@ const svg: string = exportAvatarSVG(avatar, 256);
 void appearance; void svg; void accessories;
 // @ts-expect-error Only supported accessory IDs are allowed.
 customizeAvatar(avatar, { accessory: "unknown" });
+
+customizeAvatar(avatar, { bodyShape: 'random', shapeSeed: 42 });
+avatar.setBodyShape('random', 42).setHeadRoundness(70);
+const shapeMode: 'classic' | 'random' = avatar.getBodyShape();
+const shapeSeed: number = avatar.getShapeSeed();
+void shapeMode; void shapeSeed;
+// @ts-expect-error Unsupported body shapes must be rejected.
+customizeAvatar(avatar, { bodyShape: 'triangle' });

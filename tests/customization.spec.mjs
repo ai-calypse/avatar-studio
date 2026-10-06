@@ -51,3 +51,33 @@ test('npm customization rejects unsupported inputs before changing the element',
   });
   expect(result).toEqual({ rejected: 8, body: '#182725', invalidSize: true, detached: true });
 });
+
+test('fluid geometry agrees with shared renderer and survives drag, reset, and roundness changes', async ({ page }) => {
+  await page.goto('/examples/basic.html');
+  const result = await page.evaluate(async () => {
+    const { customizeAvatar, exportAvatarSVG } = await import('/agent-robot-avatar.js');
+    const { randomBodyPath } = await import('/src/avatar-studio-body-shape.js');
+    const avatar = document.querySelector('agent-robot-avatar');
+    avatar.setHeadRoundness(50);
+    const classic = avatar._baseHeadPathD;
+    customizeAvatar(avatar, { bodyShape:'random',shapeSeed:42,headRoundness:75,accessory:'headphones' });
+    const matches = avatar._baseHeadPathD === randomBodyPath(42,75);
+    const random = avatar._baseHeadPathD;
+    avatar._dragJelly = { ...avatar._dragJelly, active:true, pullX:18,pullY:10,hotX:120,hotY:120 };
+    avatar._applyHeadDeform();
+    const deformed = avatar._headShape.getAttribute('d') !== random;
+    avatar.reset();
+    const recovered = avatar._headShape.getAttribute('d') === random;
+    avatar.setHeadRoundness(10);
+    const changed = avatar._baseHeadPathD !== random;
+    const svg = exportAvatarSVG(avatar);
+    let rejected = 0;
+    for (const input of [{bodyShape:'triangle'},{shapeSeed:-1},{shapeSeed:1.1},{shapeSeed:Infinity},{shapeSeed:4294967296}]) {
+      try { customizeAvatar(avatar,input); } catch { rejected++; }
+    }
+    avatar.setBodyShape('classic'); avatar.setHeadRoundness(50);
+    return {matches,deformed,recovered,changed,rejected,restored:avatar._baseHeadPathD === classic,valid: !svg.includes('NaN'),accessory:avatar.shadowRoot.getElementById('personal-accessory').innerHTML};
+  });
+  expect(result).toMatchObject({matches:true,deformed:true,recovered:true,changed:true,rejected:5,restored:true,valid:true});
+  expect(result.accessory).not.toBe('');
+});

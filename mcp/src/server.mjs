@@ -33,7 +33,7 @@ function artifactResult(result, single) {
 }
 
 export function createServer() {
-  const server = new McpServer({ name: 'avatar-studio', version: '0.2.0' });
+  const server = new McpServer({ name: 'avatar-studio', version: '0.3.0' });
   const active = new Set();
   const register = (name, description, handler) => server.registerTool(name, { description, inputSchema: TOOL_SCHEMAS[name], annotations }, handler);
   register('list_accessories', 'List all 50 avatar accessory IDs grouped by category, optionally filtered by category. No external access.', ({ category }) => {
@@ -43,7 +43,7 @@ export function createServer() {
   });
   register('validate_avatar', 'Validate and normalize a robot configuration before embedding it in an application. Only documented fields are allowed.', ({ config }) => json({ config }));
   register('get_capabilities', 'Discover formats, limits, expressions, identity recipe version, and recommended multi-tool workflows before planning an app integration.', () => json({
-    version: '0.2.0', identityRecipeVersion: RECIPE_VERSION, tools: Object.keys(TOOL_SCHEMAS), limits: LIMITS, expressions: EXPRESSIONS,
+    version: '0.3.0', identityRecipeVersion: RECIPE_VERSION, tools: Object.keys(TOOL_SCHEMAS), limits: LIMITS, expressions: EXPRESSIONS, bodyShapes: ['classic', 'random'], shapeSeedRange: [0, 4294967295],
     formats: { single: ['svg', 'png', 'gif'], batch: ['svg', 'png'], spriteSheet: ['svg', 'png'] },
     presentation: { backgrounds: 'transparent or six-digit hex', frames: ['none', 'circle', 'rounded'], padding: '0–24 percent on each side', statuses: ['none', 'online', 'away', 'busy', 'offline'] },
     workflows: [

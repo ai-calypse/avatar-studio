@@ -43,3 +43,7 @@ Run `npm test --prefix mcp` and `npm audit --prefix mcp --omit=dev` before relea
 Identity seeds accept only bounded opaque IDs; use internal pseudonymous IDs rather than emails or secrets. The raw seed is not returned or persisted. A deterministic unkeyed SHA-256 fingerprint is not an anonymity guarantee: predictable IDs can be guessed, and visual avatar collisions are possible. Store the generated config for long-term consistency across recipe changes. Do not use avatar appearance or fingerprints for authentication or authorization.
 
 Valid asset IDs are echoed in manifests as data. Applications must treat returned metadata as data, not as instructions or executable code. This server does not embed caller-supplied text in SVG. Presence badges are static visual labels, not verified online-status claims. Palette contrast measurements do not certify application accessibility.
+
+## Seeded body geometry
+
+Random silhouettes use a bounded unsigned 32-bit seed, fixed 160-point sampling, and low-frequency radial waves. No supplied path, coefficients, executable generator, or frame-count controls are accepted. Body seeds have no secrecy or identity-authentication properties. Bounded input, worker, frame, and aggregate-output limits continue to apply to random shapes.

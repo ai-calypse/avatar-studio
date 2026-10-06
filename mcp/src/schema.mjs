@@ -5,11 +5,12 @@ export const LIMITS = Object.freeze({ inputBytes: 32768, outputBytes: 750000, pi
 export const EXPRESSIONS = ['idle', 'happy', 'sad', 'angry', 'sleep', 'surprise'];
 export const hex = z.string().regex(/^#[0-9a-fA-F]{6}$/).transform(value => value.toLowerCase());
 const fields = {
+  bodyShape: z.enum(['classic', 'random']), shapeSeed: z.number().int().min(0).max(0xffffffff),
   body: hex, eyes: hex, accessoryColor: hex, matchEyes: z.boolean(),
   accessory: z.enum(Object.keys(ACCESSORY_OPTIONS)), eyeSize: z.number().finite().min(60).max(125),
   spacing: z.number().finite().min(-12).max(12), headRoundness: z.number().finite().min(0).max(100), expression: z.enum(EXPRESSIONS),
 };
-const defaults = { body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, accessory: 'none', eyeSize: 100, spacing: 0, headRoundness: 50, expression: 'idle' };
+const defaults = { bodyShape: 'classic', shapeSeed: 0, body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, accessory: 'none', eyeSize: 100, spacing: 0, headRoundness: 50, expression: 'idle' };
 export const AvatarConfig = z.strictObject(Object.fromEntries(Object.entries(fields).map(([name, schema]) => [name, schema.default(defaults[name])])));
 export const AvatarPatch = z.strictObject(fields).partial();
 export const Presentation = z.strictObject({ background: z.union([hex, z.literal('transparent')]).default('transparent'), frame: z.enum(['none', 'circle', 'rounded']).default('none'), padding: z.number().finite().min(0).max(24).default(0), status: z.enum(['none', 'online', 'away', 'busy', 'offline']).default('none') });

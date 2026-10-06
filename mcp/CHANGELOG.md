@@ -1,5 +1,13 @@
 # MCP changelog
 
+## 0.3.0
+
+- Add classic/random body modes and bounded shape seeds to all configuration-based workflows.
+- Share fluid geometry with the browser component and retain classic appearance defaults.
+- Derive per-user body seeds and vary body shapes in whole-look design alternatives.
+- Add geometry reproducibility, bounds, all-accessory fitting, and raster/GIF validation tests.
+
+
 ## 0.2.0
 
 - Add capability discovery, deterministic user identities, brand palette suggestions, batch generation, design variants, expression packs, and sprite sheets (10 tools total).
