@@ -1,214 +1,208 @@
-# Agent Robot Avatar
+# Avatar Studio
 
-<p align="center">
-  <img src="./assets/readme/agent-robot-avatar-header.jpg" alt="Agent Robot Avatar">
-</p>
+Create a personalized robot avatar for your profile, team chat, app, or AI assistant. Avatar Studio combines a browser-based creator with a local MCP server so people and agents can generate avatars from the same accessory catalog.
 
-[English](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/README.md) | [简体中文](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.zh-CN.md) | [Español](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.es.md) | [Русский](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.ru.md) | [Français](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.fr.md) | [Português](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.pt.md) | [Deutsch](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.de.md) | [日本語](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.ja.md) | [한국어](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.ko.md) | [繁體中文](https://github.com/CX-ArtLab/agent-robot-avatar/blob/main/docs/README.zh-TW.md)
+Built on [Agent Robot Avatar by CX ArtLab](https://github.com/CX-ArtLab/agent-robot-avatar), using SVG and vanilla JavaScript. The website runs without a backend or account; the MCP server runs separately as a local Node.js subprocess.
 
-![Version](https://img.shields.io/badge/version-v0.5.2-111111?style=flat-square) [![License](https://img.shields.io/badge/license-MIT-0A7EA4?style=flat-square)](./LICENSE) [![CI](https://github.com/CX-ArtLab/agent-robot-avatar/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/CX-ArtLab/agent-robot-avatar/actions/workflows/validate.yml) [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support-FF5E5B?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/P0E625WIOI)
+## Run the website
 
-![Vanilla JavaScript](https://img.shields.io/badge/Vanilla-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=000) ![Web Component](https://img.shields.io/badge/Web-Native%20Component-5A67D8?style=flat-square) ![SVG](https://img.shields.io/badge/Rendering-SVG-FFB13B?style=flat-square&logo=svg&logoColor=000) ![Zero Dependencies](https://img.shields.io/badge/Dependencies-0-2EA44F?style=flat-square)
+Requires Node.js 22 or newer and npm.
 
-A lightweight, expressive robot avatar Web Component for AI agents and interactive applications.
-
-Suitable for AI assistant and agent interfaces, including products and experiences similar to ChatGPT, Claude, Codex, Cursor, Grok Bot, Gemini CLI, and OpenCode.
-
-It can also be used for desktop pets, virtual pets, desktop companions, digital mascots, chatbot avatars, and other interactive character experiences.
-
-Agent Robot Avatar can also be used as a visual feedback layer for AG-UI-style agent interfaces.
-
-Built with SVG and vanilla JavaScript, it works as a native custom element with zero runtime dependencies.
-
-<p align="center">
-  <img src="./assets/demo/agent-robot-avatar-demo.gif" alt="Agent Robot Avatar interactive animation demo" width="560">
-</p>
-
-## Live Demo
-
-[Open the interactive demo](https://cx-artlab.github.io/agent-robot-avatar/)
-
-## Highlights
-
-- Native Web Component
-- SVG rendering + vanilla JavaScript
-- Zero runtime dependencies
-- Automatic blinking and subtle idle behavior
-- Pointer-following eyes and inertial head movement
-- Jelly-style drag deformation with elastic recovery
-- Press-and-hold squeeze and draggable spring antenna interactions
-- Programmatically controlled Agent states and expressions
-- Waiting, success, failure, warning, review, blocked, and system-error feedback
-- Reduced-motion support
-- Configurable sleep behavior
-- Adjustable head roundness
-- Optional antenna status flashing
-- TypeScript declarations included
-
-## Install
-
-```bash
-npm install agent-robot-avatar
+```sh
+git clone https://github.com/ai-calypse/avatar-studio.git
+cd avatar-studio
+npm ci
+npm run dev
 ```
 
-```js
-import 'agent-robot-avatar';
+Open [Avatar Studio locally](http://127.0.0.1:4173/demo/?lang=en). To use another port:
+
+```sh
+npm run dev -- --port 4175
 ```
 
-Or load the repository source directly:
+The creator opens immediately, with a live preview and downloads alongside the customization controls:
 
-```html
-<script type="module" src="./agent-robot-avatar.js"></script>
-```
+- Choose body, eye, and accessory colors independently, or enable **Match eyes** for the accessory.
+- Adjust eye size, eye spacing, and head roundness.
+- Choose from **50 accessories**, plus None, in a grouped dropdown. Accessories fit the changing body outline.
+- Try expressions and movement settings, including blinking, pointer following, and interactive head movement.
+- See your avatar in live examples of chat, profile cards, an app companion, and project branding.
 
-Then add the component:
+Your appearance settings are saved in your browser. **Reset look** restores the defaults.
 
-```html
-<agent-robot-avatar id="avatar"></agent-robot-avatar>
-```
+### Download formats
 
-No initialization code is required. The avatar enters its default idle behavior automatically.
-
-## Basic usage
-
-```js
-const avatar = document.querySelector('#avatar');
-
-avatar.play('success');
-avatar.play('warning');
-avatar.play('error');
-
-avatar.reset();
-```
-
-Available actions:
-
-`idle` · `bored` · `waiting` · `waiting-wrap` · `input` · `send` · `success` · `failure` · `warning` · `inspect` · `blocked` · `error` · `surprise` · `love` · `random` · `sleep` · `wake`
-
-`failure` is intended for a task that completed unsuccessfully, while `error` is intended for connection, service, or system failures.
-
-`love` expresses affection or thanks: the two eyes lean together into a single heart, beat three times, then return.
-
-`random` plays a slot-machine spin: each eye rolls over a drum, then the left eye slows, bounces and settles, followed by the right. `slot` is an alias.
-
-For a real Agent request lifecycle:
-
-```js
-avatar.startWaiting();
-
-// Alternative waiting motion: eyes turn out through one side and return through the other.
-avatar.startWaiting({ variant: 'wrap' });
-
-try {
-  const result = await runAgentRequest();
-  await avatar.play(result.ok ? 'success' : 'failure');
-} catch (error) {
-  await avatar.play('error');
-}
-```
-
-## Common options
-
-```html
-<agent-robot-avatar
-  size="160"
-  color="#08090b"
-  auto-sleep="30000"
-  wake-on="activity"
-  motion="auto">
-</agent-robot-avatar>
-```
-
-| Attribute | Purpose |
+| Format | Website export |
 | --- | --- |
-| `size` | Avatar size in pixels |
-| `color` | Main avatar color |
-| `auto-sleep` | Idle time before automatic sleep; `0` disables it |
-| `wake-on` | Automatic wake policy: `activity`, `interaction`, or `manual` |
-| `motion` | Motion policy: `auto`, `reduce`, or `full` |
-| `press-squeeze` | Center press-and-hold squeeze; set to `false` to disable |
-| `antenna-drag` | Antenna drag, spring return, and angry reaction; set to `false` to disable |
+| SVG | Transparent vector snapshot of the current appearance. |
+| PNG | Transparent 512 × 512 image. |
+| GIF | 24-frame, 256 × 256 looping recording, with a light background and reduced color palette. |
 
-Common runtime controls:
+Exports are generated in the browser. SVG and PNG capture the current appearance; GIF records the live animation.
 
-```js
-avatar.setPointerFollow(false);
-avatar.setHeadRoundness(75);
-avatar.setAntennaFlash(true);
-avatar.setPressSqueeze(true);
-avatar.setAntennaDrag(true);
+### Build for static hosting
+
+```sh
+npm run build:pages
 ```
 
-The avatar center begins the squeeze interaction. Moving more than 4 CSS pixels transfers the same pointer gesture to the existing head drag. Dragging the antenna uses the same pull limit as head dragging and ends with the existing angry reaction.
+Upload the contents of `.pages-site/` to your static host. The generated `index.html` serves the creator at the site root. This build contains only the website; it does not deploy or expose the MCP server.
 
-## Events and integration
+## Connect the MCP server
 
-The component emits `face-state` for visual state changes and `action-state` for semantic action lifecycle changes.
+The local MCP server lets agents discover accessories, validate avatar configurations, and create SVG, PNG, or GIF artifacts for applications. It shares the website's accessory catalog and shape-fitting accessory renderer. It uses predefined expressions and a deterministic blink animation rather than recording the browser's live state.
 
-For host integrations and accessibility status text, prefer `action-state`. See [`examples/accessibility.html`](./examples/accessibility.html) for a runnable request-lifecycle example.
-
-A minimal integration example is available at [`examples/basic.html`](./examples/basic.html).
-
-## Compatibility
-
-Designed for modern browsers with support for ES Modules, Custom Elements, SVG, Pointer Events, Web Animations API, `IntersectionObserver`, `ResizeObserver`, and `matchMedia`.
-
-Automated browser tests cover Chromium, Firefox, and WebKit.
-
-## Contributing
-
-Issues and pull requests are welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) before submitting changes.
-
-## Project status
-
-**Current public version: v0.5.2**
-
-The public API is intentionally kept compact while the project evolves toward a future `1.0.0` stability commitment.
-
-Agent Robot Avatar is independently developed and is not affiliated with, endorsed by, or representative of any AI platform or brand.
-
-## Character design and visual identity
-
-The Agent Robot Avatar character, including its robot appearance and visual identity, is an original design by CX ArtLab.
-
-The MIT License applies to the software and source code. It allows the avatar to be used, modified, and distributed as part of applications, but it does not transfer ownership of the Agent Robot Avatar name, character identity, or visual identity, or grant the right to present them as another party's original character or standalone brand.
-
-Third-party product names mentioned in this project describe possible use cases only and do not indicate affiliation or endorsement.
-
-## License
-
-MIT License. See [`LICENSE`](./LICENSE).
-
----
-
-If this project is useful to you, you can buy me a coffee.
-
-<a href='https://ko-fi.com/P0E625WIOI' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-
-### Robot customization demo
-
-The demo includes body and eye colors, eye size and spacing, and optional glasses, headphones, or a bow tie. The look is saved locally in your browser. Use **Reset look** to restore defaults or **Download SVG** to export the current appearance as a static profile or logo image. Head roundness and expression controls remain available.
-
-### Avatar Studio website
-
-The demo is now branded as **Avatar Studio**, with a live creator, responsive design controls, and browser-only exports:
-
-- SVG: transparent vector snapshot of the current appearance.
-- PNG: transparent 512 × 512 image.
-- GIF: a 24-frame, 256 × 256 looping recording with a light background and a reduced color palette.
-
-Run `npm run dev` and open `/demo/?lang=en`. `npm run build:pages` includes the studio scripts and stylesheet in the static site output. Settings stay in the visitor’s browser; downloads require no account. A local stdio MCP server now lets agents create SVG, PNG, and GIF avatars. See [MCP setup](mcp/README.md) and [security model](mcp/SECURITY.md).
-
-Run the studio browser checks with `npx playwright test tests/studio.spec.mjs --project=chromium`. Set `AVATAR_TEST_PORT` to test a server on a different port.
-
-### Avatar Studio MCP
-
-Agents can list the 50 accessories, validate configurations, and generate SVG/PNG/GIF avatars through a local stdio MCP server. The server accepts strict configuration inputs, returns artifacts in memory, and exposes no file, URL-fetching, or shell tools.
+From the repository checkout, install its separate dependencies and verify the server:
 
 ```sh
 npm ci --prefix mcp --ignore-scripts
 npm run test:mcp
-npm run mcp:start
 ```
 
-See [client configuration and examples](mcp/README.md) and [security boundaries](mcp/SECURITY.md). No remote endpoint is deployed.
+Add the following entry to your MCP client's configuration. Replace both absolute paths with your Node executable and this repository's location. Run `command -v node` to find Node; your client may use a different configuration format.
+
+```json
+{
+  "mcpServers": {
+    "avatar-studio": {
+      "command": "/absolute/path/to/node",
+      "args": [
+        "--max-old-space-size=192",
+        "/absolute/path/to/avatar-studio/mcp/src/index.mjs"
+      ],
+      "env": {}
+    }
+  }
+}
+```
+
+Restart or reconnect your MCP client after saving its configuration. The client launches and manages the server process. No API key, HTTP URL, or separate website process is required.
+
+`npm run mcp:start` also starts the server manually, but it speaks MCP over stdin/stdout and needs an MCP client attached. It does not start a web server or interactive command prompt.
+
+### Available tools
+
+| Tool | Arguments | Result |
+| --- | --- | --- |
+| `list_accessories` | `{}` for the full catalog, or an optional `category` returned by the catalog. | Accessory IDs and names grouped by category, plus generation limits. |
+| `validate_avatar` | `{ "config": { ... } }` | Validated configuration with defaults applied. |
+| `create_avatar` | `{ "format": "svg", "size": 256, "config": { ... } }` | Avatar artifact and metadata. |
+
+For example, ask your connected agent:
+
+> Use Avatar Studio to create a dark green robot profile avatar with lime eyes and headphones that match the eyes. Return a 256-pixel PNG.
+
+The corresponding `create_avatar` arguments are:
+
+```json
+{
+  "format": "png",
+  "size": 256,
+  "config": {
+    "body": "#182725",
+    "eyes": "#dbf59d",
+    "accessory": "headphones",
+    "accessoryColor": "#ffffff",
+    "matchEyes": true,
+    "eyeSize": 100,
+    "spacing": 0,
+    "headRoundness": 70,
+    "expression": "happy"
+  }
+}
+```
+
+### Configuration controls
+
+All configuration fields are optional; omitted fields use the defaults below. Unknown fields are rejected.
+
+| Field | Accepted values | Default |
+| --- | --- | --- |
+| `body` | Six-digit hex color, such as `#182725`. | `#08090b` |
+| `eyes` | Six-digit hex color. | `#ffffff` |
+| `accessoryColor` | Six-digit hex color; used when `matchEyes` is false. | `#ffffff` |
+| `matchEyes` | Boolean; use the eye color for the accessory. | `false` |
+| `accessory` | An ID returned by `list_accessories`, or `none`. | `none` |
+| `eyeSize` | Number from 60 to 125. | `100` |
+| `spacing` | Number from −12 to 12. | `0` |
+| `headRoundness` | Number from 0 to 100. | `50` |
+| `expression` | `idle`, `happy`, `sad`, `angry`, `sleep`, or `surprise`. | `idle` |
+
+`format` defaults to `svg`, and `size` defaults to `256`. SVG and PNG accept integer sizes from 32 to 512. **For GIF, explicitly set `size` between 32 and 128**:
+
+```json
+{
+  "format": "gif",
+  "size": 128,
+  "config": { "accessory": "wizard", "expression": "happy" }
+}
+```
+
+MCP GIFs contain 12 looping blink frames at 100 ms per frame, with a light background and reduced color palette. SVG and PNG have transparent backgrounds.
+
+### Use artifacts in your application
+
+The result's `structuredContent` includes the normalized configuration, format, size, MIME type, byte count, and SHA-256 checksum. The artifact is returned in `content`:
+
+- **SVG:** embedded resource with the SVG string in `resource.text`.
+- **PNG:** image block with base64 data in `data`.
+- **GIF:** embedded resource with base64 data in `resource.blob`.
+
+Decode the returned data and save it through your application's authorized storage layer. Retain the normalized configuration to regenerate the avatar later. An `avatar://generated/...` resource URI identifies the returned artifact; it is not a hosted download URL or a stored resource to fetch. The MCP server does not save files.
+
+See [the MCP guide](mcp/README.md) for more details and [the example client configuration](mcp/client-config.example.json).
+
+### Security model
+
+The MCP server is designed for a trusted MCP client launching a local subprocess. It has no network listener and exposes no file, shell, URL-fetching, or arbitrary SVG tools.
+
+Inputs use strict allowlisted schemas. Rendering has bounded image sizes, output sizes, concurrency, and execution time, with separate workers that receive no inherited environment variables. Dependencies are pinned in a lockfile.
+
+These controls do not make the process an operating-system sandbox or a public multi-tenant service. Read [the security model and limitations](mcp/SECURITY.md) before integrating or hosting it. Remote access would require a separate authentication, isolation, and deployment design.
+
+## Embed the animated component
+
+The original robot component remains available for interactive app interfaces. Serve these repository files with your application:
+
+```html
+<script type="module" src="./agent-robot-avatar.js"></script>
+<agent-robot-avatar id="avatar" size="160" color="#182725"></agent-robot-avatar>
+```
+
+```js
+const avatar = document.querySelector('#avatar');
+avatar.setHeadRoundness(70);
+avatar.startWaiting();
+// Once your operation completes:
+await avatar.play('success');
+```
+
+See [the basic example](examples/basic.html), [the accessible request lifecycle example](examples/accessibility.html), and [TypeScript declarations](index.d.ts). The studio's full customization UI lives in `demo/`; importing the base component alone does not mount that UI.
+
+## Development checks
+
+```sh
+npm run check
+npm run test:types
+npm run test:mcp
+npm audit --prefix mcp --omit=dev
+npm run build:pages
+```
+
+For the creator's Chromium browser tests:
+
+```sh
+npx playwright install chromium
+npx playwright test tests/studio.spec.mjs --project=chromium
+```
+
+Set `AVATAR_TEST_PORT=4175` if testing the local server on that port. `npm test` runs the original component's full validation suite, including Chromium, Firefox, and WebKit, and requires those Playwright browsers to be installed. Run `npm run test:mcp` separately to check the MCP server.
+
+## Attribution and license
+
+Avatar Studio extends [Agent Robot Avatar](https://github.com/CX-ArtLab/agent-robot-avatar). The original robot character and visual identity were designed by CX ArtLab; this repository adds the personalized creator, accessory catalog, exports, showcases, and local MCP integration.
+
+The original project's character and visual identity notice is retained: the MIT license permits use, modification, and distribution of the software, but does not transfer ownership of the original character's name or identity or grant the right to claim it as another party's original character.
+
+[MIT License](LICENSE), with copyright notices for CX ART Lab and ai-calypse.
