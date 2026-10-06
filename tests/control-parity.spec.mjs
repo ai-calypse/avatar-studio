@@ -35,15 +35,15 @@ test('npm controls, live looping, cancellation, and every export format work', a
 test('header translator updates creator and showcase and remembers language without changing design',async({page})=>{
   await page.goto('/demo/?lang=en',{waitUntil:'networkidle'});
   await page.getByLabel('Robot accessory',{exact:true}).selectOption('headphones');
-  await page.getByRole('combobox',{name:'Page language',exact:true}).selectOption('es');
+  await page.locator('.studio-language').selectOption('es');
   await expect(page.getByRole('heading',{name:'Hazlo tuyo'})).toBeVisible();
   await expect(page.locator('#showcase h2')).toHaveText('Una cara. Un lugar en todas partes.');
-  await expect(page.getByLabel('Robot accessory',{exact:true})).toHaveValue('headphones');
+  await expect(page.locator('[data-setting=accessory]')).toHaveValue('headphones');
   await page.reload();
   await expect(page.getByRole('heading',{name:'Hazlo tuyo'})).toBeVisible();
-  await page.getByRole('combobox',{name:'Page language',exact:true}).selectOption('ja');
+  await page.locator('.studio-language').selectOption('ja');
   await expect(page.getByRole('heading',{name:'自分らしくしよう'})).toBeVisible();
-  await page.getByRole('combobox',{name:'Page language',exact:true}).selectOption('en');
+  await page.locator('.studio-language').selectOption('en');
   await expect(page.getByRole('heading',{name:'Make it yours'})).toBeVisible();
 });
 

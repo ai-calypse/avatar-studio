@@ -294,3 +294,19 @@ Avatar Studio extends [Agent Robot Avatar](https://github.com/CX-ArtLab/agent-ro
 The original project's character and visual identity notice is retained: the MIT license permits use, modification, and distribution of the software, but does not transfer ownership of the original character's name or identity or grant the right to claim it as another party's original character.
 
 [MIT License](LICENSE), with copyright notices for CX ART Lab and ai-calypse.
+
+### Website translations
+
+The header language picker supports English, Spanish, French, German, Portuguese, Japanese, Korean, Simplified Chinese, and Traditional Chinese. Studio copy, accessory options, export feedback, page metadata, tooltips, and accessible labels use local catalogs in `demo/avatar-studio-i18n.js`. Movement controls and the conversation demo have their own catalogs in `demo/agent-robot-avatar-demo-controls.js` and `demo/agent-robot-avatar-demo-dialog-i18n.js`. Brand names, sample people/handles, commands, package names, and file formats stay literal. No visitor text is sent to a translation service.
+
+To add another language, add a complete locale to each catalog and the `LANGUAGES` list in the demo controls. Use a BCP 47 language tag; configure `dir=rtl` and review the layout when introducing a right-to-left language. Run `npx playwright test tests/translation-coverage.spec.mjs`: it checks every offered studio locale against the full phrase catalog and mounted interface, including image descriptions and tooltips. Add new phrases to every locale when changing copy. Missing translations fall back to English at runtime and fail coverage checks. Machine translations should be reviewed by a fluent speaker before release.
+
+### Publish to GitHub Pages
+
+The repository's **Deploy Live Demo** workflow builds the static site into `.pages-site` and deploys it with GitHub's Pages actions. It runs for relevant changes on `main` or manually from Actions. All asset imports are relative so the site works under `/avatar-studio/`.
+
+1. In **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
+2. Merge website changes into `main`, or run **Deploy Live Demo** manually on `main`.
+3. Open https://ai-calypse.github.io/avatar-studio/ after the deployment succeeds.
+
+Run `npm run build:pages` locally to inspect the generated artifact. The hosted site is a browser-only avatar editor; the MCP server runs locally and is not exposed by Pages.

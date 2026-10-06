@@ -281,7 +281,7 @@ function mountDemoControls() {
   function updateStatus() {
     if (!status) return;
     const t = I18N[currentLanguage];
-    status.textContent = `${currentState} · ${t.states[currentState] || currentState}`;
+    status.textContent = t.states[currentState] || currentState;
   }
 
   function applyLanguage(language = currentLanguage, { remember = false, updateUrl = false } = {}) {
