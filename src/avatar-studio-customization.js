@@ -2,7 +2,7 @@ import { ACCESSORY_OPTIONS, ACCESSORY_GROUPS, HEADWEAR, accessoryMarkup } from '
 
 const namespace = 'http://www.w3.org/2000/svg';
 const instances = new WeakMap();
-const defaults = Object.freeze({ body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, eyeSize: 100, spacing: 0, accessory: 'none', bodyShape: 'classic', shapeSeed: 0 });
+const defaults = Object.freeze({ body: '#08090b', eyes: '#ffffff', accessoryColor: '#ffffff', matchEyes: false, eyeSize: 100, spacing: 0, accessory: 'none', bodyShape: 'classic', shapeSeed: 0, antenna: true });
 const ranges = { eyeSize: [60, 125], spacing: [-12, 12], headRoundness: [0, 100] };
 
 function validate(patch) {
@@ -13,7 +13,7 @@ function validate(patch) {
     if (key === 'accessory' && !Object.hasOwn(ACCESSORY_OPTIONS, value)) throw new TypeError('Unknown accessory.');
     if (key === 'bodyShape' && !['classic', 'random'].includes(value)) throw new TypeError('Unknown body shape.');
     if (key === 'shapeSeed' && (!Number.isInteger(value) || value < 0 || value > 0xffffffff)) throw new RangeError('Shape seed must be an unsigned 32-bit integer.');
-    if (key === 'matchEyes' && typeof value !== 'boolean') throw new TypeError('matchEyes must be a boolean.');
+    if (['matchEyes', 'antenna'].includes(key) && typeof value !== 'boolean') throw new TypeError(`${key} must be a boolean.`);
     if (Object.hasOwn(ranges, key) && (typeof value !== 'number' || !Number.isFinite(value) || value < ranges[key][0] || value > ranges[key][1])) throw new RangeError(`${key} is outside its supported range.`);
   }
 }
@@ -36,7 +36,7 @@ function initialize(avatar) {
   const state = { wrappers, accessory, style, config: { ...defaults, body: avatar.getAttribute('color') || defaults.body, headRoundness: avatar.getHeadRoundness(), bodyShape: avatar.getBodyShape(), shapeSeed: avatar.getShapeSeed() } };
   state.render = () => {
     state.accessory.innerHTML = accessoryMarkup(avatar, state.config);
-    state.style.textContent = '#leftBase,#rightBase,#leftInputBase,#rightInputBase{fill:var(--robot-eye-color,#fff)!important}' + (HEADWEAR.has(state.config.accessory) ? '#antennaDot{display:none!important}' : '');
+    state.style.textContent = '#leftBase,#rightBase,#leftInputBase,#rightInputBase{fill:var(--robot-eye-color,#fff)!important}' + ((!state.config.antenna || HEADWEAR.has(state.config.accessory)) ? '#antennaDot{display:none!important}' : '');
   };
   state.observer = new MutationObserver(state.render);
   state.observer.observe(avatar._headShape, { attributes: true, attributeFilter: ['d'] });
@@ -51,6 +51,7 @@ export function customizeAvatar(avatar, appearance = {}) {
   state.config = { ...state.config, headRoundness: avatar.getHeadRoundness(), bodyShape: avatar.getBodyShape(), shapeSeed: avatar.getShapeSeed(), ...appearance };
   const config = state.config;
   avatar.setAttribute('color', config.body);
+  if (Object.hasOwn(appearance, 'antenna')) avatar.shadowRoot.getElementById('antennaDot').style.display = config.antenna ? '' : 'none';
   avatar.style.setProperty('--robot-eye-color', config.eyes);
   avatar.style.setProperty('--robot-accessory-color', config.matchEyes ? config.eyes : config.accessoryColor);
   if (Object.hasOwn(appearance, 'bodyShape') || Object.hasOwn(appearance, 'shapeSeed')) avatar.setBodyShape(config.bodyShape, config.shapeSeed);

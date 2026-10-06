@@ -1,5 +1,11 @@
 # MCP changelog
 
+## 0.4.0
+
+- Add `create_avatar_component` for all appearance controls, animation actions, and interactive behavior settings.
+- Add antenna visibility to asset configuration and share presentation rendering with npm exports.
+- Return bounded integration code as data, preserving strict input schemas and local-only execution.
+
 ## 0.3.0
 
 - Add classic/random body modes and bounded shape seeds to all configuration-based workflows.

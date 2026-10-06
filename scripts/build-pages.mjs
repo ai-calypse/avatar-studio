@@ -22,9 +22,12 @@ await cp(path.join(root, 'src'), path.join(output, 'src'), { recursive: true });
 
 for (const entry of await readdir(demo, { withFileTypes: true })) {
   if (entry.isFile() && /\.(js|css)$/.test(entry.name)) {
-    if (entry.name === 'agent-robot-avatar-demo-customize.js' || entry.name === 'avatar-studio-accessories.js') {
+    if (entry.name === 'agent-robot-avatar-demo-customize.js' || entry.name === 'avatar-studio-accessories.js' || entry.name === 'avatar-studio-gif.js') {
       const source = await readFile(path.join(demo, entry.name), 'utf8');
       await writeFile(path.join(output, entry.name), source.replaceAll('../agent-robot-avatar.js', './agent-robot-avatar.js').replaceAll('../src/', './src/'));
+    } else if (entry.name === 'avatar-studio.js') {
+      const source = await readFile(path.join(demo, entry.name), 'utf8');
+      await writeFile(path.join(output, entry.name), source.replaceAll('../agent-robot-avatar.js', './agent-robot-avatar.js'));
     } else {
       await cp(path.join(demo, entry.name), path.join(output, entry.name));
     }

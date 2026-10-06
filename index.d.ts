@@ -136,6 +136,7 @@ declare global {
 export type AvatarAccessory = 'none' | 'glasses' | 'headphones' | 'bow' | 'sunglasses' | 'crown' | 'party' | 'halo' | 'beanie' | 'moustache' | 'flower' | 'round-glasses' | 'square-glasses' | 'cat-eye' | 'aviators' | 'heart-glasses' | 'star-glasses' | 'monocle' | 'goggles' | 'visor' | 'eye-patch' | 'top-hat' | 'fedora' | 'cowboy' | 'cap' | 'beret' | 'bucket' | 'wizard' | 'santa' | 'chef' | 'graduation' | 'pirate' | 'cat-ears' | 'bunny-ears' | 'bear-ears' | 'fox-ears' | 'horns' | 'antlers' | 'alien-antennae' | 'scarf' | 'tie' | 'necklace' | 'medal' | 'choker' | 'bandana' | 'star-pin' | 'heart-pin' | 'lightning-pin' | 'leaf-pin' | 'snowflake-pin' | 'butterfly-pin';
 
 export interface AvatarAppearance {
+  antenna?: boolean;
   body?: string;
   eyes?: string;
   accessoryColor?: string;
@@ -151,3 +152,20 @@ export interface AvatarAppearance {
 export declare function customizeAvatar(avatar: AgentRobotAvatar, appearance?: AvatarAppearance): Readonly<Required<AvatarAppearance>>;
 export declare function exportAvatarSVG(avatar: AgentRobotAvatar, size?: number): string;
 export declare const accessories: readonly Readonly<{ id: Exclude<AvatarAccessory, "none">; name: string; category: string }>[];
+
+export interface AvatarBehavior {
+  antennaFlash?: boolean;
+  pointerFollow?: boolean;
+  loop?: boolean;
+  pressSqueeze?: boolean;
+  antennaDrag?: boolean;
+  motion?: AgentRobotAvatarMotion;
+  wakeOn?: AgentRobotAvatarWakeOn;
+  autoSleep?: number;
+}
+export interface AvatarConfiguration { appearance?: AvatarAppearance; behavior?: AvatarBehavior; action?: AgentRobotAvatarAction; }
+export declare function configureAvatar(avatar: AgentRobotAvatar, settings?: AvatarConfiguration): Readonly<{ appearance: Readonly<Required<AvatarAppearance>>; behavior: Readonly<Required<AvatarBehavior>>; action: AgentRobotAvatarAction }>;
+export declare function exportAvatar(avatar: AgentRobotAvatar, options?: { format?: 'svg' | 'png' | 'gif'; size?: number; background?: string; frames?: number; delay?: number; presentation?: AvatarPresentation }): Promise<Blob>;
+export declare const avatarActions: readonly AgentRobotAvatarAction[];
+
+export interface AvatarPresentation { background?: string; frame?: 'none' | 'circle' | 'rounded'; padding?: number; status?: 'none' | 'online' | 'away' | 'busy' | 'offline'; }

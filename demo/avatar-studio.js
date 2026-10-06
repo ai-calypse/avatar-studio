@@ -1,5 +1,6 @@
 import { avatarSVG, saveDownload } from './agent-robot-avatar-demo-customize.js';
-import { encodeGIF } from './avatar-studio-gif.js';
+import { exportAvatar, customizeAvatar } from '../agent-robot-avatar.js';
+import { translateStudio } from './avatar-studio-i18n.js';
 
 const canvas = document.getElementById('canvas');
 const face = document.getElementById('face');
@@ -43,6 +44,8 @@ if (options) {
   shell.querySelector('.studio-nav nav').appendChild(language);
 }
 const movement = shell.querySelector('.studio-behavior');
+const antennaControl = movement.querySelector('#demoAntenna');
+antennaControl.addEventListener('change', () => customizeAvatar(face, { antenna: antennaControl.checked }));
 movement.querySelector('summary').innerHTML = 'Movement <span class="details-arrow">⌄</span>';
 shell.querySelector('.studio-preview').appendChild(movement);
 const editorScroll = shell.querySelector('.editor-scroll');
@@ -96,19 +99,6 @@ accessoryGroup.appendChild(accessoryColorRow);
 const reset = document.getElementById('robot-custom-reset');
 shell.querySelector('.editor-heading').appendChild(reset);
 fields.append(colorGroup, faceGroup, accessoryGroup);
-async function raster(size = 512, opaque = false) {
-  const image = new Image();
-  const url = URL.createObjectURL(new Blob([avatarSVG()], { type: 'image/svg+xml' }));
-  try {
-    image.src = url;
-    await image.decode();
-    const output = document.createElement('canvas'); output.width = output.height = size;
-    const context = output.getContext('2d');
-    if (opaque) { context.fillStyle = '#f5f5ef'; context.fillRect(0, 0, size, size); }
-    context.drawImage(image, 0, 0, size, size);
-    return output;
-  } finally { URL.revokeObjectURL(url); }
-}
 const status = document.getElementById('export-status');
 let exporting = false;
 async function download(format) {
@@ -116,24 +106,9 @@ async function download(format) {
   exporting = true;
   shell.querySelectorAll('.download-row button').forEach(button => button.disabled = true);
   try {
-    if (format === 'svg') saveDownload(new Blob([avatarSVG()], { type: 'image/svg+xml' }), 'my-avatar.svg');
-    if (format === 'png') {
-      const output = await raster();
-      const blob = await new Promise(resolve => output.toBlob(resolve, 'image/png'));
-      if (!blob) throw Error('PNG generation failed');
-      saveDownload(blob, 'my-avatar.png');
-    }
-    if (format === 'gif') {
-      status.textContent = 'Recording two seconds of your live avatar…';
-      face.noteActivity();
-      const frames = [];
-      for (let i = 0; i < 24; i++) {
-        const output = await raster(256, true);
-        frames.push(output.getContext('2d').getImageData(0, 0, 256, 256).data);
-        await new Promise(resolve => setTimeout(resolve, 80));
-      }
-      saveDownload(new Blob([encodeGIF(frames, 256, 256)], { type: 'image/gif' }), 'my-avatar.gif');
-    }
+    if (format === 'gif') status.textContent = 'Recording two seconds of your live avatar…';
+    const blob = await exportAvatar(face, { format });
+    saveDownload(blob, `my-avatar.${format}`);
     status.textContent = `Your ${format.toUpperCase()} is ready. Make yourself at home anywhere.`;
   } catch {
     status.textContent = 'The download couldn’t be created. Please try again.';
@@ -186,3 +161,13 @@ setInterval(() => { if (showcaseVisible && !document.hidden) refreshShowcases();
 refreshShowcases();
 // Navigating to #create waits until the asynchronously mounted studio is ready.
 if (location.hash === '#create') requestAnimationFrame(() => shell.querySelector('#create').scrollIntoView());
+
+function translateInterface() {
+  const language = document.documentElement.lang || 'en';
+  translateStudio(shell, language);
+  const picker = shell.querySelector('.studio-language');
+  if (picker) picker.value = language;
+}
+new MutationObserver(translateInterface).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+new MutationObserver(translateInterface).observe(shell, { childList: true, characterData: true, subtree: true });
+translateInterface();

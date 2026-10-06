@@ -1,6 +1,6 @@
 # Avatar Studio MCP
 
-A local **stdio MCP server** for developers and agents to build avatar workflows in memory. Version **0.3.0** provides 10 tools for user identities, branded teams, app states, bulk assets, and sprite sheets. It uses the same 50-accessory catalog and shape-fitting accessory renderer as the website. Node.js 22 or newer is required.
+A local **stdio MCP server** for developers and agents to build avatar workflows in memory. Version **0.4.0** provides 11 tools for user identities, branded teams, app states, bulk assets, and sprite sheets. It uses the same 50-accessory catalog and shape-fitting accessory renderer as the website. Node.js 22 or newer is required.
 
 ## Install and connect
 
@@ -188,6 +188,21 @@ Single-avatar tool results include normalized configuration, format, size, MIME 
 
 An `avatar://generated/...` URI identifies the returned artifact; it is not a URL to fetch or a stored resource. Decode the provided data in your application and save it using **your application's** authorized storage layer. The server does not write files. The normalized configuration can be retained for later regeneration. Input changes produce deterministic output with the pinned renderer versions; byte-level stability across future dependency versions is not promised.
 
+## Full interactive control parity
+
+`create_avatar_component` returns fixed-template HTML, browser module code, the normalized configuration, and the required npm package. It supports every public action/alias (including waiting-wrap, inspect, failure, love, and random), all appearance controls including antenna visibility, and these `behavior` fields: `antennaFlash`, `pointerFollow`, `loop`, `pressSqueeze`, `antennaDrag`, `motion`, `wakeOn`, `autoSleep`.
+
+```json
+{
+  "config": {"bodyShape":"random","shapeSeed":42,"antenna":true,"accessory":"headphones","matchEyes":true},
+  "behavior": {"antennaFlash":true,"pointerFollow":true,"loop":true,"motion":"auto","wakeOn":"interaction","autoSleep":60000},
+  "action":"waiting-wrap",
+  "size":170
+}
+```
+
+The generated code requires `@ai-calypse/avatar-studio >=0.2.0` and a connected browser element. The server returns code as data; it does not execute, install, fetch, or write anything. Use it in a bundler/browser app you control. Image exports retain the six documented poses; full action lifecycles, pointer following, gesture interaction, and expression looping require this live component. Antenna visibility is also respected by all SVG/PNG/GIF asset tools.
+
 ## Security boundaries
 
 Read [SECURITY.md](SECURITY.md) for protections, threat model, and limitations. This server is built for a trusted host launching a local subprocess. It is not a public, multi-tenant service. Transport ownership provides the local trust boundary; there is no network listener and no bearer-token authentication layer.
@@ -211,4 +226,4 @@ Tests exercise complete identity/brand/batch/variant/expression/sprite workflows
 
 ## Update an existing connection
 
-After updating the checkout, run the install/verification commands above and restart the MCP connection in your host so it discovers all 10 tools. The command and entrypoint are unchanged. This update does not create a remote endpoint or update the separately published browser npm package.
+After updating the checkout, run the install/verification commands above and restart the MCP connection in your host so it discovers all 11 tools. The command and entrypoint are unchanged. This update does not create a remote endpoint or update the separately published browser npm package.
