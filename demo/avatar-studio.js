@@ -1,6 +1,7 @@
 import { avatarSVG, saveDownload } from './agent-robot-avatar-demo-customize.js';
 import { exportAvatar, customizeAvatar } from '../agent-robot-avatar.js';
 import { translateStudio } from './avatar-studio-i18n.js';
+import { mountUseCases } from './avatar-studio-use-cases.js';
 
 const canvas = document.getElementById('canvas');
 const face = document.getElementById('face');
@@ -12,7 +13,7 @@ if (buildBadge) buildBadge.hidden = true;
 const shell = document.createElement('div');
 shell.className = 'studio-shell';
 shell.innerHTML = `
-<header class="studio-nav"><a href="#" class="studio-brand"><span class="brand-mark" aria-hidden="true">a<span>·</span></span> avatar studio</a><nav aria-label="Main navigation"><a href="../docs/">Docs</a><a href="#create">Create</a><a href="#showcase">In use</a><a href="#developers">For developers <span>↗</span></a></nav></header>
+<header class="studio-nav"><a href="#" class="studio-brand"><span class="brand-mark" aria-hidden="true">a<span>·</span></span> avatar studio</a><nav aria-label="Main navigation"><a href="../docs/">Docs</a><a href="#create">Create</a><a href="#showcase">In use</a></nav></header>
 
 <main id="create" class="studio-workspace"><section class="studio-preview" aria-label="Live avatar preview"><div class="preview-heading"><span><i></i> LIVE PREVIEW</span><span class="preview-tag">01 / ROBOT</span></div><div class="studio-stage"></div><div class="preview-caption"><strong>Hello, little you.</strong><span>Move your cursor. Watch it come to life.</span></div><div class="studio-formats"><span>Made for your corner of the internet</span><div><span>Profile</span><span>Portfolio</span><span>App</span></div></div></section><section class="studio-editor" aria-label="Avatar editor"><div class="editor-heading"><div><h2>Make it yours</h2><p>Choose your colors. Give it character.</p></div></div><div class="editor-scroll"><div class="studio-design"></div><details class="studio-expression"><summary>Try an expression <span class="details-arrow">⌄</span></summary><div class="studio-actions"></div></details><details class="studio-behavior"><summary>Movement settings <span class="details-arrow">⌄</span></summary><div class="studio-options"></div></details></div><div class="studio-export"><div><h3>Download your avatar</h3><p>Download your avatar. No account needed.</p></div><div class="download-row"><button type="button" id="studio-svg">SVG <span>↗</span></button><button type="button" id="studio-png">PNG <span>↗</span></button><button type="button" id="studio-gif">GIF <span>↗</span></button></div><p id="export-status" role="status">SVG & PNG are transparent. GIF has a light background.</p></div></section></main>
 <section id="showcase" class="studio-showcase"><div class="showcase-heading"><div><span class="studio-eyebrow">YOUR AVATAR, OUT IN THE WORLD</span><h2>One face. A place everywhere.</h2></div><p>These previews use your current design.<br>Change a color and see it follow you.</p></div><div class="showcase-grid">
@@ -167,7 +168,14 @@ function translateInterface() {
   translateStudio(shell, language);
   const picker = shell.querySelector('.studio-language');
   if (picker) picker.value = language;
+  for (const docsLink of shell.querySelectorAll('.studio-nav nav a:first-child, .use-case-docs')) {
+    const docsURL = new URL(docsLink.href);
+    docsURL.searchParams.set('lang', language);
+    if (docsLink.href !== docsURL.href) docsLink.href = docsURL.href;
+  }
 }
 new MutationObserver(translateInterface).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 new MutationObserver(translateInterface).observe(shell, { childList: true, characterData: true, subtree: true });
 translateInterface();
+
+void mountUseCases(showcase).then(translateInterface);

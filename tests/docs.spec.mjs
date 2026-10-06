@@ -23,7 +23,7 @@ test('local search finds tool names inside tables and supports Escape',async({pa
  await page.getByRole('searchbox').fill('create_avatar_component');
  await expect(page.locator('#search-results')).toContainText('Tools and real use cases');
  await page.locator('#search-results').getByRole('link',{name:'Tools and real use cases',exact:false}).click();
- await expect(page).toHaveURL(/mcp\.html#tools-and-real-use-cases/);
+ await expect(page).toHaveURL(/mcp\.html\?lang=en#tools-and-real-use-cases/);
  await page.getByRole('button',{name:'Search docs',exact:false}).click();
  await page.keyboard.press('Escape');
  await expect(page.locator('#docs-search')).not.toBeVisible();
@@ -50,4 +50,29 @@ test('mobile documentation menu works without horizontal page overflow',async({p
  await page.locator('#docs-sidebar').getByRole('link',{name:'npm integration',exact:true}).click();
  await expect(page.getByRole('heading',{name:'npm integration',exact:true})).toBeVisible();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
+
+test('docs language menu translates the current full guide and preserves literal code',async({page})=>{
+ await page.goto('/docs/mcp.html?lang=es#install-and-connect');
+ await page.locator('.docs-translation summary').click();
+ const picker=page.getByLabel('Documentation language');
+ await expect(picker).toHaveValue('es');
+ await picker.selectOption('ja');
+ const link=page.getByRole('link',{name:'Translate page',exact:false});
+ const target=new URL(await link.getAttribute('href'));
+ expect(target.origin).toBe('https://translate.google.com');
+ expect(target.searchParams.get('tl')).toBe('ja');
+ expect(target.searchParams.get('sl')).toBe('en');
+ expect(target.searchParams.get('u')).toBe('https://ai-calypse.github.io/avatar-studio/docs/mcp.html#install-and-connect');
+ await expect(link).toHaveAttribute('target','_blank');
+ await expect(page.locator('.code-block pre').first()).toHaveAttribute('translate','no');
+ const files=await page.locator('article code').evaluateAll(elements=>elements.filter(element=>!element.closest('[translate="no"]')).length);
+ expect(files).toBe(0);
+ await page.locator('#docs-sidebar').getByRole('link',{name:'npm integration',exact:true}).click();
+ await expect(page).toHaveURL(/npm\.html\?lang=ja/);
+ await page.locator('.docs-translation summary').click();
+ await expect(page.getByLabel('Documentation language')).toHaveValue('ja');
+ await page.getByLabel('Documentation language').selectOption('en');
+ await expect(page.getByRole('link',{name:'Read original English',exact:false})).toHaveAttribute('href','https://ai-calypse.github.io/avatar-studio/docs/npm.html');
 });

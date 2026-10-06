@@ -31,6 +31,9 @@ for (const entry of await readdir(demo, { withFileTypes: true })) {
     } else if (entry.name === 'avatar-studio.js') {
       const source = await readFile(path.join(demo, entry.name), 'utf8');
       await writeFile(path.join(output, entry.name), source.replaceAll('../agent-robot-avatar.js', './agent-robot-avatar.js').replaceAll('href="../docs/"', 'href="./docs/"'));
+    } else if (entry.name === 'avatar-studio-use-cases.js') {
+      const source = await readFile(path.join(demo, entry.name), 'utf8');
+      await writeFile(path.join(output, entry.name), source.replaceAll('../docs/use-cases/', './docs/use-cases/'));
     } else {
       await cp(path.join(demo, entry.name), path.join(output, entry.name));
     }

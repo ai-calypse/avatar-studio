@@ -215,3 +215,30 @@ test('editor scroll keeps downloads fixed and movement remains accessible on mob
   await page.getByRole('heading',{name:'Make it yours'}).click();
   await expect(page.locator('.studio-behavior')).not.toHaveAttribute('open');
 });
+
+
+test('In use contains every README example, working previews, search and category filters',async({page})=>{
+ const {readFile}=await import('node:fs/promises');
+ const manifest=JSON.parse(await readFile(new URL('../docs/use-cases/manifest.json',import.meta.url),'utf8'));
+ await page.goto('/demo/?lang=en',{waitUntil:'networkidle'});
+ await expect(page.locator('.studio-nav a[href="#developers"]')).toHaveCount(0);
+ await expect(page.locator('.use-case-example')).toHaveCount(manifest.length);
+ const ids=await page.locator('[data-use-case]').evaluateAll(cards=>cards.map(card=>card.dataset.useCase));
+ expect(ids).toEqual(manifest.map(item=>item.id));
+ const broken=await page.locator('.use-case-example img').evaluateAll(async images=>{
+  await Promise.all(images.map(image=>{image.loading='eager';return image.decode().catch(()=>{});}));
+  return images.filter(image=>!image.naturalWidth).map(image=>image.src);
+ });
+ expect(broken).toEqual([]);
+ await page.getByLabel('Category',{exact:true}).selectOption('presence');
+ await expect(page.locator('.use-case-example:visible')).toHaveCount(6);
+ await expect(page.locator('.use-case-count')).toHaveText('6');
+ await page.getByLabel('Category',{exact:true}).selectOption('all');
+ await page.getByLabel('Find a use case',{exact:true}).fill('sprite');
+ await expect(page.locator('.use-case-example:visible')).toHaveCount(1);
+ await expect(page.locator('.use-case-example:visible')).toHaveAttribute('data-use-case','sprites');
+ await page.getByLabel('Find a use case',{exact:true}).fill('no-matching-use-case');
+ await expect(page.locator('.use-case-empty')).toBeVisible();
+ await page.setViewportSize({width:320,height:700});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
