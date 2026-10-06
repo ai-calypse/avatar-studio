@@ -5,7 +5,9 @@ Create a personalized robot avatar for your profile, team chat, app, or AI assis
 
 Built on [Agent Robot Avatar by CX ArtLab](https://github.com/CX-ArtLab/agent-robot-avatar), using SVG and vanilla JavaScript. The website runs without a backend or account; the MCP server runs separately as a local Node.js subprocess.
 
-[Read the documentation](https://ai-calypse.github.io/avatar-studio/docs/) for creator guides, npm integration, MCP setup, API controls, and visual use cases.
+[Live creator](https://ai-calypse.github.io/avatar-studio/) · [Documentation](https://ai-calypse.github.io/avatar-studio/docs/) · [Releases](https://github.com/ai-calypse/avatar-studio/releases) · [Changelog](CHANGELOG.md) · [npm package](https://www.npmjs.com/package/@ai-calypse/avatar-studio)
+
+The documentation covers creator guides, npm integration, MCP setup, API controls, and visual use cases.
 
 ## Avatar examples
 

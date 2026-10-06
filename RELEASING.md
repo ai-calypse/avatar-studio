@@ -26,6 +26,8 @@ The workflow uses OIDC instead of an npm token. Setup is described in [npm trust
 
 For each release, update `package.json`, `package-lock.json`, `src/agent-robot-avatar-version.js`, and the changelog. Push the changes, then publish a GitHub Release with the matching `v<version>` tag. The workflow validates the release and package, tests all three browser engines, and publishes. Prereleases use the `next` npm tag; stable versions use `latest`.
 
-Do not publish a GitHub Release for a version already manually published, since the workflow would attempt the same immutable version again. Use the next version when transitioning to automated publishing. Never overwrite tags or reuse a published npm version.
+Published releases live at [GitHub Releases](https://github.com/ai-calypse/avatar-studio/releases). Maintain dated release entries in `CHANGELOG.md`, preserving the separate upstream history, and create an immutable `v<version>` tag at the validated commit. Write release notes that identify both the browser and MCP versions and link the live creator and documentation.
+
+The workflow checks the npm registry before publishing. Historical GitHub Releases for versions already on npm are allowed: the workflow reports that publication is complete and skips further publishing steps. A new GitHub Release does not by itself confirm npm publication; verify the workflow result and registry metadata. If trusted publishing is not configured, the GitHub release remains available while npm authentication requires setup. Never overwrite tags or reuse a published npm version.
 
 The local MCP is separate: install its dependencies with `npm ci --prefix mcp --ignore-scripts` and run `npm run test:mcp`. It is not published by this workflow.
