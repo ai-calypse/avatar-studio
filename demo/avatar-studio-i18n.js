@@ -1403,6 +1403,12 @@ export function missingStudioTranslations(root, language) {
 }
 export function translateStudio(root, language) {
   const dictionary = translations[language] || {};
+  // Dialog localization owns this node too; keep the studio's compact hint localized.
+  const hint = root.querySelector('.preview-caption .demo-chat-entry-hint');
+  const hintText = translatePhrase('Double-click to try a conversation. Drag to play.',language);
+  if (hint && hint.textContent !== hintText) hint.textContent = hintText;
+  const previewImage = root.querySelector('#face')?.shadowRoot?.querySelector('svg[role=img]');
+  previewImage?.setAttribute('aria-label',translatePhrase('Profile avatar',language));
   for (const element of root.querySelectorAll('optgroup,[aria-label],[title],[alt],[placeholder]')) {
     // These older controls have their own locale catalogs.
     if (element.closest('.demo-options,.demo-roundness-control,.demo-chat-entry-hint')) continue;
