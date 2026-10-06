@@ -28,3 +28,36 @@ for(const button of document.querySelectorAll('.copy-code'))button.addEventListe
  catch{button.textContent='Select code to copy';}
  setTimeout(()=>{button.textContent='Copy';},2000);
 });
+
+// Full-page translation is opt-in. No third-party scripts or requests load here.
+const language=document.getElementById('docs-language');
+const translatedPage=document.querySelector('.docs-translate-link');
+const moreLanguages=document.querySelector('.docs-more-languages');
+const translationMenu=document.querySelector('.docs-translation');
+const parameters=new URL(location.href).searchParams;
+const locale=parameters.get('lang')||parameters.get('_x_tr_tl');
+if([...language.options].some(option=>option.value===locale))language.value=locale;
+function updateTranslation(){
+ const file=location.pathname.split('/').pop();
+ const page=/^(index|creator|npm|mcp|reference|examples|security|contributing)\.html$/.test(file)?file:'';
+ const source=new URL(page,'https://ai-calypse.github.io/avatar-studio/docs/');source.hash=location.hash;
+ const target=new URL('https://translate.google.com/translate');
+ target.searchParams.set('sl','en');target.searchParams.set('tl',language.value);target.searchParams.set('u',source.href);
+ translatedPage.href=language.value==='en'?source.href:target.href;
+ translatedPage.textContent=language.value==='en'?'Read original English ↗':'Translate page ↗';
+ const chooser=new URL(target);
+ if(language.value==='en')chooser.searchParams.set('tl','es');
+ moreLanguages.href=chooser.href;
+ const current=new URL(location.href);current.searchParams.set('lang',language.value);history.replaceState(null,'',current);
+ for(const link of document.querySelectorAll('a[href]')){
+  if(link===translatedPage||link===moreLanguages)continue;
+  const destination=new URL(link.href);
+  if(destination.origin!==location.origin||!destination.pathname.startsWith(location.pathname.replace(/[^/]*$/,''))||destination.hash&&destination.pathname===location.pathname)continue;
+  if(destination.pathname.endsWith('/')||destination.pathname.endsWith('.html')){destination.searchParams.set('lang',language.value);link.href=destination.href;}
+ }
+}
+language.addEventListener('change',updateTranslation);
+window.addEventListener('hashchange',updateTranslation);
+document.addEventListener('pointerdown',event=>{if(!translationMenu.contains(event.target))translationMenu.open=false;});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')translationMenu.open=false;});
+updateTranslation();

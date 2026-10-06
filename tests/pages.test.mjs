@@ -41,3 +41,13 @@ test('all generated documentation links, images, and search destinations resolve
   }
  }
 });
+
+
+test('Pages gallery uses project-relative assets and includes every canonical preview',()=>{
+ const root=path.resolve('.pages-site');
+ const module=readFileSync(path.join(root,'avatar-studio-use-cases.js'),'utf8');
+ assert.ok(module.includes("new URL('./docs/use-cases/', import.meta.url)"));
+ const manifest=JSON.parse(readFileSync(path.join(root,'docs/use-cases/manifest.json'),'utf8'));
+ assert.equal(manifest.length,48);
+ for(const item of manifest)assert.ok(existsSync(path.join(root,'docs/use-cases',item.preview)),item.preview);
+});
