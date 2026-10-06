@@ -1,5 +1,7 @@
 # Avatar Studio
 
+![Avatar Studio — colorful robot avatars with personalized accessories](https://raw.githubusercontent.com/ai-calypse/avatar-studio/main/docs/assets/avatar-studio-banner.png)
+
 [![Validate](https://github.com/ai-calypse/avatar-studio/actions/workflows/validate.yml/badge.svg)](https://github.com/ai-calypse/avatar-studio/actions/workflows/validate.yml) [![CodeQL](https://github.com/ai-calypse/avatar-studio/actions/workflows/codeql.yml/badge.svg)](https://github.com/ai-calypse/avatar-studio/actions/workflows/codeql.yml)
 Create a personalized robot avatar for your profile, team chat, app, or AI assistant. Avatar Studio combines a browser-based creator with a local MCP server so people and agents can generate avatars from the same accessory catalog.
 
