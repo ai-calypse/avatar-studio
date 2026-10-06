@@ -13,6 +13,9 @@ test('every supported studio locale covers text, options, tooltips, and accessib
         page:missingStudioTranslations(document.querySelector('.studio-shell'),language)};
     },locale);
     expect(missing,locale).toEqual({catalog:[],page:[]});
+    const expectedHint = await page.evaluate(async language => (await import('/demo/avatar-studio-i18n.js')).translatePhrase('Double-click to try a conversation. Drag to play.',language),locale);
+    await expect(page.locator('.preview-caption .demo-chat-entry-hint')).toHaveText(expectedHint);
+    await expect(page.locator('#status')).not.toContainText('idle ·');
     await expect(page.locator('.studio-language')).not.toHaveAttribute('aria-label','Page language');
     await expect(page.locator('[data-avatar-showcase]').first()).not.toHaveAttribute('alt','Your avatar as a chat profile');
   }
