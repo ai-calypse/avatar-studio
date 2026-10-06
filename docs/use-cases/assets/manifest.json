@@ -1,0 +1,507 @@
+[
+  {
+    "config": {
+      "antenna": false,
+      "bodyShape": "random",
+      "shapeSeed": 183,
+      "body": "#32624f",
+      "eyes": "#d7f4a0",
+      "accessoryColor": "#ff9cbd",
+      "matchEyes": false,
+      "accessory": "flower",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "#e7f1e7",
+      "frame": "circle",
+      "padding": 10,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "3398437c66058038bfe8e0dbb6f3e6eedeffe55f604a9b75f62ac595ae8965a9",
+    "bytes": 6291,
+    "file": "presence-none.svg",
+    "tool": "create_avatar"
+  },
+  {
+    "config": {
+      "antenna": false,
+      "bodyShape": "random",
+      "shapeSeed": 183,
+      "body": "#32624f",
+      "eyes": "#d7f4a0",
+      "accessoryColor": "#ff9cbd",
+      "matchEyes": false,
+      "accessory": "flower",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "#e7f1e7",
+      "frame": "circle",
+      "padding": 10,
+      "status": "online"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "9ec33b1057474e6b4cbe4df9574d56454f5ab45627245b73e4b828c2ceda9513",
+    "bytes": 6374,
+    "file": "presence-online.svg",
+    "tool": "create_avatar"
+  },
+  {
+    "config": {
+      "antenna": false,
+      "bodyShape": "random",
+      "shapeSeed": 183,
+      "body": "#32624f",
+      "eyes": "#d7f4a0",
+      "accessoryColor": "#ff9cbd",
+      "matchEyes": false,
+      "accessory": "flower",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "#e7f1e7",
+      "frame": "circle",
+      "padding": 10,
+      "status": "away"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "fb3edda2a999207da531395afef9c6cd3f134a5302e3f8c21303a399f9c2ea7e",
+    "bytes": 6374,
+    "file": "presence-away.svg",
+    "tool": "create_avatar"
+  },
+  {
+    "config": {
+      "antenna": false,
+      "bodyShape": "random",
+      "shapeSeed": 183,
+      "body": "#32624f",
+      "eyes": "#d7f4a0",
+      "accessoryColor": "#ff9cbd",
+      "matchEyes": false,
+      "accessory": "flower",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "#e7f1e7",
+      "frame": "circle",
+      "padding": 10,
+      "status": "busy"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "1dd70ce30961dcb8b6b3407fb87b5f534baeb7338d0507dfaac49a598c500c7a",
+    "bytes": 6374,
+    "file": "presence-busy.svg",
+    "tool": "create_avatar"
+  },
+  {
+    "config": {
+      "antenna": false,
+      "bodyShape": "random",
+      "shapeSeed": 183,
+      "body": "#32624f",
+      "eyes": "#d7f4a0",
+      "accessoryColor": "#ff9cbd",
+      "matchEyes": false,
+      "accessory": "flower",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "#e7f1e7",
+      "frame": "circle",
+      "padding": 10,
+      "status": "offline"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "65d03d7c6a1dc3bea5cce1a7e58e06fae44efefe2a0ffc26249efc4d9348961f",
+    "bytes": 6374,
+    "file": "presence-offline.svg",
+    "tool": "create_avatar"
+  },
+  {
+    "id": "idle",
+    "config": {
+      "antenna": true,
+      "bodyShape": "classic",
+      "shapeSeed": 0,
+      "body": "#393b62",
+      "eyes": "#ffe8b6",
+      "accessoryColor": "#ff895b",
+      "matchEyes": false,
+      "accessory": "headphones",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 85,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "537dbac8ea883993eb6900d0c437d4c1c63beeb99483ba434624c48ca762f8b0",
+    "bytes": 7480,
+    "file": "expression-idle.svg",
+    "tool": "create_expression_pack"
+  },
+  {
+    "id": "happy",
+    "config": {
+      "antenna": true,
+      "bodyShape": "classic",
+      "shapeSeed": 0,
+      "body": "#393b62",
+      "eyes": "#ffe8b6",
+      "accessoryColor": "#ff895b",
+      "matchEyes": false,
+      "accessory": "headphones",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 85,
+      "expression": "happy"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "552a6df8c0122885b4b976d99e658cdd5f4bd13cf6fe75a7a7d88d97fafa8c07",
+    "bytes": 7512,
+    "file": "expression-happy.svg",
+    "tool": "create_expression_pack"
+  },
+  {
+    "id": "sad",
+    "config": {
+      "antenna": true,
+      "bodyShape": "classic",
+      "shapeSeed": 0,
+      "body": "#393b62",
+      "eyes": "#ffe8b6",
+      "accessoryColor": "#ff895b",
+      "matchEyes": false,
+      "accessory": "headphones",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 85,
+      "expression": "sad"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "4b7acf00bce327f424c4f399a4793c1788ea696954a4ecd59e9e5b6df24ebd7c",
+    "bytes": 7734,
+    "file": "expression-sad.svg",
+    "tool": "create_expression_pack"
+  },
+  {
+    "id": "angry",
+    "config": {
+      "antenna": true,
+      "bodyShape": "classic",
+      "shapeSeed": 0,
+      "body": "#393b62",
+      "eyes": "#ffe8b6",
+      "accessoryColor": "#ff895b",
+      "matchEyes": false,
+      "accessory": "headphones",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 85,
+      "expression": "angry"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "37f68d848c5c34cc1f70a861805041b3e829c368e3a99cf5ccdc6ef372089c75",
+    "bytes": 7734,
+    "file": "expression-angry.svg",
+    "tool": "create_expression_pack"
+  },
+  {
+    "id": "sleep",
+    "config": {
+      "antenna": true,
+      "bodyShape": "classic",
+      "shapeSeed": 0,
+      "body": "#393b62",
+      "eyes": "#ffe8b6",
+      "accessoryColor": "#ff895b",
+      "matchEyes": false,
+      "accessory": "headphones",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 85,
+      "expression": "sleep"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "fde208bd00e9174c70c9f0733350d124cc4f4cab98152b0fc31ee4ae2dc24559",
+    "bytes": 7478,
+    "file": "expression-sleep.svg",
+    "tool": "create_expression_pack"
+  },
+  {
+    "id": "surprise",
+    "config": {
+      "antenna": true,
+      "bodyShape": "classic",
+      "shapeSeed": 0,
+      "body": "#393b62",
+      "eyes": "#ffe8b6",
+      "accessoryColor": "#ff895b",
+      "matchEyes": false,
+      "accessory": "headphones",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 85,
+      "expression": "surprise"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "614d7e419fc7669396775b7a00d1ee75f943875e70355d165ab6cfa112da6962",
+    "bytes": 7492,
+    "file": "expression-surprise.svg",
+    "tool": "create_expression_pack"
+  },
+  {
+    "id": "variant-1",
+    "config": {
+      "antenna": true,
+      "bodyShape": "random",
+      "shapeSeed": 9921,
+      "body": "#214d65",
+      "eyes": "#77ead9",
+      "accessoryColor": "#a490ff",
+      "matchEyes": false,
+      "accessory": "graduation",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "5bcdcaf64584d53f6a42ac7dfa13d6ea42593c76b3ac1f5fc8da9c66bf2b14a9",
+    "bytes": 5567,
+    "file": "variant-0.svg",
+    "tool": "create_avatar_variants"
+  },
+  {
+    "id": "variant-2",
+    "config": {
+      "antenna": true,
+      "bodyShape": "random",
+      "shapeSeed": 9921,
+      "body": "#214d65",
+      "eyes": "#77ead9",
+      "accessoryColor": "#a490ff",
+      "matchEyes": false,
+      "accessory": "pirate",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "38cd7691fc8e98ab2649b6ae59b1d233b5df972503d1b8fde4e8f6f71c9f65f1",
+    "bytes": 5601,
+    "file": "variant-1.svg",
+    "tool": "create_avatar_variants"
+  },
+  {
+    "id": "variant-3",
+    "config": {
+      "antenna": true,
+      "bodyShape": "random",
+      "shapeSeed": 9921,
+      "body": "#214d65",
+      "eyes": "#77ead9",
+      "accessoryColor": "#a490ff",
+      "matchEyes": false,
+      "accessory": "cat-ears",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "8063462f5a4fbf8f416d4e5c15929b7ac131807fa22134271e40798251dc69a8",
+    "bytes": 5699,
+    "file": "variant-2.svg",
+    "tool": "create_avatar_variants"
+  },
+  {
+    "id": "variant-4",
+    "config": {
+      "antenna": true,
+      "bodyShape": "random",
+      "shapeSeed": 9921,
+      "body": "#214d65",
+      "eyes": "#77ead9",
+      "accessoryColor": "#a490ff",
+      "matchEyes": false,
+      "accessory": "bunny-ears",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "46114da06b07dddf81b2c818f18a4d0295543df9252da7647f7aa08455f593d4",
+    "bytes": 5653,
+    "file": "variant-3.svg",
+    "tool": "create_avatar_variants"
+  },
+  {
+    "id": "variant-5",
+    "config": {
+      "antenna": true,
+      "bodyShape": "random",
+      "shapeSeed": 9921,
+      "body": "#214d65",
+      "eyes": "#77ead9",
+      "accessoryColor": "#a490ff",
+      "matchEyes": false,
+      "accessory": "bear-ears",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "1d7786e07dc61f954b775c7c09fdb1d4a9f65328f298fba5f67d3c5a9575c2cd",
+    "bytes": 5685,
+    "file": "variant-4.svg",
+    "tool": "create_avatar_variants"
+  },
+  {
+    "id": "variant-6",
+    "config": {
+      "antenna": true,
+      "bodyShape": "random",
+      "shapeSeed": 9921,
+      "body": "#214d65",
+      "eyes": "#77ead9",
+      "accessoryColor": "#a490ff",
+      "matchEyes": false,
+      "accessory": "fox-ears",
+      "eyeSize": 100,
+      "spacing": 0,
+      "headRoundness": 50,
+      "expression": "idle"
+    },
+    "presentation": {
+      "background": "transparent",
+      "frame": "none",
+      "padding": 0,
+      "status": "none"
+    },
+    "size": 128,
+    "format": "svg",
+    "mimeType": "image/svg+xml",
+    "sha256": "f6834f8c4794a699e08c2ee589e931e56c0c26a48dc097e80ebffb796614713f",
+    "bytes": 5697,
+    "file": "variant-5.svg",
+    "tool": "create_avatar_variants"
+  }
+]

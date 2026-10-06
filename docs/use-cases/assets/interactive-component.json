@@ -1,0 +1,34 @@
+{
+  "package": "@ai-calypse/avatar-studio",
+  "minimumVersion": "0.2.0",
+  "settings": {
+    "appearance": {
+      "antenna": true,
+      "bodyShape": "random",
+      "shapeSeed": 2048,
+      "body": "#204c52",
+      "eyes": "#ffffff",
+      "accessoryColor": "#ffffff",
+      "matchEyes": true,
+      "accessory": "lightning-pin",
+      "eyeSize": 103,
+      "spacing": 6,
+      "headRoundness": 47
+    },
+    "behavior": {
+      "antennaFlash": true,
+      "pointerFollow": true,
+      "loop": true,
+      "pressSqueeze": true,
+      "antennaDrag": true,
+      "motion": "auto",
+      "wakeOn": "activity",
+      "autoSleep": 0
+    },
+    "action": "waiting-wrap"
+  },
+  "size": 170,
+  "html": "<agent-robot-avatar id=\"studio-avatar\" size=\"170\"></agent-robot-avatar>",
+  "javascript": "import { configureAvatar, exportAvatar } from '@ai-calypse/avatar-studio';\nconst avatar = document.getElementById('studio-avatar');\nconfigureAvatar(avatar, {\"appearance\":{\"antenna\":true,\"bodyShape\":\"random\",\"shapeSeed\":2048,\"body\":\"#204c52\",\"eyes\":\"#ffffff\",\"accessoryColor\":\"#ffffff\",\"matchEyes\":true,\"accessory\":\"lightning-pin\",\"eyeSize\":103,\"spacing\":6,\"headRoundness\":47},\"behavior\":{\"antennaFlash\":true,\"pointerFollow\":true,\"loop\":true,\"pressSqueeze\":true,\"antennaDrag\":true,\"motion\":\"auto\",\"wakeOn\":\"activity\",\"autoSleep\":0},\"action\":\"waiting-wrap\"});\n// Optional download: await exportAvatar(avatar, { format: 'gif' });",
+  "instructions": "Install @ai-calypse/avatar-studio >=0.2.0. Mount the HTML first, then run the module code in your browser application. Pointer interaction and looping require a live component. SVG/PNG/GIF tools produce image files, not interactive components."
+}

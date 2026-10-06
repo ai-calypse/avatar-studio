@@ -32,6 +32,129 @@ The same designs can be exported as transparent SVGs, profile PNGs, or sprite sh
 
 Reproduce the GIFs using the exact `create_avatar` arguments in [the example manifest](docs/examples/manifest.json). See [sprite coordinates and configs](docs/examples/sprite-manifest.json) for the PNG sheet. All assets are committed to this repository; no external image host is required.
 
+## Avatars in real applications
+
+**48 illustrated use cases**, from account profiles to agent workflows. These are documentation mockups made with real avatar exports, not bundled integrations. Your application supplies messaging, presence, notifications, accounts, game logic, and state transitions. Platform support for animated profile images varies; use PNG when GIF is not supported.
+
+### Profiles and communities
+
+![Profiles and communities: six avatar use cases](docs/use-cases/identity.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [User profile](docs/use-cases/user-profile.svg) | Your own recognizable account picture. | `create_avatar` |
+| [Team chat](docs/use-cases/team-chat.svg) | Recognizable faces beside every message. | `create_avatar_batch` |
+| [Comments and replies](docs/use-cases/comments.svg) | Give authors a consistent identity. | `generate_identity` |
+| [Community forum](docs/use-cases/forum.svg) | Pseudonymous profiles without photo uploads. | `generate_identity` |
+| [Team directory](docs/use-cases/directory.svg) | Create a coordinated set of team avatars. | `create_avatar_batch` |
+| [Notification sender](docs/use-cases/notifications.svg) | Distinguish people, bots, and app events. | `create_avatar` |
+
+### Assistants and support
+
+![Assistants and support: six avatar use cases](docs/use-cases/assistants.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [Product copilot](docs/use-cases/copilot.svg) | Embed a companion beside useful suggestions. | `create_avatar_component` |
+| [Support chat](docs/use-cases/support.svg) | Use a friendly identity for support agents. | `create_avatar_component` |
+| [Command palette](docs/use-cases/command.svg) | Give your in-app assistant a face. | `npm component` |
+| [Onboarding guide](docs/use-cases/onboarding.svg) | Explain the next step with a character. | `create_expression_pack` |
+| [Documentation guide](docs/use-cases/docs-guide.svg) | Add a recognizable guide to documentation. | `npm component` |
+| [Browser extension](docs/use-cases/extension.svg) | Fit a tiny helper into an extension popup. | `npm component` |
+
+### Presence and workflow states
+
+![Presence and workflow states: six avatar use cases](docs/use-cases/presence.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [No presence badge](docs/use-cases/neutral.svg) | Use the avatar without a state indicator. | `create_avatar` |
+| [Online presence](docs/use-cases/online.svg) | Show an available person or assistant. | `create_avatar` |
+| [Away or idle](docs/use-cases/away.svg) | Show a temporary absence with a badge. | `create_avatar` |
+| [Busy or processing](docs/use-cases/busy.svg) | Show an agent working on a request. | `create_avatar` |
+| [Offline presence](docs/use-cases/offline.svg) | Keep unavailable users visible in a roster. | `create_avatar` |
+| [Success and error feedback](docs/use-cases/outcomes.svg) | Map avatar expressions to app outcomes. | `create_expression_pack` |
+
+### Collaboration and work
+
+![Collaboration and work: six avatar use cases](docs/use-cases/collaboration.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [Task assignees](docs/use-cases/kanban.svg) | Identify owners on a project board. | `create_avatar_batch` |
+| [Document collaborators](docs/use-cases/editors.svg) | Show people currently editing a document. | `create_avatar_batch` |
+| [Code review participants](docs/use-cases/reviewers.svg) | Show authors and reviewers near changes. | `generate_identity` |
+| [Meeting attendees](docs/use-cases/calendar.svg) | Represent invitees in calendar events. | `create_avatar_batch` |
+| [Contact directory](docs/use-cases/crm.svg) | Give contact records a default identity. | `generate_identity` |
+| [Multi-agent team](docs/use-cases/agent-team.svg) | Differentiate agents while preserving brand colors. | `create_avatar_variants` |
+
+### Branding and product identity
+
+![Branding and product identity: six avatar use cases](docs/use-cases/branding.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [App icon concept](docs/use-cases/app-icon.svg) | Start an icon design from a robot mascot. | `create_avatar` |
+| [Project logo](docs/use-cases/project-logo.svg) | Give side projects an expressive visual mark. | `create_avatar` |
+| [Favicon source](docs/use-cases/favicon.svg) | Export SVG or PNG as a favicon source. | `create_avatar` |
+| [Mobile account screen](docs/use-cases/mobile.svg) | Use exported assets in a native app. | `create_avatar` |
+| [Email signature](docs/use-cases/email.svg) | Add a personal mark to your signature. | `SVG / PNG export` |
+| [Speaker and slide identity](docs/use-cases/slides.svg) | Use a consistent avatar in presentations. | `SVG / PNG export` |
+
+### Content and community identity
+
+![Content and community identity: six avatar use cases](docs/use-cases/content.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [Portfolio identity](docs/use-cases/portfolio.svg) | Carry your avatar across a personal site. | `SVG / PNG export` |
+| [Streaming channel identity](docs/use-cases/stream.svg) | Use an avatar as a channel identity asset. | `GIF / PNG export` |
+| [Newsletter author](docs/use-cases/newsletter.svg) | Show the author in newsletter headers. | `PNG export` |
+| [Social profile picture](docs/use-cases/social.svg) | Upload a profile image where supported. | `PNG export` |
+| [Membership cards](docs/use-cases/members.svg) | Personalize fictional community member cards. | `create_avatar_batch` |
+| [Launch and milestone graphics](docs/use-cases/launch.svg) | Add a mascot to launch announcements. | `SVG / GIF export` |
+
+### Games and learning
+
+![Games and learning: six avatar use cases](docs/use-cases/learning.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [Game character portrait](docs/use-cases/character.svg) | Give players a customizable portrait. | `create_avatar` |
+| [Leaderboard players](docs/use-cases/leaderboard.svg) | Use repeatable avatars beside player scores. | `generate_identity` |
+| [Learning companion](docs/use-cases/tutor.svg) | Add a character beside lesson guidance. | `create_avatar_component` |
+| [Quiz feedback](docs/use-cases/quiz.svg) | Celebrate answers or show retry feedback. | `create_expression_pack` |
+| [Achievement card](docs/use-cases/achievement.svg) | Personalize an achievement illustration. | `create_avatar` |
+| [Collectible character cards](docs/use-cases/collectibles.svg) | Generate visual character collections. | `create_avatar_variants` |
+
+### Developer and agent workflows
+
+![Developer and agent workflows: six avatar use cases](docs/use-cases/developer.png)
+
+| Example | How to use it | Tool or export |
+| --- | --- | --- |
+| [Repeatable default identities](docs/use-cases/identicons.svg) | Generate a stable look from an opaque ID. | `generate_identity` |
+| [Brand-matched variants](docs/use-cases/brand-kit.svg) | Keep colors fixed while varying accessories. | `suggest_brand_palette + create_avatar_variants` |
+| [Expression asset pack](docs/use-cases/expression-pack.svg) | Export six named states for app logic. | `create_expression_pack` |
+| [Sprite sheet coordinates](docs/use-cases/sprites.svg) | Use frame coordinates in canvas or games. | `create_sprite_sheet` |
+| [Demo and test fixtures](docs/use-cases/fixtures.svg) | Create named users for mock interfaces. | `create_avatar_batch` |
+| [Interactive browser component](docs/use-cases/interactive.svg) | Generate npm integration code for live controls. | `create_avatar_component` |
+
+### Choose an integration
+
+| Need | Use |
+| --- | --- |
+| A profile picture, logo, signature, slide, or native app asset | Website SVG/PNG/GIF downloads, npm `exportAvatar`, or MCP `create_avatar`. |
+| Animated browser avatars with actions, cursor following, gestures, and looping | npm `configureAvatar` or MCP `create_avatar_component` for integration code. |
+| Named users or a team set | `create_avatar_batch`. |
+| Repeatable default avatars | `generate_identity`; pass an opaque ID and persist its returned config. It is not authentication or an anonymity guarantee. |
+| A consistent brand palette and variations | `suggest_brand_palette` then `create_avatar_variants`. |
+| Six image poses for application states | `create_expression_pack`; your app controls when to display each pose. |
+| A canvas/game atlas with frame coordinates | `create_sprite_sheet`; the app implements rendering and animation. |
+| Discover controls or validate agent-generated settings | `get_capabilities`, `list_accessories`, and `validate_avatar`. |
+
+See the [MCP-generated live component configuration](docs/use-cases/assets/interactive-component.json) for looping, pointer-following, and antenna flash settings. Source: [48 use-case definitions](docs/use-cases/manifest.json), [MCP export metadata](docs/use-cases/assets/manifest.json), and [the gallery builder](scripts/build-use-case-gallery.mjs). After installing MCP dependencies, run `node scripts/build-use-case-gallery.mjs` to rebuild the mockups. PNG previews are committed so GitHub can display them directly.
+
 ## Run the website
 
 Requires Node.js 22 or newer and npm.
