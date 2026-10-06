@@ -165,7 +165,7 @@ These controls do not make the process an operating-system sandbox or a public m
 
 The browser package is **`@ai-calypse/avatar-studio`**. It includes the animated robot and cat components, the 50-accessory catalog, programmatic customization, and SVG snapshots with TypeScript declarations. It has no runtime dependencies. The website controls and Node.js MCP server are separate.
 
-Once published to npm:
+Install the published package from [npm](https://www.npmjs.com/package/@ai-calypse/avatar-studio):
 
 ```sh
 npm install @ai-calypse/avatar-studio
@@ -200,7 +200,7 @@ Call `customizeAvatar` after attaching the element to the page. It accepts parti
 
 `exportAvatarSVG` returns a string snapshot of the current pose at a size from 32 to 512. Use the website for PNG/GIF downloads or MCP for generated PNG/GIF artifacts. In a server-rendered application, create and customize elements on the client after mounting.
 
-Before registry publication, install directly from a local tarball:
+To test local changes before publishing a new version, install from a local tarball:
 
 ```sh
 npm pack --pack-destination /tmp
