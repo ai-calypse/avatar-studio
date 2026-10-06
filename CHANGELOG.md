@@ -1,62 +1,73 @@
 # Changelog
 
+Avatar Studio uses Semantic Versioning for the browser package. The local MCP server has its own version; the Avatar Studio 0.2.0 release includes MCP 0.4.0. GitHub releases and npm registry publication are tracked separately.
+
 ## Unreleased
 
-- Move movement controls beside the live preview, remove nested settings tabs, and improve editor scrolling. Enabling Loop immediately repeats the current expression.
-- Add ESLint, workflow validation, browser/MCP matrices, package checks, and dependency audits to CI.
-- Add GitHub CodeQL, Dependency Review, Dependabot updates, and pinned Actions with minimal permissions.
-- Add contributor, conduct, ownership, and private security-reporting documentation.
+No unreleased changes recorded.
 
-## Avatar Studio 0.2.0
+## [Avatar Studio 0.2.0] - 2026-10-06
 
-- Add `configureAvatar`, the full action catalog, antenna visibility, live looping/behavior policies, and SVG/PNG/GIF Blob export APIs.
-- Share GIF encoding and safe export presentation with MCP, including backgrounds, frames, padding, and status badges.
-- Add full studio/accessory translations in all nine header languages.
+### Added
 
-- Add repeatable fluid body silhouettes alongside classic square-to-circle roundness.
-- Add website body mode and Shuffle controls, with browser-persisted shape seeds.
-- Add `bodyShape` and `shapeSeed` to the npm customization API, plus component setters/getters and body-shape events.
-- Share random geometry across browser, SVG/PNG/GIF exports, and MCP; accessories fit the generated contour.
+- Complete npm control helpers: `configureAvatar`, the action catalog, live behavior policies, antenna visibility, and SVG/PNG/GIF Blob exports.
+- Repeatable seeded fluid silhouettes alongside classic square-to-circle roundness. Accessories follow the body contour across the creator, component, and exported images.
+- MCP 0.4.0 with 11 tools covering stable identities, brand palettes, batch generation, variants, expression packs, sprite sheets with frame coordinates, and live component integration code.
+- Export presentation controls for backgrounds, circle/rounded frames, padding, and online/away/busy/offline presence badges.
+- Full creator translations across nine header languages, including accessories, feedback, tooltips, and accessible names.
+- Eight searchable documentation guides, code-copy buttons, mobile navigation, and opt-in full-page Google Translate support with literal code and identifiers.
+- 24 MCP-generated animated avatar examples and 48 illustrated application use cases in the README and docs. The website includes the same 48 cases with search, category filters, and translated captions.
+- GitHub Pages hosting for the creator and documentation.
 
+### Changed
 
-## Avatar Studio 0.1.0
+- Move movement controls beside the live preview, remove nested settings tabs, and keep downloads fixed while customization options scroll. Enabling Loop immediately repeats the current expression.
+- Simplify navigation to Docs, Create, In use, and the language picker. Four live previews continue to follow the current avatar design.
+- Document contributing, conduct, ownership, release procedures, and private security reporting.
+
+### Security and quality
+
+- Add ESLint, type/package integrity checks, workflow validation, dependency audits, browser tests in Chromium/Firefox/WebKit, and MCP tests on Node 22/24.
+- Add CodeQL, Dependency Review, Dependabot, pinned Actions, and minimal workflow permissions.
+- Keep MCP local over stdio with strict schemas, bounded inputs, in-memory exports, and no public endpoint.
+
+## [Avatar Studio 0.1.0] - 2026-10-06
 
 - First release under `@ai-calypse/avatar-studio`, based on Agent Robot Avatar 0.5.2.
 - Export `customizeAvatar`, `exportAvatarSVG`, and a catalog of 50 accessories for app integrations.
 - Support independent body, eye, and accessory colors, matching eye colors, eye geometry, and head roundness.
-- Share shape-fitting accessories between the browser creator, npm runtime, and local MCP.
+- Share shape-fitting accessories between the browser creator, npm runtime, and local MCP 0.1.0.
 - Include TypeScript declarations and retain the original robot and cat components.
 
-The entries below describe the upstream Agent Robot Avatar releases.
+## Upstream Agent Robot Avatar history
 
+The entries below belong to CX ArtLab’s original project. Its version numbers are independent of Avatar Studio’s versions.
 
 All notable user-facing changes to Agent Robot Avatar are documented here.
 
 The project follows Semantic Versioning for public releases. Internal development build numbers are not part of the public version history.
 
-## [Unreleased]
+### [0.5.2] - 2026-10-06
 
-## [0.5.2] - 2026-10-06
-
-### Added
+#### Added
 
 - Added the `love` action: the eyes lean together into a heart, beat three times, then return.
 - Added the `random` action (alias `slot`): the eyes roll like slot-machine reels, then settle with a bounce.
 
-### Fixed
+#### Fixed
 
 - `love` now shows the full heart under reduced motion, and `love` and `random` follow motion preference changes while they play.
 
-## [0.4.3] - 2026-09-22
+### [0.4.3] - 2026-09-22
 
-### Fixed
+#### Fixed
 
 - Restored the existing head-drag, waiting, sleep-wake, and touch-cancel behavior alongside press-and-hold squeezing by deferring squeeze activation until the hold is confirmed.
 - Refined the wrap waiting animation with shared rotational projection, optical height compensation, and edge contact so the eyes turn around the head without overlapping, clipping, or using transparency.
 
-## [0.4.2] - 2026-09-21
+### [0.4.2] - 2026-09-21
 
-### Added
+#### Added
 
 - Added a second waiting choice, `startWaiting({ variant: 'wrap' })`, with the approved 2.4-second left-out/right-in eye turn and custom easing. `play('waiting-wrap')` plays one cycle; the original waiting remains available and is the default.
 - Added center press-and-hold squeezing, sustained compression tremor, and spring/jelly release. Moving more than 4 CSS pixels transfers the gesture to the existing head drag.
@@ -64,17 +75,17 @@ The project follows Semantic Versioning for public releases. Internal developmen
 - Added `setPressSqueeze()` and `setAntennaDrag()` opt-outs, interaction state events, and reduced-motion behavior.
 - Added localized “Try” tags below the Demo status for double-clicking, head dragging, center press-and-hold squeezing, and antenna dragging.
 
-### Changed
+#### Changed
 
 - Renamed and repositioned the Demo action as “Waiting · Wrap” directly after the original waiting action.
 
-### Fixed
+#### Fixed
 
 - Kept both eyes looking at the live pointer position throughout antenna dragging instead of returning them to center when the drag begins.
 
-## [0.3.2] - 2026-09-10
+### [0.3.2] - 2026-09-10
 
-### Fixed
+#### Fixed
 
 - Unified synchronous `size` attribute parsing so numeric and `px` values use the same validation immediately, without a transient fallback before runtime observers run.
 - Added the existing public `sleep()`, `wake()`, and `input()` convenience methods to the TypeScript declaration surface and type checks.
@@ -84,9 +95,9 @@ The project follows Semantic Versioning for public releases. Internal developmen
 - Prevented the accessible request lifecycle example's delayed replacement step from starting after cancellation, a newer user request, or a newer replacement flow has invalidated it.
 - Made the example's business status the only automatic live region; the visible request debug log remains available for deliberate reading without `role="log"` live semantics or whole-log text rewrites.
 
-## [0.3.1] - 2026-09-10
+### [0.3.1] - 2026-09-10
 
-### Fixed
+#### Fixed
 
 - Prevented disconnect cleanup from recreating per-instance media-query listeners and observers; reattaching now initializes connected runtime resources once without emitting cleanup-only lifecycle events.
 - Decoupled automatic sleep timing from frame rendering so `motion="reduce"` can pause continuous drawing without disabling `auto-sleep`, while active waiting/input continue to take priority.
@@ -95,9 +106,9 @@ The project follows Semantic Versioning for public releases. Internal developmen
 - Separated explicit `noteActivity()` calls from ambient DOM activity so host calls inside real event handlers keep API semantics while automatic wakeups continue to obey `wake-on`.
 - Restricted action alias lookup to declared keys so prototype-like names such as `constructor` and `__proto__` fail before changing waiting/action state.
 
-## [0.3.0] - 2026-09-10
+### [0.3.0] - 2026-09-10
 
-### Added
+#### Added
 
 - Added `wake-on="activity|interaction|manual"` to control automatic wake behavior while preserving `activity` as the default.
 - Added `motion="auto|reduce|full"`; `auto` follows `prefers-reduced-motion` and updates when the system preference changes.
@@ -105,7 +116,7 @@ The project follows Semantic Versioning for public releases. Internal developmen
 - Added explicit `px` support for `size`, alongside existing numeric pixel values.
 - Added Chromium, Firefox, and WebKit browser validation, including trusted Chromium touch-cancellation coverage.
 
-### Changed
+#### Changed
 
 - Unified program-action and drag cancellation so reset, replacement actions, disconnect, and pointer cancellation cannot leave delayed drag reactions behind.
 - Program-controlled actions such as waiting and input now keep ownership of their expression while drag deformation remains available; suppressed drag reactions are discarded rather than replayed.
@@ -116,15 +127,15 @@ The project follows Semantic Versioning for public releases. Internal developmen
 - High-frequency pointer updates are coalesced to the latest update per animation frame.
 - Shared the head-flattening geometry used by the antenna and roundness modules.
 
-### Fixed
+#### Fixed
 
 - Preserved valid `window.AgentRobotAvatarInspectConfig` values supplied before module loading and normalized missing, invalid, and out-of-range values deterministically.
 - Distinguished `pointercancel` from a normal release so cancelled touch gestures recover without success/angry feedback.
 - Tightened `size` parsing so unsupported units, malformed values, zero, negative, and non-finite input use the default size instead of being partially parsed as pixels.
 
-## [0.2.1] - 2026-09-05
+### [0.2.1] - 2026-09-05
 
-### Fixed
+#### Fixed
 
 - Fixed dynamic custom-element creation failing because the constructor added a host style attribute; preserved default and explicit sizing.
 - Prevented interrupted expression continuations and animation callbacks from overriding resets or newer actions.
@@ -132,18 +143,18 @@ The project follows Semantic Versioning for public releases. Internal developmen
 - Synchronized dynamic head colors with the eye masks and antenna, including while sleep rendering is paused.
 - Cancelled pending timers, animations, waiting, and drag feedback on disconnect; reattached avatars start idle with their settings preserved.
 
-## [0.2.0] - 2026-09-04
+### [0.2.0] - 2026-09-04
 
 First stable release of the backward-compatible 0.2 series.
 
-### Added
+#### Added
 
 - Added Traditional Chinese, Japanese, Korean, Spanish, Portuguese, German, and French documentation.
 - Added package, installation, server-import, and real-browser smoke tests.
 - Added `setAntennaFlash(enabled)` for per-avatar antenna flashing.
 - Added built-in TypeScript declarations for actions, events, and public methods.
 
-### Changed
+#### Changed
 
 - Added a lightweight animated GIF preview for the README documentation.
 - Moved localized README files into the `docs/` directory and added a unified language selector.
@@ -157,11 +168,11 @@ First stable release of the backward-compatible 0.2 series.
 - Routed built-in actions and antenna drawing through the same registry, leaving one lifecycle entry point.
 - Shared global input listeners across avatar instances and paused frame rendering after sleep animations settle.
 
-## [0.1.0] - 2026-09-02
+### [0.1.0] - 2026-09-02
 
 First public release.
 
-### Added
+#### Added
 
 - Reusable `<agent-robot-avatar>` Web Component built with SVG and vanilla JavaScript
 - Public `play(name)` and `reset()` APIs
@@ -190,3 +201,6 @@ First public release.
 [0.2.1]: https://github.com/CX-ArtLab/agent-robot-avatar/releases/tag/v0.2.1
 [0.2.0]: https://github.com/CX-ARTLab/agent-robot-avatar/releases/tag/v0.2.0
 [0.1.0]: https://github.com/CX-ARTLab/agent-robot-avatar/releases/tag/v0.1.0
+
+[Avatar Studio 0.2.0]: https://github.com/ai-calypse/avatar-studio/releases/tag/v0.2.0
+[Avatar Studio 0.1.0]: https://github.com/ai-calypse/avatar-studio/releases/tag/v0.1.0
