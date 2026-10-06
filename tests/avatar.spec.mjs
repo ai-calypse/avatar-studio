@@ -95,6 +95,7 @@ test('interactive demo loads without runtime errors', async ({ page }) => {
 
   await page.goto('/demo/');
   await expect(page.locator('agent-robot-avatar')).toBeVisible();
+  await page.locator('.studio-expression summary').click();
   await expect(page.locator('[data-action="waiting"]')).toBeVisible();
   await expect(page.locator('#demoAntennaFlash')).not.toBeChecked();
   await expect(page.locator('#agent-demo-build')).toHaveText('Demo 0.5.2');
@@ -134,6 +135,7 @@ test('looping waiting starts once and continues smoothly', async ({ page }) => {
     input.checked = true;
     input.dispatchEvent(new Event('change', { bubbles: true }));
   });
+  await page.locator('.studio-expression summary').click();
   await page.locator('[data-action="waiting"]').click();
 
   const avatar = page.locator('#face');

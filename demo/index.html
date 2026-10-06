@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Agent Robot Avatar — Interactive Demo</title>
+<title>Avatar Studio — Make a little you</title>
+<meta name="description" content="Design an expressive robot avatar. Customize its colors, shape, and accessories, then download SVG, PNG, or GIF for your profile or app.">
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;min-height:100%;font-family:Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:#15171a;background:#f7f7f5}
@@ -12,6 +13,7 @@
   .title{position:absolute;left:28px;top:22px;font-size:13px;color:#8a8f98;letter-spacing:.04em}
   .build-badge{position:absolute;right:28px;top:20px;padding:3px 7px;border:1px solid #e0e1e3;border-radius:999px;background:rgba(255,255,255,.82);font-size:10px;color:#777c83}
   .avatar-home{position:absolute;left:50%;top:39%;transform:translate(-50%,-50%);width:118px;height:118px;display:grid;place-items:center;z-index:5}
+  agent-cat-avatar{filter:drop-shadow(0 12px 24px rgba(0,0,0,.08))}
   agent-robot-avatar{filter:drop-shadow(0 12px 24px rgba(0,0,0,.08));transition:filter .2s ease}
   agent-robot-avatar:hover{filter:drop-shadow(0 15px 30px rgba(0,0,0,.13))}
   .controls{position:absolute;left:50%;top:calc(39% + 102px);transform:translateX(-50%);padding:8px;border-radius:16px;background:rgba(255,255,255,.88);box-shadow:0 7px 30px rgba(0,0,0,.08);backdrop-filter:blur(14px);display:flex;gap:6px;z-index:20;flex-wrap:wrap;justify-content:center;max-width:min(900px,calc(100% - 56px))}
@@ -303,6 +305,8 @@
   await import('./agent-robot-avatar-demo-dialog-i18n.js');
   await import('./agent-robot-avatar-demo-chat-avatar-mode.js');
   await import('./agent-robot-avatar-demo-reply-loop.js');
+  await import('./agent-robot-avatar-demo-customize.js');
+  await import('./avatar-studio.js');
 </script>
 </body>
 </html>

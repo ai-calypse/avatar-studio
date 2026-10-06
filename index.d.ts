@@ -118,11 +118,13 @@ export declare class AgentRobotAvatar extends HTMLElement {
 }
 
 export declare const VERSION: string;
+export declare class AgentCatAvatar extends AgentRobotAvatar {}
 
 export default AgentRobotAvatar;
 
 declare global {
   interface HTMLElementTagNameMap {
     'agent-robot-avatar': AgentRobotAvatar;
+    'agent-cat-avatar': AgentCatAvatar;
   }
 }

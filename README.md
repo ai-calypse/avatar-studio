@@ -184,3 +184,31 @@ MIT License. See [`LICENSE`](./LICENSE).
 If this project is useful to you, you can buy me a coffee.
 
 <a href='https://ko-fi.com/P0E625WIOI' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
+### Robot customization demo
+
+The demo includes body and eye colors, eye size and spacing, and optional glasses, headphones, or a bow tie. The look is saved locally in your browser. Use **Reset look** to restore defaults or **Download SVG** to export the current appearance as a static profile or logo image. Head roundness and expression controls remain available.
+
+### Avatar Studio website
+
+The demo is now branded as **Avatar Studio**, with a live creator, responsive design controls, and browser-only exports:
+
+- SVG: transparent vector snapshot of the current appearance.
+- PNG: transparent 512 × 512 image.
+- GIF: a 24-frame, 256 × 256 looping recording with a light background and a reduced color palette.
+
+Run `npm run dev` and open `/demo/?lang=en`. `npm run build:pages` includes the studio scripts and stylesheet in the static site output. Settings stay in the visitor’s browser; downloads require no account. A local stdio MCP server now lets agents create SVG, PNG, and GIF avatars. See [MCP setup](mcp/README.md) and [security model](mcp/SECURITY.md).
+
+Run the studio browser checks with `npx playwright test tests/studio.spec.mjs --project=chromium`. Set `AVATAR_TEST_PORT` to test a server on a different port.
+
+### Avatar Studio MCP
+
+Agents can list the 50 accessories, validate configurations, and generate SVG/PNG/GIF avatars through a local stdio MCP server. The server accepts strict configuration inputs, returns artifacts in memory, and exposes no file, URL-fetching, or shell tools.
+
+```sh
+npm ci --prefix mcp --ignore-scripts
+npm run test:mcp
+npm run mcp:start
+```
+
+See [client configuration and examples](mcp/README.md) and [security boundaries](mcp/SECURITY.md). No remote endpoint is deployed.

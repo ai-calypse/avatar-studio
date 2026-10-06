@@ -10,6 +10,7 @@ import './src/agent-robot-avatar-random.js';
 import './src/agent-robot-avatar-head-roundness.js';
 import './src/agent-robot-avatar-gestures.js';
 import './src/agent-robot-avatar-runtime.js';
+import { AgentCatAvatar } from './src/agent-cat-avatar.js';
 import { VERSION } from './src/agent-robot-avatar-version.js';
 
 // Elements already present in markup can upgrade while the core module is
@@ -24,5 +25,5 @@ if (typeof window !== 'undefined') {
   window.AgentRobotAvatarVersion = VERSION;
 }
 
-export { AgentRobotAvatar, VERSION };
+export { AgentRobotAvatar, AgentCatAvatar, VERSION };
 export default AgentRobotAvatar;

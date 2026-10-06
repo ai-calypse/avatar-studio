@@ -1,11 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const port = Number(process.env.AVATAR_TEST_PORT) || 4173;
+
 export default defineConfig({
   testDir: './tests',
   testMatch: '**/*.spec.mjs',
   reporter: 'line',
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL: `http://127.0.0.1:${port}`,
   },
   projects: [
     {
@@ -22,8 +24,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'node scripts/serve.mjs --port 4173',
-    url: 'http://127.0.0.1:4173/examples/basic.html',
+    command: `node scripts/serve.mjs --port ${port}`,
+    url: `http://127.0.0.1:${port}/examples/basic.html`,
     reuseExistingServer: true,
   },
 });

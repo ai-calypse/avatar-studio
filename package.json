@@ -27,7 +27,9 @@
     "test:types": "tsc -p tsconfig.types.json",
     "test:release": "node --test tests/release.test.mjs",
     "test:package": "node --test tests/package.test.mjs",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "mcp:start": "npm --prefix mcp start",
+    "test:mcp": "npm --prefix mcp test"
   },
   "files": [
     "agent-robot-avatar.js",

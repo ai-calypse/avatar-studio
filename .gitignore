@@ -7,3 +7,5 @@ playwright-report/
 test-results/
 .pages-site/
 demo/*-tuner.html
+
+mcp/client-config.local.json

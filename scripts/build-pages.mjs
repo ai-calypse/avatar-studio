@@ -21,7 +21,7 @@ await cp(path.join(root, 'agent-robot-avatar.js'), path.join(output, 'agent-robo
 await cp(path.join(root, 'src'), path.join(output, 'src'), { recursive: true });
 
 for (const entry of await readdir(demo, { withFileTypes: true })) {
-  if (entry.isFile() && entry.name.endsWith('.js')) {
+  if (entry.isFile() && /\.(js|css)$/.test(entry.name)) {
     await cp(path.join(demo, entry.name), path.join(output, entry.name));
   }
 }

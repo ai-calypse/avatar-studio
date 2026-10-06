@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "avatar-studio": {
+      "command": "/absolute/path/to/node",
+      "args": ["--max-old-space-size=192", "/absolute/path/to/avatar-studio/mcp/src/index.mjs"],
+      "env": {}
+    }
+  }
+}

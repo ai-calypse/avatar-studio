@@ -18,6 +18,7 @@ async function openDemo(page, query = '') {
   await page.goto(`/demo/${query}`, { waitUntil: 'networkidle' });
   await expect(page.locator('.controls button[data-action]')).toHaveCount(17);
   await expect(page.locator('#agent-demo-build')).toHaveText(/^Demo \d/);
+  await page.locator('.studio-expression summary').click();
 }
 
 test('the demo lists the newest actions last, each flagged with a NEW badge', async ({ page }) => {
