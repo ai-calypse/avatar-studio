@@ -21,3 +21,23 @@ test('Pages artifact contains every relative HTML and module dependency',()=>{
     }
   }
 });
+
+// Static docs must work with JavaScript disabled and under the Pages project path.
+test('all generated documentation links, images, and search destinations resolve',()=>{
+ const root=path.resolve('.pages-site');
+ const directory=path.join(root,'docs');
+ const pages=readdirSync(directory).filter(file=>file.endsWith('.html'));
+ assert.equal(pages.length,8);
+ for(const file of pages){
+  const html=readFileSync(path.join(directory,file),'utf8');
+  for(const [,reference] of html.matchAll(/(?:href|src)="([^"]+)"/g)){
+   if(/^(https?:|#)/.test(reference))continue;
+   const [pathname,hash]=reference.split('#');
+   let target=path.resolve(directory,pathname);
+   if(pathname.endsWith('/'))target=path.join(target,'index.html');
+   assert.ok(target.startsWith(root+path.sep),`${file}: outside site ${reference}`);
+   assert.ok(existsSync(target),`${file}: missing ${reference}`);
+   if(hash&&target.endsWith('.html'))assert.ok(readFileSync(target,'utf8').includes(`id="${hash}"`),`${file}: missing anchor ${reference}`);
+  }
+ }
+});

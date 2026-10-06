@@ -41,6 +41,7 @@ Call `get_capabilities` first to discover supported formats, limits, expressions
 | `validate_avatar` | Normalizes and validates configuration. | Check an app's saved avatar settings. |
 | `generate_identity` | Maps an opaque stable ID to a repeatable avatar config. | Give new users a default profile picture without uploads. |
 | `suggest_brand_palette` | Suggests body/eye/accessory colors and measured contrast. | Adapt a support mascot to company colors. |
+| `create_avatar_component` | Returns validated npm integration code with every appearance and behavior control. | Add a live browser companion with cursor following, looping, and gestures. |
 | `create_avatar` | Returns SVG, PNG, or a looping blink GIF. | Profile images, logos, chat avatars, or a bot mascot. |
 | `create_avatar_batch` | Generates up to 12 named SVG/PNG assets with a manifest. | Seed chat demos, team directories, or multi-agent apps. |
 | `create_avatar_variants` | Generates up to 12 repeatable alternatives. | Offer users six design choices while preserving brand colors. |

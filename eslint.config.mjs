@@ -5,7 +5,7 @@ export default [
   { ignores: ['node_modules/**', 'mcp/node_modules/**', 'dist/**', '.pages-site/**', 'test-results/**', 'playwright-report/**'] },
   js.configs.recommended,
   { rules: { 'no-empty': ['error', { allowEmptyCatch: true }] } },
-  { files: ['src/**/*.js', 'demo/**/*.js', 'agent-robot-avatar.js'], languageOptions: { globals: globals.browser } },
+  { files: ['src/**/*.js', 'demo/**/*.js', 'docs/**/*.js', 'agent-robot-avatar.js'], languageOptions: { globals: globals.browser } },
   { files: ['mcp/**/*.mjs', 'scripts/**/*.mjs', '*.config.mjs'], languageOptions: { globals: globals.node } },
   { files: ['tests/**/*.{js,mjs}'], languageOptions: { globals: { ...globals.browser, ...globals.node } } },
   // Existing animation hooks intentionally retain arguments and intermediate

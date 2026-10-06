@@ -2,6 +2,8 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { buildDocs } from './build-docs.mjs';
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, '.pages-site');
 const demo = path.join(root, 'demo');
@@ -28,11 +30,14 @@ for (const entry of await readdir(demo, { withFileTypes: true })) {
       await writeFile(path.join(output, entry.name), source.replaceAll('../agent-robot-avatar.js', './agent-robot-avatar.js').replaceAll('../src/', './src/'));
     } else if (entry.name === 'avatar-studio.js') {
       const source = await readFile(path.join(demo, entry.name), 'utf8');
-      await writeFile(path.join(output, entry.name), source.replaceAll('../agent-robot-avatar.js', './agent-robot-avatar.js'));
+      await writeFile(path.join(output, entry.name), source.replaceAll('../agent-robot-avatar.js', './agent-robot-avatar.js').replaceAll('href="../docs/"', 'href="./docs/"'));
     } else {
       await cp(path.join(demo, entry.name), path.join(output, entry.name));
     }
   }
 }
+
+await cp(path.join(root, 'docs'), path.join(output, 'docs'), { recursive: true, filter: source => !/\.(html)$/.test(source) && !source.endsWith('search-index.json') });
+await buildDocs(path.join(output, 'docs'), { pages: true });
 
 console.log(`GitHub Pages demo built at ${output}`);

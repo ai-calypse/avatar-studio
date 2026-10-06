@@ -9,3 +9,7 @@ test-results/
 demo/*-tuner.html
 
 mcp/client-config.local.json
+
+# Generated documentation pages (source: README and MCP guides).
+docs/*.html
+docs/search-index.json

@@ -1356,6 +1356,8 @@ for (const [language, entries] of Object.entries({
   }
 })) Object.assign(translations[language], entries);
 
+for (const [language, label] of Object.entries({es:'Documentación',fr:'Documentation',de:'Dokumentation',pt:'Documentação',ja:'ドキュメント',ko:'문서','zh-CN':'文档','zh-TW':'文件'})) translations[language].Docs = label;
+
 // Native language names, brand names, handles, and file/code identifiers stay literal.
 const literalText = new Set(['a', 'avatar studio', 'avatar studio ·', 'Alex Morgan', 'Jamie', 'J',
   '@alexmakes', 'Little Lab', '# design-team', 'SVG', 'PNG', 'GIF', '10:24 AM', '10:25 AM']);
