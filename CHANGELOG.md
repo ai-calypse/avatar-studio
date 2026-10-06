@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Move movement controls beside the live preview, remove nested settings tabs, and improve editor scrolling. Enabling Loop immediately repeats the current expression.
 - Add ESLint, workflow validation, browser/MCP matrices, package checks, and dependency audits to CI.
 - Add GitHub CodeQL, Dependency Review, Dependabot updates, and pinned Actions with minimal permissions.
 - Add contributor, conduct, ownership, and private security-reporting documentation.

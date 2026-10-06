@@ -30,7 +30,27 @@ shell.querySelector('.studio-design').appendChild(document.querySelector('.robot
 shell.querySelector('.studio-design').appendChild(document.querySelector('.demo-roundness-control'));
 shell.querySelector('.studio-actions').appendChild(document.querySelector('.controls'));
 const options = document.querySelector('.demo-options');
-if (options) shell.querySelector('.studio-options').appendChild(options);
+if (options) {
+  shell.querySelector('.studio-options').appendChild(options);
+  options.querySelector('#demoPanelToolbar').hidden = true;
+  options.querySelector('#demoSettingsPanel').hidden = false;
+  const language = document.createElement('select');
+  language.className = 'studio-language';
+  language.setAttribute('aria-label', 'Page language');
+  const languages = [...options.querySelectorAll('.demo-language-option')];
+  language.replaceChildren(...languages.map(button => new Option(button.textContent, button.dataset.lang, false, button.classList.contains('demo-language-active'))));
+  language.addEventListener('change', () => languages.find(button => button.dataset.lang === language.value)?.click());
+  shell.querySelector('.studio-nav nav').appendChild(language);
+}
+const movement = shell.querySelector('.studio-behavior');
+movement.querySelector('summary').innerHTML = 'Movement <span class="details-arrow">⌄</span>';
+shell.querySelector('.studio-preview').appendChild(movement);
+const editorScroll = shell.querySelector('.editor-scroll');
+editorScroll.tabIndex = 0;
+editorScroll.setAttribute('role', 'region');
+editorScroll.setAttribute('aria-label', 'Avatar customization options');
+document.addEventListener('pointerdown', event => { if (!movement.contains(event.target)) movement.open = false; });
+movement.addEventListener('keydown', event => { if (event.key === 'Escape') { movement.open = false; movement.querySelector('summary').focus(); } });
 const hint = document.querySelector('.demo-chat-entry-hint');
 if (hint) { hint.textContent = 'Double-click to try a conversation. Drag to play.'; shell.querySelector('.preview-caption').appendChild(hint); }
 stack.remove();

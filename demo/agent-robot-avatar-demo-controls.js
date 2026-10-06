@@ -416,6 +416,7 @@ function mountDemoControls() {
 
   loopToggle.addEventListener('change', () => {
     loopEnabled = loopToggle.checked;
+    if (loopEnabled) runAction(activeAction || 'idle');
     if (!loopEnabled) {
       loopToken += 1;
       if (activeAction === 'waiting' || activeAction === 'waiting-wrap') face.stopWaiting();

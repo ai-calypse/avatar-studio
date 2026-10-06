@@ -166,3 +166,52 @@ test('fluid body shuffle persists and classic roundness remains available', asyn
   const binary = await bytes(await download);
   expect(binary.toString()).not.toContain('NaN');
 });
+
+test('preview movement switches control the avatar without nested tabs', async ({ page }) => {
+  await page.goto('/demo/?lang=en');
+  const menu = page.locator('.studio-preview .studio-behavior');
+  await menu.locator('summary').click();
+  await expect(menu.locator('#demoSettingsPanel')).toBeVisible();
+  await expect(page.locator('#demoPanelToolbar')).toBeHidden();
+  await menu.getByText('Antenna', { exact: true }).click();
+  await expect.poll(() => page.locator('#face').evaluate(el => getComputedStyle(el.shadowRoot.getElementById('antennaDot')).display)).toBe('none');
+  await menu.getByText('Antenna', { exact: true }).click();
+  await expect.poll(() => page.locator('#face').evaluate(el => getComputedStyle(el.shadowRoot.getElementById('antennaDot')).display)).not.toBe('none');
+  await menu.getByText('Antenna blink', { exact: true }).click();
+  expect(await page.locator('#face').evaluate(el => el._antennaFlashEnabled)).toBe(true);
+  await menu.getByText('Pointer follow', { exact: true }).click();
+  expect(await page.locator('#face').evaluate(el => el._pointerFollowEnabled)).toBe(false);
+  await page.locator('#face').evaluate(el => {
+    el._movementPlayCount = 0;
+    const play = el.play;
+    el.play = function(...args) { this._movementPlayCount++; return play.apply(this,args); };
+  });
+  await menu.getByText('Loop', { exact: true }).click();
+  await expect.poll(() => page.locator('#face').evaluate(el => el._movementPlayCount)).toBeGreaterThan(1);
+  await menu.getByText('Loop', { exact: true }).click();
+  await menu.locator('summary').focus();
+  await page.keyboard.press('Escape');
+  await expect(menu).not.toHaveAttribute('open');
+  await page.getByRole('combobox', { name: 'Page language', exact: true }).selectOption('ja');
+  await expect(page.locator('html')).toHaveAttribute('lang','ja');
+  await expect(page).toHaveURL(/lang=ja/);
+});
+
+test('editor scroll keeps downloads fixed and movement remains accessible on mobile', async ({ page }) => {
+  await page.setViewportSize({width:1100,height:650});
+  await page.goto('/demo/?lang=en');
+  await page.locator('.studio-expression summary').click();
+  const scroll = page.getByRole('region',{name:'Avatar customization options'});
+  const before = await page.locator('.studio-export').boundingBox();
+  await scroll.hover();
+  await page.mouse.wheel(0,180);
+  await expect.poll(() => scroll.evaluate(el=>el.scrollTop)).toBeGreaterThan(0);
+  const after = await page.locator('.studio-export').boundingBox();
+  expect(Math.abs(after.y - before.y)).toBeLessThanOrEqual(2);
+  await page.setViewportSize({width:390,height:844});
+  await page.locator('.studio-behavior summary').click();
+  await expect(page.locator('#demoSettingsPanel')).toBeVisible();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('heading',{name:'Make it yours'}).click();
+  await expect(page.locator('.studio-behavior')).not.toHaveAttribute('open');
+});
