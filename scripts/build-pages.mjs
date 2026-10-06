@@ -17,6 +17,7 @@ if (pagesHtml === html) {
 }
 
 await writeFile(path.join(output, 'index.html'), pagesHtml);
+await writeFile(path.join(output, '.nojekyll'), '');
 await cp(path.join(root, 'agent-robot-avatar.js'), path.join(output, 'agent-robot-avatar.js'));
 await cp(path.join(root, 'src'), path.join(output, 'src'), { recursive: true });
 

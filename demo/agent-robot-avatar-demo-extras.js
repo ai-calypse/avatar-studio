@@ -128,16 +128,16 @@ function mountStateLabels() {
     const state = event.detail?.state;
     if (state === 'inspect') {
       const t = INSPECT_LABELS[activeLanguage(INSPECT_LABELS)];
-      status.textContent = `inspect · ${t.state}`;
+      status.textContent = t.state;
     } else if (state === 'failure') {
       const t = FAILURE_LABELS[activeLanguage(FAILURE_LABELS)];
-      status.textContent = `failure · ${t.state}`;
+      status.textContent = t.state;
     } else if (state === 'love') {
       const t = LOVE_LABELS[activeLanguage(LOVE_LABELS)];
-      status.textContent = `love · ${t.state}`;
+      status.textContent = t.state;
     } else if (state === 'random') {
       const t = RANDOM_LABELS[activeLanguage(RANDOM_LABELS)];
-      status.textContent = `random · ${t.state}`;
+      status.textContent = t.state;
     }
   });
 }

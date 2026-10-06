@@ -1,4 +1,4 @@
-const translations = {
+export const translations = {
   "es": {
     "Create": "Crear",
     "In use": "En uso",
@@ -1248,14 +1248,174 @@ const translations = {
     "Waiting wrap": "環繞等待"
   }
 };
+
+for (const [language, entries] of Object.entries({
+  "es": {
+    "Navigation": "Navegación",
+    "Language": "Idioma",
+    "Customization options": "Opciones de personalización",
+    "Accessory color": "Color del accesorio",
+    "Chat profile avatar": "Avatar de perfil de chat",
+    "Profile avatar": "Avatar de perfil",
+    "App assistant avatar": "Avatar de asistente",
+    "Project logo avatar": "Avatar de logotipo de proyecto",
+    "Make a little you": "Crea un pequeño tú",
+    "Create and download your own animated robot avatar.": "Crea y descarga tu propio avatar de robot animado.",
+    "01 / ROBOT": "01 / ROBOT"
+  },
+  "fr": {
+    "Navigation": "Navigation",
+    "Language": "Langue",
+    "Customization options": "Options de personnalisation",
+    "Accessory color": "Couleur de l’accessoire",
+    "Chat profile avatar": "Avatar de profil de discussion",
+    "Profile avatar": "Avatar de profil",
+    "App assistant avatar": "Avatar d’assistant",
+    "Project logo avatar": "Avatar de logo de projet",
+    "Make a little you": "Créez un petit vous",
+    "Create and download your own animated robot avatar.": "Créez et téléchargez votre avatar de robot animé.",
+    "01 / ROBOT": "01 / ROBOT"
+  },
+  "de": {
+    "Navigation": "Navigation",
+    "Language": "Sprache",
+    "Customization options": "Anpassungsoptionen",
+    "Accessory color": "Accessoire-Farbe",
+    "Chat profile avatar": "Chat-Profilbild",
+    "Profile avatar": "Profilbild",
+    "App assistant avatar": "Assistenten-Avatar",
+    "Project logo avatar": "Projektlogo-Avatar",
+    "Make a little you": "Dein kleines Ich",
+    "Create and download your own animated robot avatar.": "Erstelle deinen eigenen animierten Roboter-Avatar und lade ihn herunter.",
+    "01 / ROBOT": "01 / ROBOTER"
+  },
+  "pt": {
+    "Navigation": "Navegação",
+    "Language": "Idioma",
+    "Customization options": "Opções de personalização",
+    "Accessory color": "Cor do acessório",
+    "Chat profile avatar": "Avatar de perfil de chat",
+    "Profile avatar": "Avatar de perfil",
+    "App assistant avatar": "Avatar de assistente",
+    "Project logo avatar": "Avatar de logotipo de projeto",
+    "Make a little you": "Crie um pequeno você",
+    "Create and download your own animated robot avatar.": "Crie e baixe seu próprio avatar de robô animado.",
+    "01 / ROBOT": "01 / ROBÔ"
+  },
+  "ja": {
+    "Navigation": "ナビゲーション",
+    "Language": "言語",
+    "Customization options": "カスタマイズ設定",
+    "Accessory color": "アクセサリーの色",
+    "Chat profile avatar": "チャットのプロフィールアバター",
+    "Profile avatar": "プロフィールアバター",
+    "App assistant avatar": "アシスタントのアバター",
+    "Project logo avatar": "プロジェクトロゴのアバター",
+    "Make a little you": "小さな自分を作ろう",
+    "Create and download your own animated robot avatar.": "自分だけの動くロボットアバターを作成してダウンロード。",
+    "01 / ROBOT": "01 / ロボット"
+  },
+  "ko": {
+    "Navigation": "탐색",
+    "Language": "언어",
+    "Customization options": "맞춤 설정",
+    "Accessory color": "액세서리 색상",
+    "Chat profile avatar": "채팅 프로필 아바타",
+    "Profile avatar": "프로필 아바타",
+    "App assistant avatar": "도우미 아바타",
+    "Project logo avatar": "프로젝트 로고 아바타",
+    "Make a little you": "작은 나를 만들어 보세요",
+    "Create and download your own animated robot avatar.": "나만의 움직이는 로봇 아바타를 만들고 다운로드하세요.",
+    "01 / ROBOT": "01 / 로봇"
+  },
+  "zh-CN": {
+    "Navigation": "导航",
+    "Language": "语言",
+    "Customization options": "自定义选项",
+    "Accessory color": "配饰颜色",
+    "Chat profile avatar": "聊天头像",
+    "Profile avatar": "个人头像",
+    "App assistant avatar": "助手头像",
+    "Project logo avatar": "项目标志头像",
+    "Make a little you": "打造小小的你",
+    "Create and download your own animated robot avatar.": "创建并下载专属动态机器人头像。",
+    "01 / ROBOT": "01 / 机器人"
+  },
+  "zh-TW": {
+    "Navigation": "導覽",
+    "Language": "語言",
+    "Customization options": "自訂選項",
+    "Accessory color": "配飾顏色",
+    "Chat profile avatar": "聊天頭像",
+    "Profile avatar": "個人頭像",
+    "App assistant avatar": "助手頭像",
+    "Project logo avatar": "專案標誌頭像",
+    "Make a little you": "打造小小的你",
+    "Create and download your own animated robot avatar.": "建立並下載專屬動態機器人頭像。",
+    "01 / ROBOT": "01 / 機器人"
+  }
+})) Object.assign(translations[language], entries);
+
+// Native language names, brand names, handles, and file/code identifiers stay literal.
+const literalText = new Set(['a', 'avatar studio', 'avatar studio ·', 'Alex Morgan', 'Jamie', 'J',
+  '@alexmakes', 'Little Lab', '# design-team', 'SVG', 'PNG', 'GIF', '10:24 AM', '10:25 AM']);
+const ignored = 'script,style,code,.controls,.demo-options,.demo-roundness-control,.studio-language,#status,.demo-chat-entry-hint';
 const originals = new WeakMap();
-const groupLabels = new WeakMap();
+const attributes = new WeakMap();
+const attributeKeys = {
+  'Main navigation':'Navigation', 'Page language':'Language',
+  'Live avatar preview':'LIVE PREVIEW', 'Avatar editor':'Make it yours',
+  'Avatar customization options':'Customization options', 'Customize your robot':'Make it yours',
+  'Robot body color':'Body', 'Robot eye color':'Eyes', 'Robot accessory color':'Accessory color',
+  'Robot body shape':'Body shape', 'Shuffle body shape':'Shuffle', 'New random shape':'Shuffle',
+  'Robot eye size':'Eye size', 'Robot eye spacing':'Eye spacing', 'Robot accessory':'Accessory',
+  'Match accessory color to eyes':'Match eyes', 'Avatar states':'Try an expression',
+  'Your avatar as a chat profile':'Chat profile avatar', 'Your avatar on a profile card':'Profile avatar',
+  'Your avatar as an app assistant':'App assistant avatar', 'Your avatar as a project logo':'Project logo avatar'
+};
+export const supportedLanguages = ['en', ...Object.keys(translations)];
+export function translatePhrase(key, language) {
+  return translations[language]?.[key] ?? key;
+}
+function sourceKey(node) {
+  if (!originals.has(node)) originals.set(node,node.textContent);
+  return originals.get(node).trim();
+}
+export function missingStudioTranslations(root, language) {
+  const missing = new Set();
+  const check = key => {
+    if (/[a-z]/i.test(key) && !literalText.has(key) && !translations[language]?.[key]) missing.add(key);
+  };
+  const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walk.nextNode())) {
+    if (!node.parentElement.closest(ignored)) check(sourceKey(node));
+  }
+  for (const group of root.querySelectorAll('optgroup')) check(attributes.get(group)?.label ?? group.label);
+  for (const element of root.querySelectorAll('[aria-label],[title],[alt],[placeholder]')) {
+    if (element.closest('.demo-options,.demo-roundness-control,.demo-chat-entry-hint')) continue;
+    for (const name of ['aria-label','title','alt','placeholder']) {
+      const source = attributes.get(element)?.[name] ?? element.getAttribute(name);
+      if (source) check(attributeKeys[source] ?? source);
+    }
+  }
+  return [...missing].sort();
+}
 export function translateStudio(root, language) {
   const dictionary = translations[language] || {};
-  for (const group of root.querySelectorAll('optgroup')) {
-    if (!groupLabels.has(group)) groupLabels.set(group,group.label);
-    const label = dictionary[groupLabels.get(group)] || groupLabels.get(group);
-    if (group.label !== label) group.label = label;
+  for (const element of root.querySelectorAll('optgroup,[aria-label],[title],[alt],[placeholder]')) {
+    // These older controls have their own locale catalogs.
+    if (element.closest('.demo-options,.demo-roundness-control,.demo-chat-entry-hint')) continue;
+    let original = attributes.get(element);
+    if (!original) { original = {}; attributes.set(element,original); }
+    for (const name of ['label','aria-label','title','alt','placeholder']) {
+      if (!element.hasAttribute(name)) continue;
+      if (!(name in original)) original[name] = element.getAttribute(name);
+      const source = original[name];
+      const key = attributeKeys[source] ?? source;
+      const value = language === 'en' ? source : (dictionary[key] ?? source);
+      if (element.getAttribute(name) !== value) element.setAttribute(name,value);
+    }
   }
   const extraActions = { inspect:'Inspect', failure:'Failure', love:'Love', random:'Random', 'waiting-wrap':'Waiting wrap' };
   for (const [action,label] of Object.entries(extraActions)) {
@@ -1266,14 +1426,16 @@ export function translateStudio(root, language) {
   const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
   let node;
   while ((node = walk.nextNode())) {
-    if (node.parentElement.closest('script,style,code,.controls,.demo-options,.demo-roundness-control,.studio-language')) continue;
-    if (!originals.has(node)) originals.set(node,node.textContent);
+    if (node.parentElement.closest(ignored)) continue;
+    const key = sourceKey(node);
     const source = originals.get(node);
-    const key = source.trim();
     let value = dictionary[key] || key;
     const ready = /^Your (SVG|PNG|GIF) is ready\. Make yourself at home anywhere\.$/.exec(key);
-    if (ready) value = (dictionary['Your {format} is ready. Make yourself at home anywhere.'] || 'Your {format} is ready. Make yourself at home anywhere.').replace('{format}',ready[1]);
+    if (ready) value = translatePhrase('Your {format} is ready. Make yourself at home anywhere.',language).replace('{format}',ready[1]);
     const output = source.replace(key,value);
     if (node.textContent !== output) node.textContent = output;
   }
+  document.title = `Avatar Studio — ${translatePhrase('Make a little you',language)}`;
+  const description = document.querySelector('meta[name="description"]');
+  if (description) description.content = translatePhrase('Create and download your own animated robot avatar.',language);
 }
