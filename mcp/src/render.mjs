@@ -1,3 +1,4 @@
+import { presentAvatarSVG } from '../../src/avatar-studio-presentation.js';
 import { Resvg } from '@resvg/resvg-js';
 import { createHash } from 'node:crypto';
 import { accessoryMarkup, HEADWEAR } from '../../src/avatar-studio-accessories.js';
@@ -44,22 +45,12 @@ export function renderSVG(config, size, blink = 1) {
     }
     return `<ellipse cx="${x}" cy="126" rx="${rx}" ry="${Math.max(2,ry)}" fill="${config.eyes}"/>`;
   }).join('');
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="-16 -48 272 320" role="img" aria-label="Robot avatar"><defs><clipPath id="avatar-head-clip"><path d="${d}" transform="translate(7.2 7.2) scale(.94)"/></clipPath></defs><path d="${d}" fill="${config.body}" transform="translate(7.2 7.2) scale(.94)"/>${HEADWEAR.has(config.accessory) ? '' : `<circle cx="120" cy="12" r="15" fill="${config.body}"/>`}<g clip-path="url(#avatar-head-clip)">${eyes}</g>${accessory}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="-16 -48 272 320" role="img" aria-label="Robot avatar"><defs><clipPath id="avatar-head-clip"><path d="${d}" transform="translate(7.2 7.2) scale(.94)"/></clipPath></defs><path d="${d}" fill="${config.body}" transform="translate(7.2 7.2) scale(.94)"/>${(!config.antenna || HEADWEAR.has(config.accessory)) ? '' : `<circle cx="120" cy="12" r="15" fill="${config.body}"/>`}<g clip-path="url(#avatar-head-clip)">${eyes}</g>${accessory}</svg>`;
 }
 
 export function renderPresentedSVG(config, size, presentation = {}, blink = 1) {
   config = AvatarConfig.parse(config);
-  const options = Presentation.parse(presentation);
-  const inner = renderSVG(config, size, blink);
-  if (options.background === 'transparent' && options.frame === 'none' && options.padding === 0 && options.status === 'none') return inner;
-  const pad = options.padding * 2.56;
-  const side = 256 - pad * 2;
-  const shape = options.frame === 'circle' ? '<circle cx="128" cy="128" r="128"/>' : `<rect width="256" height="256" rx="${options.frame === 'rounded' ? 40 : 0}"/>`;
-  const background = options.background === 'transparent' ? '' : `<rect width="256" height="256" fill="${options.background}"/>`;
-  const statusColors = { online: '#22c55e', away: '#f59e0b', busy: '#ef4444', offline: '#94a3b8' };
-  const badge = options.status === 'none' ? '' : `<circle cx="216" cy="216" r="18" fill="${statusColors[options.status]}" stroke="#ffffff" stroke-width="4"/>`;
-  const nested = inner.replace('<svg ', `<svg x="${pad}" y="${pad}" `).replace(`width="${size}" height="${size}"`, `width="${side}" height="${side}"`);
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 256 256" role="img" aria-label="Robot avatar"><defs><clipPath id="avatar-frame">${shape}</clipPath></defs><g clip-path="url(#avatar-frame)">${background}${nested}</g>${badge}</svg>`;
+  return presentAvatarSVG(renderSVG(config,size,blink),size,Presentation.parse(presentation));
 }
 
 export function rasterize(svg, background) {

@@ -17,7 +17,7 @@ async function connect(t) {
 test('real stdio client discovers tools and creates SVG, PNG, GIF artifacts', async t => {
   const client = await connect(t);
   const tools = (await client.listTools()).tools;
-  assert.equal(tools.length, 10);
+  assert.equal(tools.length, 11);
   assert.ok(tools.some(tool => tool.name === 'create_avatar'));
   for (const tool of tools) {
     assert.equal(tool.annotations.openWorldHint, false);

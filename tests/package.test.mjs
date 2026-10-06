@@ -32,6 +32,11 @@ test('package contains the complete runtime and excludes the demo', async () => 
     'agent-robot-avatar.js',
     'index.d.ts',
     'src/avatar-studio-customization.js',
+    'src/avatar-studio-controls.js',
+    'src/avatar-studio-runtime.js',
+    'src/avatar-studio-export.js',
+    'src/avatar-studio-presentation.js',
+    'src/avatar-studio-gif.js',
     'src/avatar-studio-body-shape.js',
     'src/avatar-studio-accessories.js',
     'src/agent-cat-avatar.js',
@@ -108,7 +113,8 @@ test('packed package installs and can be imported without browser globals', asyn
       '--eval',
       "import('@ai-calypse/avatar-studio').then(module => console.log(Object.keys(module).sort().join(',')))",
     ], { cwd: consumer });
-    assert.match(imported, /AgentRobotAvatar,VERSION,accessories,customizeAvatar,default,exportAvatarSVG/);
+    const exports = new Set(imported.trim().split(','));
+    for (const name of ['AgentRobotAvatar','AgentCatAvatar','VERSION','accessories','avatarActions','configureAvatar','customizeAvatar','default','exportAvatar','exportAvatarSVG']) assert.ok(exports.has(name), `Missing export: ${name}`);
 
     const packageJson = JSON.parse(await readFile(path.join(consumer, 'node_modules', '@ai-calypse', 'avatar-studio', 'package.json'), 'utf8'));
     assert.notEqual(packageJson.sideEffects, false);

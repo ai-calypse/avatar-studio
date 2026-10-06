@@ -46,7 +46,7 @@ test('brand suggestions provide usable high-contrast eyes in light and dark mode
   }
   const client = await connect(t);
   const capabilities = await client.callTool({ name: 'get_capabilities', arguments: {} });
-  assert.equal(capabilities.structuredContent.tools.length, 10);
+  assert.equal(capabilities.structuredContent.tools.length, 11);
   assert.equal(capabilities.structuredContent.limits.batchCount, 12);
   const palette = await client.callTool({ name: 'suggest_brand_palette', arguments: { primary: '#5588cc' } });
   const variants = await client.callTool({ name: 'create_avatar_variants', arguments: { config: palette.structuredContent.config, count: 4, vary: 'accessories' } });

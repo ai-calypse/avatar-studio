@@ -9,6 +9,10 @@
 
 ## Avatar Studio 0.2.0
 
+- Add `configureAvatar`, the full action catalog, antenna visibility, live looping/behavior policies, and SVG/PNG/GIF Blob export APIs.
+- Share GIF encoding and safe export presentation with MCP, including backgrounds, frames, padding, and status badges.
+- Add full studio/accessory translations in all nine header languages.
+
 - Add repeatable fluid body silhouettes alongside classic square-to-circle roundness.
 - Add website body mode and Shuffle controls, with browser-persisted shape seeds.
 - Add `bodyShape` and `shapeSeed` to the npm customization API, plus component setters/getters and body-shape events.

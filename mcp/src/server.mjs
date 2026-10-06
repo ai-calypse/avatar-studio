@@ -1,3 +1,5 @@
+import { createComponent } from './component.mjs';
+import { avatarActions, behaviorDefaults } from '../../src/avatar-studio-controls.js';
 import { McpServer } from '@modelcontextprotocol/server';
 import { Worker } from 'node:worker_threads';
 import { ACCESSORY_OPTIONS, ACCESSORY_GROUPS } from '../../src/avatar-studio-accessories.js';
@@ -33,9 +35,10 @@ function artifactResult(result, single) {
 }
 
 export function createServer() {
-  const server = new McpServer({ name: 'avatar-studio', version: '0.3.0' });
+  const server = new McpServer({ name: 'avatar-studio', version: '0.4.0' });
   const active = new Set();
   const register = (name, description, handler) => server.registerTool(name, { description, inputSchema: TOOL_SCHEMAS[name], annotations }, handler);
+  register('create_avatar_component', 'Generate validated npm integration code for an interactive avatar with every appearance control, all animation actions, looping, pointer following, antenna blinking, gestures, reduced motion, and auto-sleep. Returns code and configuration only; does not execute code, install packages, or access files/network.', input => json(createComponent(input)));
   register('list_accessories', 'List all 50 avatar accessory IDs grouped by category, optionally filtered by category. No external access.', ({ category }) => {
     const groups = category ? { [category]: ACCESSORY_GROUPS[category] } : ACCESSORY_GROUPS;
     const catalog = Object.fromEntries(Object.entries(groups).map(([name, keys]) => [name, keys.map(id => ({ id, name: ACCESSORY_OPTIONS[id][0] }))]));
@@ -43,7 +46,7 @@ export function createServer() {
   });
   register('validate_avatar', 'Validate and normalize a robot configuration before embedding it in an application. Only documented fields are allowed.', ({ config }) => json({ config }));
   register('get_capabilities', 'Discover formats, limits, expressions, identity recipe version, and recommended multi-tool workflows before planning an app integration.', () => json({
-    version: '0.3.0', identityRecipeVersion: RECIPE_VERSION, tools: Object.keys(TOOL_SCHEMAS), limits: LIMITS, expressions: EXPRESSIONS, bodyShapes: ['classic', 'random'], shapeSeedRange: [0, 4294967295],
+    version: '0.4.0', identityRecipeVersion: RECIPE_VERSION, tools: Object.keys(TOOL_SCHEMAS), limits: LIMITS, expressions: EXPRESSIONS, liveActions: avatarActions, behaviorDefaults, npmExports: ['customizeAvatar','configureAvatar','exportAvatarSVG','exportAvatar'], bodyShapes: ['classic', 'random'], shapeSeedRange: [0, 4294967295],
     formats: { single: ['svg', 'png', 'gif'], batch: ['svg', 'png'], spriteSheet: ['svg', 'png'] },
     presentation: { backgrounds: 'transparent or six-digit hex', frames: ['none', 'circle', 'rounded'], padding: '0–24 percent on each side', statuses: ['none', 'online', 'away', 'busy', 'offline'] },
     workflows: [

@@ -27,6 +27,7 @@ The creator opens immediately, with a live preview and downloads alongside the c
 - Choose body, eye, and accessory colors independently, or enable **Match eyes** for the accessory.
 - Adjust eye size, eye spacing, and head roundness. Choose **Fluid / random** for an organic body, then **Shuffle** to find a unique silhouette. Your shape seed is saved with your look.
 - Choose from **50 accessories**, plus None, in a grouped dropdown. Accessories fit the changing body outline.
+- Choose the header language to translate controls, all 50 accessories, showcases, and download messages into English, Spanish, French, German, Portuguese, Japanese, Korean, Simplified Chinese, or Traditional Chinese. The URL and browser remember your selection.
 - Try expressions and movement settings, including blinking, pointer following, and interactive head movement.
 - See your avatar in live examples of chat, profile cards, an app companion, and project branding.
 
@@ -215,7 +216,7 @@ console.log(accessories); // 50 entries with id, name, and category
 
 Call `customizeAvatar` after attaching the element to the page. It accepts partial appearance updates using the color, accessory, eye-size, spacing, and head-roundness controls listed above. Unsupported fields, accessory IDs, and out-of-range values are rejected. Set expressions through the component's animation API, such as `avatar.play('success')`; the MCP-only `expression` field is not accepted by `customizeAvatar`. With `bodyShape: "random"`, the same `shapeSeed` and `headRoundness` reproduce the same silhouette in the browser and MCP. Roundness still controls the underlying softness; changing the seed changes the outline. The shape stays stable while blinking, dragging, and exporting. Shape uniqueness is visual variety, not an authentication guarantee. Settings are isolated per element and are not automatically saved to browser storage.
 
-`exportAvatarSVG` returns a string snapshot of the current pose at a size from 32 to 512. Use the website for PNG/GIF downloads or MCP for generated PNG/GIF artifacts. In a server-rendered application, create and customize elements on the client after mounting.
+`exportAvatarSVG` returns a string snapshot of the current pose at a size from 32 to 512. Use `exportAvatar` for browser SVG/PNG/GIF Blobs, the website downloads, or MCP for generated artifacts. In a server-rendered application, create and customize elements on the client after mounting.
 
 To test local changes before publishing a new version, install from a local tarball:
 
@@ -226,6 +227,41 @@ npm install /tmp/ai-calypse-avatar-studio-0.2.0.tgz
 ```
 
 See [the basic example](examples/basic.html), [the accessible request lifecycle example](examples/accessibility.html), and [TypeScript declarations](index.d.ts) for the underlying component API. [Publishing instructions](RELEASING.md) explain npm login, validation, and release automation.
+
+## Complete control API (npm 0.2.0+)
+
+```js
+import { configureAvatar, exportAvatar, avatarActions } from '@ai-calypse/avatar-studio';
+
+// Attach the component before configuring it.
+configureAvatar(avatar, {
+  appearance: { bodyShape: 'random', shapeSeed: 42, antenna: true,
+    accessory: 'headphones', matchEyes: true, eyes: '#dbf59d' },
+  behavior: { pointerFollow: true, antennaFlash: true, loop: true,
+    pressSqueeze: true, antennaDrag: true, motion: 'auto',
+    wakeOn: 'interaction', autoSleep: 60000 },
+  action: 'waiting-wrap'
+});
+const gif = await exportAvatar(avatar, { format: 'gif', size: 128,
+  frames: 12, delay: 100,
+  presentation: { frame: 'circle', status: 'online', padding: 4 } });
+// Returns a Blob. Your app owns saving or uploading it.
+console.log(avatarActions); // Every public action and alias.
+```
+
+`configureAvatar` accepts partial appearance/behavior updates and preserves previous settings. Antenna visibility is an appearance field; headwear can hide the antenna. Behavior switches default to pointer following and gestures enabled, antenna flash and expression looping disabled. Motion supports `auto`, `reduce`, `full`; wake policy supports `activity`, `interaction`, `manual`; auto-sleep is 0–86400000 ms (0 disables it). Looping waiting uses continuous waiting; other actions repeat after completing. Reset/cancellation clears queued repeats. Disconnecting prevents a queued repeat from starting. Explicit actions start asynchronously after runtime policies are applied.
+
+`exportAvatar` supports SVG/PNG at 32–512 pixels and GIF at 32–256 pixels, 2–48 frames, 20–500 ms per frame. PNG keeps transparency by default; GIF uses a light background. Presentation supports background hex/transparent, none/circle/rounded framing, padding 0–24%, and none/online/away/busy/offline badges. `background` is a shorthand for a solid presentation background. GIF records the current live component; its image loop is independent of the expression-loop switch. No files, uploads, or network access are performed by these helpers.
+
+| Control | Website | npm | MCP |
+| --- | --- | --- | --- |
+| Colors, eyes, accessory, match eyes, roundness, seeded shape, antenna visibility | Creator | `customizeAvatar` / `configureAvatar` | Asset config and `create_avatar_component` |
+| All expressions/actions and aliases | Expression buttons | `play` / `configureAvatar`, `avatarActions` | `create_avatar_component`; image tools retain six supported image poses |
+| Pointer follow, antenna flash, expression loop, gestures, motion, wake, auto-sleep | Movement plus component policies | `configureAvatar` and public setters/attributes | `create_avatar_component` |
+| SVG, PNG, GIF | Downloads | `exportAvatar` | `create_avatar` |
+| Background, frame, padding, presence badge | Showcase examples | Export presentation options | Asset presentation options |
+
+Interactive movement and full action lifecycles run in a live browser component. An image file cannot follow a cursor. MCP's `create_avatar_component` returns validated npm integration code and normalized settings for those interactive use cases; it executes no code on the server. Website language selection affects the interface, not avatar geometry.
 
 ## Development checks
 

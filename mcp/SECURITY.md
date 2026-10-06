@@ -47,3 +47,7 @@ Valid asset IDs are echoed in manifests as data. Applications must treat returne
 ## Seeded body geometry
 
 Random silhouettes use a bounded unsigned 32-bit seed, fixed 160-point sampling, and low-frequency radial waves. No supplied path, coefficients, executable generator, or frame-count controls are accepted. Body seeds have no secrecy or identity-authentication properties. Bounded input, worker, frame, and aggregate-output limits continue to apply to random shapes.
+
+## Interactive integration output
+
+`create_avatar_component` accepts bounded appearance/behavior enums, booleans, numeric ranges, and hex colors. It returns fixed-template HTML/module code with JSON-serialized validated settings and a literal package import. It does not accept executable source or URLs, execute code, install packages, or access filesystem/network APIs. The caller decides whether to integrate the returned code into a trusted browser application.

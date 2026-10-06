@@ -29,3 +29,7 @@ export { AgentRobotAvatar, AgentCatAvatar, VERSION };
 export default AgentRobotAvatar;
 
 export { customizeAvatar, exportAvatarSVG, accessories } from './src/avatar-studio-customization.js';
+
+export { configureAvatar } from './src/avatar-studio-runtime.js';
+export { exportAvatar } from './src/avatar-studio-export.js';
+export { avatarActions } from './src/avatar-studio-controls.js';

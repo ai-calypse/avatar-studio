@@ -96,3 +96,11 @@ const shapeSeed: number = avatar.getShapeSeed();
 void shapeMode; void shapeSeed;
 // @ts-expect-error Unsupported body shapes must be rejected.
 customizeAvatar(avatar, { bodyShape: 'triangle' });
+
+import { configureAvatar, exportAvatar, avatarActions } from '@ai-calypse/avatar-studio';
+configureAvatar(avatar, {appearance:{antenna:false,bodyShape:'random',shapeSeed:42},behavior:{antennaFlash:true,loop:true,pointerFollow:false,motion:'reduce',wakeOn:'manual',autoSleep:5000},action:'love'});
+const exported: Promise<Blob> = exportAvatar(avatar,{format:'gif',size:128,frames:12,delay:100});
+const actions: readonly AgentRobotAvatarAction[] = avatarActions;
+void exported; void actions;
+// @ts-expect-error Invalid movement policy.
+configureAvatar(avatar,{behavior:{motion:'fast'}});
