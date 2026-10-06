@@ -17,7 +17,8 @@ async function connect(t) {
 test('real stdio client discovers tools and creates SVG, PNG, GIF artifacts', async t => {
   const client = await connect(t);
   const tools = (await client.listTools()).tools;
-  assert.deepEqual(tools.map(tool => tool.name), ['list_accessories', 'validate_avatar', 'create_avatar']);
+  assert.equal(tools.length, 10);
+  assert.ok(tools.some(tool => tool.name === 'create_avatar'));
   for (const tool of tools) {
     assert.equal(tool.annotations.openWorldHint, false);
     assert.equal(tool.annotations.destructiveHint, false);

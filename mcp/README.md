@@ -1,6 +1,6 @@
 # Avatar Studio MCP
 
-A local **stdio MCP server** for developers and agents to generate Avatar Studio robot avatars in memory. It uses the same 50-accessory catalog and shape-fitting accessory renderer as the website. Node.js 22 or newer is required.
+A local **stdio MCP server** for developers and agents to build avatar workflows in memory. Version **0.2.0** provides 10 tools for user identities, branded teams, app states, bulk assets, and sprite sheets. It uses the same 50-accessory catalog and shape-fitting accessory renderer as the website. Node.js 22 or newer is required.
 
 ## Install and connect
 
@@ -30,13 +30,109 @@ Configure your MCP host to launch Node directly with an absolute entrypoint. Do 
 
 A tested, machine-specific configuration is provided in `client-config.local.json` when this checkout is prepared locally. That file is ignored by Git. The server can be started manually with `npm run mcp:start`, but stdin/stdout must be attached to an MCP client for protocol use. There is no HTTP endpoint or credential to configure.
 
-## Tools
+## Tools and real use cases
 
-| Tool | Purpose |
-| --- | --- |
-| `list_accessories` | List all 50 accessories, or one catalog category. |
-| `validate_avatar` | Validate and normalize an application-ready avatar configuration. |
-| `create_avatar` | Return an SVG, PNG, or looping GIF artifact. |
+Call `get_capabilities` first to discover supported formats, limits, expressions, and recommended workflows. Use `list_accessories` to discover IDs rather than inventing them.
+
+| Tool | What it does | Example use |
+| --- | --- | --- |
+| `get_capabilities` | Reports supported workflows and limits. | Let a coding agent plan which assets an app needs. |
+| `list_accessories` | Lists all 50 accessories, optionally by category. | Choose recognizable accessories for support, guide, and admin bots. |
+| `validate_avatar` | Normalizes and validates configuration. | Check an app's saved avatar settings. |
+| `generate_identity` | Maps an opaque stable ID to a repeatable avatar config. | Give new users a default profile picture without uploads. |
+| `suggest_brand_palette` | Suggests body/eye/accessory colors and measured contrast. | Adapt a support mascot to company colors. |
+| `create_avatar` | Returns SVG, PNG, or a looping blink GIF. | Profile images, logos, chat avatars, or a bot mascot. |
+| `create_avatar_batch` | Generates up to 12 named SVG/PNG assets with a manifest. | Seed chat demos, team directories, or multi-agent apps. |
+| `create_avatar_variants` | Generates up to 12 repeatable alternatives. | Offer users six design choices while preserving brand colors. |
+| `create_expression_pack` | Exports matching expression images. | Map a guide's images to onboarding or chat states. |
+| `create_sprite_sheet` | Packs up to 16 configurations into one SVG/PNG and coordinate manifest. | CSS sprites, games, canvas renderers, or expression atlases. |
+
+### Stable default profile pictures
+
+Call `generate_identity`:
+
+```json
+{
+  "seed": "user-2048",
+  "overrides": { "body": "#182725", "eyes": "#dbf59d" }
+}
+```
+
+Pass the returned `config` to `create_avatar`. Seeds accept 1–128 ASCII letters/digits plus `.`, `_`, `:`, and `-`; start with a letter or digit. Use an opaque ID rather than a name, email address, or secret. The raw seed is never returned. The returned fingerprint is an unkeyed hash and is **not** an anonymity or authentication guarantee. Different seeds can produce visually similar or identical avatars.
+
+Identity recipe version `1` is deterministic. Store the returned configuration if an avatar must remain unchanged across future recipe or renderer updates. Overrides are partial: unspecified generated features are preserved.
+
+### Branded teams and design choices
+
+1. Call `suggest_brand_palette` with `{ "primary": "#738b3b", "accent": "#dbf59d", "mode": "dark" }`.
+2. Pass its returned `config` to `create_avatar_variants`:
+
+```json
+{
+  "config": { "body": "#343f1b", "eyes": "#ffffff", "accessoryColor": "#dbf59d" },
+  "seed": "support-team",
+  "count": 6,
+  "vary": "accessories",
+  "format": "png",
+  "size": 128,
+  "presentation": { "frame": "circle", "background": "#f5f5ef", "padding": 6 }
+}
+```
+
+`vary: "accessories"` preserves colors and face geometry. `"colors"` preserves the accessory and face geometry. `"look"` varies colors, accessories, eye geometry, and roundness. Use the same seed to reproduce the alternatives.
+
+Palette suggestions report eye/body and accessory/body contrast. Eye colors are selected for strong contrast; an accent can still have low contrast. These measurements are not a full accessibility audit. Presence badges should be accompanied by status text in your app.
+
+### Chat users and fixtures in one call
+
+Call `create_avatar_batch`:
+
+```json
+{
+  "items": [
+    { "id": "support", "config": { "accessory": "headphones", "eyes": "#dbf59d" } },
+    { "id": "guide", "config": { "accessory": "wizard", "body": "#263b69" } }
+  ],
+  "format": "png",
+  "size": 128,
+  "presentation": { "frame": "rounded", "background": "#f5f5ef", "status": "online" }
+}
+```
+
+Batch IDs must be unique, 1–32 letters/digits/underscores/hyphens, starting with a letter or digit. Batch, variant, and expression tools support SVG/PNG at 32–256 pixels, with a common format, size, and presentation for the call. They return `structuredContent.artifacts` in the same order as the individual `content` artifacts; each record includes its ID, config, hash, MIME type, and byte count. There is no ZIP or filesystem write.
+
+### Expression images and sprite sheets
+
+Call `create_expression_pack`:
+
+```json
+{
+  "config": { "accessory": "headphones", "body": "#182725" },
+  "expressions": ["idle", "happy", "sad", "angry", "sleep", "surprise"],
+  "format": "png",
+  "size": 128
+}
+```
+
+The default is all six expressions. Each asset is named after its expression and preserves the same appearance. These are state images; they do not replace the interactive npm animation runtime or provide skeletal animation.
+
+To pack configurations into a sheet, call `create_sprite_sheet`:
+
+```json
+{
+  "items": [
+    { "id": "idle", "config": { "accessory": "headphones", "expression": "idle" } },
+    { "id": "happy", "config": { "accessory": "headphones", "expression": "happy" } }
+  ],
+  "columns": 2,
+  "cellSize": 128,
+  "format": "png"
+}
+```
+
+You can also use the ID/config pairs from a variant or expression manifest as sheet items. The result has a single artifact plus `structuredContent.frames`, with `id`, `config`, `x`, `y`, `width`, and `height` for each cell. Use those coordinates for CSS `background-position` or canvas `drawImage` source rectangles. Cells are 32–128 pixels, columns 1–4, and total dimensions at most 512 × 512. Unused cells are transparent.
+
+## Single avatar controls and artifacts
 
 Example `create_avatar` arguments:
 
@@ -58,9 +154,20 @@ Example `create_avatar` arguments:
 }
 ```
 
-For GIF, set `"format": "gif", "size": 128`. GIFs contain 12 deterministic blink frames at 100 ms per frame and loop indefinitely. SVG/PNG snapshots are transparent; GIFs have a light background and a reduced color palette. Inputs are limited to the documented controls, rather than arbitrary images or free-form SVG. Expression options are `idle`, `happy`, `sad`, `angry`, `sleep`, and `surprise`.
+For GIF, set `"format": "gif", "size": 128`. GIFs contain 12 deterministic blink frames at 100 ms per frame and loop indefinitely. SVG/PNG snapshots are transparent by default; GIFs have a light background and a reduced color palette. Inputs are limited to the documented controls, rather than arbitrary images or free-form SVG. Expression options are `idle`, `happy`, `sad`, `angry`, `sleep`, and `surprise`.
 
-Tool results include normalized configuration, format, size, MIME type, byte count, and SHA-256 checksum in `structuredContent`. The actual artifact is in `content`:
+All render tools accept an optional `presentation` object:
+
+| Field | Values | Default |
+| --- | --- | --- |
+| `background` | Six-digit hex or `transparent`. | `transparent` |
+| `frame` | `none`, `circle`, `rounded`. | `none` |
+| `padding` | Number from 0 to 24, as a percentage on each side. | `0` |
+| `status` | `none`, `online`, `away`, `busy`, `offline`. | `none` |
+
+Frames clip the composition; add padding if a hat or other accessory needs more space. Status badges are decorative snapshots, not live presence tracking. GIF uses the chosen background when provided; otherwise its transparent area becomes the fixed light background. All render outputs are size-bounded.
+
+Single-avatar tool results include normalized configuration, format, size, MIME type, byte count, and SHA-256 checksum in `structuredContent`. The actual artifact is in `content`:
 
 - SVG: embedded resource with `resource.text` containing the complete SVG.
 - PNG: image block with base64 `data`.
@@ -87,4 +194,8 @@ npm run check --prefix mcp
 npm audit --prefix mcp --omit=dev
 ```
 
-Tests exercise a real MCP client connection, all 50 SVG accessories, raster exports, payload injection, unknown tools/properties, prototype/depth abuse, oversized frames, traffic floods, concurrent renders, cancellation, deterministic output, and process cleanup.
+Tests exercise complete identity/brand/batch/variant/expression/sprite workflows over real stdio, pixel-exact sprite placement, unique clip IDs, measured eye contrast, maximum batch/sheet limits, malicious new-tool arguments, and a real MCP client connection, all 50 SVG accessories, raster exports, payload injection, unknown tools/properties, prototype/depth abuse, oversized frames, traffic floods, concurrent renders, cancellation, deterministic output, and process cleanup.
+
+## Update an existing connection
+
+After updating the checkout, run the install/verification commands above and restart the MCP connection in your host so it discovers all 10 tools. The command and entrypoint are unchanged. This update does not create a remote endpoint or update the separately published browser npm package.

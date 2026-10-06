@@ -1,14 +1,16 @@
 {
   "name": "avatar-studio-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Local MCP avatar generation with bounded, schema-validated inputs and in-memory exports.",
-  "engines": { "node": ">=22" },
+  "description": "Local MCP avatar workflows: stable identities, brand palettes, batch exports, variants, expression packs, and sprite sheets.",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node --max-old-space-size=192 src/index.mjs",
     "test": "node --test tests/*.test.mjs",
-    "check": "node --check src/index.mjs && node --check src/server.mjs && node --check src/render.mjs",
+    "check": "node --check src/index.mjs && node --check src/server.mjs && node --check src/render.mjs && node --check src/recipes.mjs && node --check src/jobs.mjs && node --check src/schema.mjs",
     "audit": "npm audit --omit=dev"
   },
   "dependencies": {
@@ -16,5 +18,7 @@
     "@resvg/resvg-js": "2.6.2",
     "zod": "4.6.5"
   },
-  "devDependencies": { "@modelcontextprotocol/client": "2.3.1" }
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.3.1"
+  }
 }

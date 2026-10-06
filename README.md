@@ -51,7 +51,7 @@ Upload the contents of `.pages-site/` to your static host. The generated `index.
 
 ## Connect the MCP server
 
-The local MCP server lets agents discover accessories, validate avatar configurations, and create SVG, PNG, or GIF artifacts for applications. It shares the website's accessory catalog and shape-fitting accessory renderer. It uses predefined expressions and a deterministic blink animation rather than recording the browser's live state.
+The local MCP server provides **10 tools** for stable user identities, brand palettes, batch exports, design variants, expression packs, sprite sheets, and SVG/PNG/GIF generation. It shares the website's accessory catalog and shape-fitting accessory renderer. It uses predefined expressions and a deterministic blink animation rather than recording the browser's live state.
 
 From the repository checkout, install its separate dependencies and verify the server:
 
@@ -88,6 +88,18 @@ Restart or reconnect your MCP client after saving its configuration. The client 
 | `list_accessories` | `{}` for the full catalog, or an optional `category` returned by the catalog. | Accessory IDs and names grouped by category, plus generation limits. |
 | `validate_avatar` | `{ "config": { ... } }` | Validated configuration with defaults applied. |
 | `create_avatar` | `{ "format": "svg", "size": 256, "config": { ... } }` | Avatar artifact and metadata. |
+| `get_capabilities` | `{}` | Supported formats, limits, expressions, and recommended workflows. |
+| `generate_identity` | `{ "seed": "user-2048", "overrides": { ... } }` | Repeatable avatar config for a stable opaque user ID. |
+| `suggest_brand_palette` | `{ "primary": "#738b3b", "mode": "dark" }` | Suggested config and measured color contrast. |
+| `create_avatar_batch` | Named `items`, common `format`, `size`, and optional `presentation`. | Up to 12 files and an ordered manifest for teams or app fixtures. |
+| `create_avatar_variants` | `config`, `seed`, `count`, and `vary`. | Up to 12 alternatives; preserve brand colors with `vary: "accessories"`. |
+| `create_expression_pack` | `config` and optional `expressions`. | Matching images for idle, happy, sad, angry, sleep, and surprise states. |
+| `create_sprite_sheet` | Named `items`, `columns`, and `cellSize`. | One SVG/PNG sheet with frame coordinates, at most 512 × 512. |
+
+For example: “Create six branded support agents,” “Make a repeatable profile avatar for user-2048,” or “Build a sprite sheet of my guide's expressions.” See [workflow examples](mcp/README.md#tools-and-real-use-cases) for exact arguments.
+
+Render tools also accept `presentation` for a hex/transparent background, circular or rounded frame, 0–24% padding, and an online/away/busy/offline status badge. These controls are specific to MCP exports. Batch/variant/expression tools produce SVG/PNG at 32–256 pixels; single-avatar generation retains SVG/PNG/GIF support. Results stay in memory and your app owns storage.
+
 
 For example, ask your connected agent:
 
@@ -139,7 +151,7 @@ All configuration fields are optional; omitted fields use the defaults below. Un
 }
 ```
 
-MCP GIFs contain 12 looping blink frames at 100 ms per frame, with a light background and reduced color palette. SVG and PNG have transparent backgrounds.
+MCP GIFs contain 12 looping blink frames at 100 ms per frame, with a light background and reduced color palette. SVG and PNG have transparent backgrounds by default; set `presentation.background` for a solid background.
 
 ### Use artifacts in your application
 

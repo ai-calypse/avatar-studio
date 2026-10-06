@@ -21,6 +21,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install MCP dependencies without lifecycle scripts
+        run: npm ci --prefix mcp --ignore-scripts
+
+      - name: Validate MCP workflows and security controls
+        run: npm run check --prefix mcp && npm run test:mcp
+
       - name: Install browsers
         run: npx playwright install --with-deps chromium firefox webkit
 
