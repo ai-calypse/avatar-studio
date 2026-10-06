@@ -1,0 +1,1196 @@
+{
+  "serverVersion": "0.4.0",
+  "examples": [
+    {
+      "id": "classic",
+      "label": "Classic square",
+      "file": "classic.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#182e36",
+          "eyes": "#a3e635",
+          "headRoundness": 0,
+          "accessory": "none",
+          "eyeSize": 85,
+          "spacing": -6
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#182e36",
+        "eyes": "#a3e635",
+        "accessoryColor": "#ffffff",
+        "matchEyes": false,
+        "accessory": "none",
+        "eyeSize": 85,
+        "spacing": -6,
+        "headRoundness": 0,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "5f769100ecaf0792bf15f438f8d6c17e69299a678daa01491c3fbdc8cd5b446e",
+      "bytes": 126597
+    },
+    {
+      "id": "music",
+      "label": "Music lover",
+      "file": "music.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#393b62",
+          "eyes": "#ffe8b6",
+          "accessory": "headphones",
+          "accessoryColor": "#ff895b",
+          "headRoundness": 85,
+          "expression": "happy"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#393b62",
+        "eyes": "#ffe8b6",
+        "accessoryColor": "#ff895b",
+        "matchEyes": false,
+        "accessory": "headphones",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 85,
+        "expression": "happy"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "f4b6450f52d74475dd85fedfafd9bc7c9a64e5d1f3c97639b4760bcb772a3f65",
+      "bytes": 126597
+    },
+    {
+      "id": "royal",
+      "label": "Royal surprise",
+      "file": "royal.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#593164",
+          "eyes": "#f8eafa",
+          "accessory": "crown",
+          "accessoryColor": "#ffc75b",
+          "headRoundness": 100,
+          "expression": "surprise",
+          "eyeSize": 120
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#593164",
+        "eyes": "#f8eafa",
+        "accessoryColor": "#ffc75b",
+        "matchEyes": false,
+        "accessory": "crown",
+        "eyeSize": 120,
+        "spacing": 0,
+        "headRoundness": 100,
+        "expression": "surprise"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "4400767bd4c489656645f26cb0ba650a6d9179e8a1f79b39456d9b1f0f944268",
+      "bytes": 126597
+    },
+    {
+      "id": "fox",
+      "label": "Fluid fox",
+      "file": "fox.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 472,
+          "body": "#af583d",
+          "eyes": "#fff2db",
+          "accessory": "fox-ears",
+          "accessoryColor": "#fdb678",
+          "expression": "happy"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 472,
+        "body": "#af583d",
+        "eyes": "#fff2db",
+        "accessoryColor": "#fdb678",
+        "matchEyes": false,
+        "accessory": "fox-ears",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "happy"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "b0229dac0e74443e77944369727bb8aaa8468be27e11821a4e5b51525a2919ad",
+      "bytes": 126597
+    },
+    {
+      "id": "wizard",
+      "label": "Wizard",
+      "file": "wizard.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 9921,
+          "body": "#214d65",
+          "eyes": "#77ead9",
+          "accessory": "wizard",
+          "accessoryColor": "#a490ff",
+          "spacing": 10
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 9921,
+        "body": "#214d65",
+        "eyes": "#77ead9",
+        "accessoryColor": "#a490ff",
+        "matchEyes": false,
+        "accessory": "wizard",
+        "eyeSize": 100,
+        "spacing": 10,
+        "headRoundness": 50,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "3ca01903e9f9d4907069507490c850894a4e884868a72378db4be1f05ba7173f",
+      "bytes": 126597
+    },
+    {
+      "id": "botanical",
+      "label": "Botanical",
+      "file": "botanical.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 183,
+          "body": "#32624f",
+          "eyes": "#d7f4a0",
+          "accessory": "flower",
+          "accessoryColor": "#ff9cbd",
+          "antenna": false
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": false,
+        "bodyShape": "random",
+        "shapeSeed": 183,
+        "body": "#32624f",
+        "eyes": "#d7f4a0",
+        "accessoryColor": "#ff9cbd",
+        "matchEyes": false,
+        "accessory": "flower",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "6124ff4f13f1afcf5230b10ff86e9f15f28cfdc11c52fef843301e108c94b2b2",
+      "bytes": 126597
+    },
+    {
+      "id": "sleepy",
+      "label": "Sleepy beanie",
+      "file": "sleepy.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#d6a178",
+          "eyes": "#352a32",
+          "accessory": "beanie",
+          "accessoryColor": "#93b8cf",
+          "headRoundness": 95,
+          "expression": "sleep"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#d6a178",
+        "eyes": "#352a32",
+        "accessoryColor": "#93b8cf",
+        "matchEyes": false,
+        "accessory": "beanie",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 95,
+        "expression": "sleep"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "7666aafbb69306bb4b714c8b17e3faccfe9b855ad2096b8e4db0db6e60251822",
+      "bytes": 126597
+    },
+    {
+      "id": "cyber",
+      "label": "Cyber visor",
+      "file": "cyber.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 73456,
+          "body": "#24243c",
+          "eyes": "#ff66c4",
+          "accessory": "visor",
+          "matchEyes": true,
+          "expression": "angry",
+          "eyeSize": 65,
+          "spacing": 12
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 73456,
+        "body": "#24243c",
+        "eyes": "#ff66c4",
+        "accessoryColor": "#ffffff",
+        "matchEyes": true,
+        "accessory": "visor",
+        "eyeSize": 65,
+        "spacing": 12,
+        "headRoundness": 50,
+        "expression": "angry"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "36e837f2059ce8d2b262970f63198a61e8ca823e9ed00fd97f17cd96522a2054",
+      "bytes": 126597
+    },
+    {
+      "id": "bookworm",
+      "label": "Bookworm",
+      "file": "bookworm.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#3b465b",
+          "eyes": "#ffdf91",
+          "accessory": "round-glasses",
+          "accessoryColor": "#e8a28a",
+          "headRoundness": 45
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#3b465b",
+        "eyes": "#ffdf91",
+        "accessoryColor": "#e8a28a",
+        "matchEyes": false,
+        "accessory": "round-glasses",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 45,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "cd4645cf05d25f931c36589818b9cce22cae481cb3ab9564da4b5e07ab82ba37",
+      "bytes": 126597
+    },
+    {
+      "id": "party",
+      "label": "Party time",
+      "file": "party.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#804789",
+          "eyes": "#fff0c2",
+          "accessory": "party",
+          "accessoryColor": "#58d8c9",
+          "expression": "happy",
+          "headRoundness": 70
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#804789",
+        "eyes": "#fff0c2",
+        "accessoryColor": "#58d8c9",
+        "matchEyes": false,
+        "accessory": "party",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 70,
+        "expression": "happy"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "aa900e50eea1c2d9fc47642bb01ad282e4d183caf2183e2632725ecf6139185b",
+      "bytes": 126597
+    },
+    {
+      "id": "bunny",
+      "label": "Fluid bunny",
+      "file": "bunny.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 278,
+          "body": "#a87396",
+          "eyes": "#ffe5ed",
+          "accessory": "bunny-ears",
+          "accessoryColor": "#d9b4d2",
+          "expression": "surprise"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 278,
+        "body": "#a87396",
+        "eyes": "#ffe5ed",
+        "accessoryColor": "#d9b4d2",
+        "matchEyes": false,
+        "accessory": "bunny-ears",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "surprise"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "1ba6c7bed871811a5007e8806512c1ade2294fe638cdd95deb6163d0c903f671",
+      "bytes": 126597
+    },
+    {
+      "id": "cowboy",
+      "label": "Cowboy",
+      "file": "cowboy.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#755437",
+          "eyes": "#ffd999",
+          "accessory": "cowboy",
+          "accessoryColor": "#d0a468",
+          "headRoundness": 20
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#755437",
+        "eyes": "#ffd999",
+        "accessoryColor": "#d0a468",
+        "matchEyes": false,
+        "accessory": "cowboy",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 20,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "32079b7d5c754e6e1dbe3e7dcdb9ca39ba948ab14b5846ab67afc84ff00eea41",
+      "bytes": 126597
+    },
+    {
+      "id": "chef",
+      "label": "Chef",
+      "file": "chef.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 950,
+          "body": "#46817a",
+          "eyes": "#ffecac",
+          "accessory": "chef",
+          "accessoryColor": "#ffffff",
+          "expression": "happy"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 950,
+        "body": "#46817a",
+        "eyes": "#ffecac",
+        "accessoryColor": "#ffffff",
+        "matchEyes": false,
+        "accessory": "chef",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "happy"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "d682840a9605f0ed9bdb2f6f709fc7a4d7923c5de8581cec8360eef844b9ee69",
+      "bytes": 126597
+    },
+    {
+      "id": "pirate",
+      "label": "Pirate",
+      "file": "pirate.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#434d63",
+          "eyes": "#ffae78",
+          "accessory": "pirate",
+          "accessoryColor": "#b79770",
+          "expression": "angry",
+          "headRoundness": 35
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#434d63",
+        "eyes": "#ffae78",
+        "accessoryColor": "#b79770",
+        "matchEyes": false,
+        "accessory": "pirate",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 35,
+        "expression": "angry"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "40decc4b72a6cc660a6b38eb13b3ddf05e2d44a1ddd61a0c50c67b794281cbff",
+      "bytes": 126597
+    },
+    {
+      "id": "angel",
+      "label": "Little angel",
+      "file": "angel.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 2221,
+          "body": "#6a93b5",
+          "eyes": "#f3fdff",
+          "accessory": "halo",
+          "accessoryColor": "#ffdd88",
+          "expression": "happy",
+          "antenna": false
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": false,
+        "bodyShape": "random",
+        "shapeSeed": 2221,
+        "body": "#6a93b5",
+        "eyes": "#f3fdff",
+        "accessoryColor": "#ffdd88",
+        "matchEyes": false,
+        "accessory": "halo",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "happy"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "879342fce484eaad13c8aaed47fd7edd6aff883dd4984051cd99cb35ab5f8433",
+      "bytes": 126597
+    },
+    {
+      "id": "devil",
+      "label": "Tiny trouble",
+      "file": "devil.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 419,
+          "body": "#a4464c",
+          "eyes": "#ffeab4",
+          "accessory": "horns",
+          "accessoryColor": "#ff766b",
+          "expression": "angry"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 419,
+        "body": "#a4464c",
+        "eyes": "#ffeab4",
+        "accessoryColor": "#ff766b",
+        "matchEyes": false,
+        "accessory": "horns",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "angry"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "dac405fbcb28114512293572a6f51683f6f7a64d74e858e28b371fea1ee0a878",
+      "bytes": 126597
+    },
+    {
+      "id": "winter",
+      "label": "Winter scarf",
+      "file": "winter.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#4b6d86",
+          "eyes": "#eef6ff",
+          "accessory": "scarf",
+          "accessoryColor": "#ffa598",
+          "headRoundness": 85,
+          "expression": "sad"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#4b6d86",
+        "eyes": "#eef6ff",
+        "accessoryColor": "#ffa598",
+        "matchEyes": false,
+        "accessory": "scarf",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 85,
+        "expression": "sad"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "5ed6b3a4196946212c7b17ec70b80e12b6f55578c7e53fc300d78d7af7edfd63",
+      "bytes": 126597
+    },
+    {
+      "id": "graduate",
+      "label": "Graduate",
+      "file": "graduate.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#433a6f",
+          "eyes": "#ece1ff",
+          "accessory": "graduation",
+          "accessoryColor": "#9f8adb",
+          "headRoundness": 60,
+          "expression": "happy"
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#433a6f",
+        "eyes": "#ece1ff",
+        "accessoryColor": "#9f8adb",
+        "matchEyes": false,
+        "accessory": "graduation",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 60,
+        "expression": "happy"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "9ac131312a17b7ca4851cf07154d71b306c9cce4c443a0e64ef148de7fb46d5b",
+      "bytes": 126597
+    },
+    {
+      "id": "bear",
+      "label": "Fluid bear",
+      "file": "bear.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 12201,
+          "body": "#896b54",
+          "eyes": "#ffe9c4",
+          "accessory": "bear-ears",
+          "accessoryColor": "#b88e6c",
+          "eyeSize": 110
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 12201,
+        "body": "#896b54",
+        "eyes": "#ffe9c4",
+        "accessoryColor": "#b88e6c",
+        "matchEyes": false,
+        "accessory": "bear-ears",
+        "eyeSize": 110,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "57a0792fd1cc9cb531b7c2bef6e4a63dd2bd02493c6092a47698c02eaa12a8a2",
+      "bytes": 126597
+    },
+    {
+      "id": "alien",
+      "label": "Alien signal",
+      "file": "alien.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 6271,
+          "body": "#4f8a54",
+          "eyes": "#b8fb9e",
+          "accessory": "alien-antennae",
+          "matchEyes": true,
+          "expression": "surprise",
+          "eyeSize": 120
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "none",
+          "status": "none"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 6271,
+        "body": "#4f8a54",
+        "eyes": "#b8fb9e",
+        "accessoryColor": "#ffffff",
+        "matchEyes": true,
+        "accessory": "alien-antennae",
+        "eyeSize": 120,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "surprise"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "none",
+        "padding": 8,
+        "status": "none"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "9ab6585ed74b2a7bd3371044de881fdc78ba4d0ec8cf52539c0ef69b3812a0e3",
+      "bytes": 126597
+    },
+    {
+      "id": "gentleman",
+      "label": "Top hat",
+      "file": "gentleman.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#37464f",
+          "eyes": "#ece4d3",
+          "accessory": "top-hat",
+          "accessoryColor": "#627985",
+          "headRoundness": 30
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "circle",
+          "status": "online"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#37464f",
+        "eyes": "#ece4d3",
+        "accessoryColor": "#627985",
+        "matchEyes": false,
+        "accessory": "top-hat",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 30,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "circle",
+        "padding": 8,
+        "status": "online"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "d49daf47e332d2e3e4c62fe1cd0baa532a9772442b8e2c2ba3168f264c83fe1a",
+      "bytes": 126597
+    },
+    {
+      "id": "hero",
+      "label": "Lightning hero",
+      "file": "hero.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 6482,
+          "body": "#3d568f",
+          "eyes": "#ffe16b",
+          "accessory": "lightning-pin",
+          "matchEyes": true,
+          "expression": "happy",
+          "antenna": false
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "circle",
+          "status": "busy"
+        }
+      },
+      "config": {
+        "antenna": false,
+        "bodyShape": "random",
+        "shapeSeed": 6482,
+        "body": "#3d568f",
+        "eyes": "#ffe16b",
+        "accessoryColor": "#ffffff",
+        "matchEyes": true,
+        "accessory": "lightning-pin",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "happy"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "circle",
+        "padding": 8,
+        "status": "busy"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "b464116e03dd78f751ee6a2f4f82d88fd7c6af94694ece3b9bb285b4f5233b3c",
+      "bytes": 126597
+    },
+    {
+      "id": "valentine",
+      "label": "Heart glasses",
+      "file": "valentine.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "body": "#865272",
+          "eyes": "#ffd0e4",
+          "accessory": "heart-glasses",
+          "accessoryColor": "#ff91b8",
+          "headRoundness": 100
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "circle",
+          "status": "away"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#865272",
+        "eyes": "#ffd0e4",
+        "accessoryColor": "#ff91b8",
+        "matchEyes": false,
+        "accessory": "heart-glasses",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 100,
+        "expression": "idle"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "circle",
+        "padding": 8,
+        "status": "away"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "125b9b26415d68869b5dcebd2c90d135fdb86e45a49379ed2387b356922bb47e",
+      "bytes": 126597
+    },
+    {
+      "id": "space",
+      "label": "Space goggles",
+      "file": "space.gif",
+      "tool": "create_avatar",
+      "request": {
+        "config": {
+          "bodyShape": "random",
+          "shapeSeed": 14381,
+          "body": "#38456d",
+          "eyes": "#9ef5ec",
+          "accessory": "goggles",
+          "accessoryColor": "#79b4e2",
+          "expression": "surprise",
+          "spacing": 8
+        },
+        "format": "gif",
+        "size": 96,
+        "presentation": {
+          "background": "#f5f5ef",
+          "padding": 8,
+          "frame": "circle",
+          "status": "offline"
+        }
+      },
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 14381,
+        "body": "#38456d",
+        "eyes": "#9ef5ec",
+        "accessoryColor": "#79b4e2",
+        "matchEyes": false,
+        "accessory": "goggles",
+        "eyeSize": 100,
+        "spacing": 8,
+        "headRoundness": 50,
+        "expression": "surprise"
+      },
+      "presentation": {
+        "background": "#f5f5ef",
+        "frame": "circle",
+        "padding": 8,
+        "status": "offline"
+      },
+      "size": 96,
+      "format": "gif",
+      "mimeType": "image/gif",
+      "sha256": "fbd5b05d451d0feb301c9486460b3da5d808f6da8f899040bfe899c1c551b1e0",
+      "bytes": 126597
+    }
+  ]
+}
