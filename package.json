@@ -31,7 +31,10 @@
     "test:browser": "playwright test",
     "mcp:start": "npm --prefix mcp start",
     "test:mcp": "npm --prefix mcp test",
-    "test:pages": "node --test tests/pages.test.mjs"
+    "test:pages": "node --test tests/pages.test.mjs",
+    "build:docs": "node scripts/build-docs.mjs",
+    "predev": "npm run build:docs",
+    "pretest:browser": "npm run build:docs"
   },
   "files": [
     "agent-robot-avatar.js",
@@ -73,6 +76,7 @@
     "@playwright/test": "1.63.0",
     "eslint": "10.12.0",
     "globals": "17.13.0",
+    "marked": "18.1.0",
     "typescript": "7.0.2"
   },
   "contributors": [

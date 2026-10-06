@@ -5,6 +5,8 @@ Create a personalized robot avatar for your profile, team chat, app, or AI assis
 
 Built on [Agent Robot Avatar by CX ArtLab](https://github.com/CX-ArtLab/agent-robot-avatar), using SVG and vanilla JavaScript. The website runs without a backend or account; the MCP server runs separately as a local Node.js subprocess.
 
+[Read the documentation](https://ai-calypse.github.io/avatar-studio/docs/) for creator guides, npm integration, MCP setup, API controls, and visual use cases.
+
 ## Avatar examples
 
 Try the [live creator](https://ai-calypse.github.io/avatar-studio/) or use MCP to make your own. These **24 GIF examples were generated through the Avatar Studio MCP server**, using different colors, accessories, expressions, classic and seeded fluid bodies, and profile badges. Each preview links to its downloadable GIF.
@@ -460,3 +462,7 @@ The repository's **Deploy Live Demo** workflow builds the static site into `.pag
 3. Open https://ai-calypse.github.io/avatar-studio/ after the deployment succeeds.
 
 Run `npm run build:pages` locally to inspect the generated artifact. The hosted site is a browser-only avatar editor; the MCP server runs locally and is not exposed by Pages.
+
+### Website documentation
+
+The site documentation lives at `/docs/`. Run `npm run build:docs` to generate eight navigable pages from this README, `mcp/README.md`, and `mcp/SECURITY.md`; `npm run dev` builds them automatically. The Pages build includes the docs and their visual assets. Edit the Markdown sources and rebuild rather than editing generated HTML. Layout and search are maintained in `docs/docs.css` and `docs/docs.js`. Technical docs currently use English; the creator remains available in nine languages.
