@@ -29,13 +29,13 @@ jobs:
       RELEASE_TAG: ${{ inputs.tag || github.event.release.tag_name }}
     steps:
       - name: Checkout release tag
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: refs/tags/${{ inputs.tag || github.event.release.tag_name }}
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org/
@@ -69,7 +69,16 @@ jobs:
           NODE
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
+
+      - name: Validate MCP before release
+        run: |
+          npm ci --prefix mcp --ignore-scripts
+          npm run test:mcp
+          npm audit --prefix mcp --audit-level=high
+
+      - name: Audit package dependencies
+        run: npm audit --audit-level=high
 
       - name: Install browsers
         run: npx playwright install --with-deps chromium firefox webkit

@@ -1002,7 +1002,7 @@ const AgentRobotAvatar = (() => {
       let nodScaleY = 1;
       if (this._eyeNod) {
         const elapsed = now - this._eyeNod.start;
-        let depth = 0;
+        let depth;
         if (elapsed < 150) depth = elapsed / 150;
         else if (elapsed < 300) depth = 1 - (elapsed - 150) / 150;
         else if (elapsed < 450) depth = (elapsed - 300) / 150;

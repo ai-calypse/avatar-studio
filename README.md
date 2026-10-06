@@ -1,5 +1,6 @@
 # Avatar Studio
 
+[![Validate](https://github.com/ai-calypse/avatar-studio/actions/workflows/validate.yml/badge.svg)](https://github.com/ai-calypse/avatar-studio/actions/workflows/validate.yml) [![CodeQL](https://github.com/ai-calypse/avatar-studio/actions/workflows/codeql.yml/badge.svg)](https://github.com/ai-calypse/avatar-studio/actions/workflows/codeql.yml)
 Create a personalized robot avatar for your profile, team chat, app, or AI assistant. Avatar Studio combines a browser-based creator with a local MCP server so people and agents can generate avatars from the same accessory catalog.
 
 Built on [Agent Robot Avatar by CX ArtLab](https://github.com/CX-ArtLab/agent-robot-avatar), using SVG and vanilla JavaScript. The website runs without a backend or account; the MCP server runs separately as a local Node.js subprocess.
@@ -229,6 +230,7 @@ See [the basic example](examples/basic.html), [the accessible request lifecycle 
 ## Development checks
 
 ```sh
+npm run lint
 npm run check
 npm run test:types
 npm run test:mcp
@@ -244,6 +246,10 @@ npx playwright test tests/studio.spec.mjs --project=chromium
 ```
 
 Set `AVATAR_TEST_PORT=4175` if testing the local server on that port. `npm test` runs the original component's full validation suite, including Chromium, Firefox, and WebKit, and requires those Playwright browsers to be installed. Run `npm run test:mcp` separately to check the MCP server.
+
+## Contributing and security
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for local setup and required checks, [SECURITY.md](SECURITY.md) to report vulnerabilities privately, and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community guidelines. CI checks code quality, types, browser compatibility, npm packaging, MCP workflows, dependencies, and GitHub Actions security.
 
 ## Attribution and license
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Add ESLint, workflow validation, browser/MCP matrices, package checks, and dependency audits to CI.
+- Add GitHub CodeQL, Dependency Review, Dependabot updates, and pinned Actions with minimal permissions.
+- Add contributor, conduct, ownership, and private security-reporting documentation.
+
 ## Avatar Studio 0.2.0
 
 - Add repeatable fluid body silhouettes alongside classic square-to-circle roundness.

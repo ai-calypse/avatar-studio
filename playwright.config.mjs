@@ -8,6 +8,8 @@ export default defineConfig({
   reporter: 'line',
   use: {
     baseURL: `http://127.0.0.1:${port}`,
+    screenshot: 'only-on-failure',
+    trace: process.env.CI ? 'retain-on-failure' : 'off',
   },
   projects: [
     {

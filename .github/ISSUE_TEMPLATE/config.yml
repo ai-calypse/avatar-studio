@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a security vulnerability privately
+    url: https://github.com/ai-calypse/avatar-studio/security/advisories/new
+    about: Do not report security vulnerabilities in public issues.

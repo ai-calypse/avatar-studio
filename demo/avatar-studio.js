@@ -115,7 +115,7 @@ async function download(format) {
       saveDownload(new Blob([encodeGIF(frames, 256, 256)], { type: 'image/gif' }), 'my-avatar.gif');
     }
     status.textContent = `Your ${format.toUpperCase()} is ready. Make yourself at home anywhere.`;
-  } catch (error) {
+  } catch {
     status.textContent = 'The download couldn’t be created. Please try again.';
   } finally {
     exporting = false;

@@ -1,15 +1,15 @@
 ## Summary
 
-Describe what this PR changes and why.
+Describe the problem and resulting behavior.
 
 ## Validation
 
-- [ ] Tested `index.html`
-- [ ] Tested `examples/basic.html`
-- [ ] No unrelated animation behavior changed
+- [ ] `npm test` passes (lint, types, package checks, browser tests, site build)
+- [ ] `npm run test:mcp` passes if MCP or shared rendering code changed
 - [ ] Public API changes are documented
-- [ ] `CHANGELOG.md` updated when needed
+- [ ] `CHANGELOG.md` updated for user-visible changes
+- [ ] Accessibility and reduced-motion behavior preserved
 
 ## Notes
 
-Add screenshots, recordings, browser details, or compatibility notes when relevant.
+Include screenshots for visual changes and explain compatibility or security implications when relevant.
