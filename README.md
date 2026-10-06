@@ -5,6 +5,33 @@ Create a personalized robot avatar for your profile, team chat, app, or AI assis
 
 Built on [Agent Robot Avatar by CX ArtLab](https://github.com/CX-ArtLab/agent-robot-avatar), using SVG and vanilla JavaScript. The website runs without a backend or account; the MCP server runs separately as a local Node.js subprocess.
 
+## Avatar examples
+
+Try the [live creator](https://ai-calypse.github.io/avatar-studio/) or use MCP to make your own. These **24 GIF examples were generated through the Avatar Studio MCP server**, using different colors, accessories, expressions, classic and seeded fluid bodies, and profile badges. Each preview links to its downloadable GIF.
+
+MCP GIFs use a deterministic blink cycle with a selected expression. Sleeping eyes stay closed. For full actions, cursor following, and gestures, embed the live npm component.
+
+| | | | |
+| --- | --- | --- | --- |
+| **Classic square**<br>[![Classic square robot avatar](docs/examples/classic.gif)](docs/examples/classic.gif) | **Music lover**<br>[![Music lover robot avatar](docs/examples/music.gif)](docs/examples/music.gif) | **Royal surprise**<br>[![Royal surprise robot avatar](docs/examples/royal.gif)](docs/examples/royal.gif) | **Fluid fox**<br>[![Fluid fox robot avatar](docs/examples/fox.gif)](docs/examples/fox.gif) |
+| **Wizard**<br>[![Wizard robot avatar](docs/examples/wizard.gif)](docs/examples/wizard.gif) | **Botanical**<br>[![Botanical robot avatar](docs/examples/botanical.gif)](docs/examples/botanical.gif) | **Sleepy beanie**<br>[![Sleepy beanie robot avatar](docs/examples/sleepy.gif)](docs/examples/sleepy.gif) | **Cyber visor**<br>[![Cyber visor robot avatar](docs/examples/cyber.gif)](docs/examples/cyber.gif) |
+| **Bookworm**<br>[![Bookworm robot avatar](docs/examples/bookworm.gif)](docs/examples/bookworm.gif) | **Party time**<br>[![Party time robot avatar](docs/examples/party.gif)](docs/examples/party.gif) | **Fluid bunny**<br>[![Fluid bunny robot avatar](docs/examples/bunny.gif)](docs/examples/bunny.gif) | **Cowboy**<br>[![Cowboy robot avatar](docs/examples/cowboy.gif)](docs/examples/cowboy.gif) |
+| **Chef**<br>[![Chef robot avatar](docs/examples/chef.gif)](docs/examples/chef.gif) | **Pirate**<br>[![Pirate robot avatar](docs/examples/pirate.gif)](docs/examples/pirate.gif) | **Little angel**<br>[![Little angel robot avatar](docs/examples/angel.gif)](docs/examples/angel.gif) | **Tiny trouble**<br>[![Tiny trouble robot avatar](docs/examples/devil.gif)](docs/examples/devil.gif) |
+| **Winter scarf**<br>[![Winter scarf robot avatar](docs/examples/winter.gif)](docs/examples/winter.gif) | **Graduate**<br>[![Graduate robot avatar](docs/examples/graduate.gif)](docs/examples/graduate.gif) | **Fluid bear**<br>[![Fluid bear robot avatar](docs/examples/bear.gif)](docs/examples/bear.gif) | **Alien signal**<br>[![Alien signal robot avatar](docs/examples/alien.gif)](docs/examples/alien.gif) |
+| **Top hat**<br>[![Top hat robot avatar](docs/examples/gentleman.gif)](docs/examples/gentleman.gif) | **Lightning hero**<br>[![Lightning hero robot avatar](docs/examples/hero.gif)](docs/examples/hero.gif) | **Heart glasses**<br>[![Heart glasses robot avatar](docs/examples/valentine.gif)](docs/examples/valentine.gif) | **Space goggles**<br>[![Space goggles robot avatar](docs/examples/space.gif)](docs/examples/space.gif) |
+
+### SVG, PNG, and sprite examples
+
+The same designs can be exported as transparent SVGs, profile PNGs, or sprite sheets with frame coordinates.
+
+![Eight customized robot avatars in a sprite sheet](docs/examples/gallery.png)
+
+[Classic SVG](docs/examples/classic.svg) · [Headphones SVG](docs/examples/music.svg) · [Crown SVG](docs/examples/royal.svg) · [Fluid fox SVG](docs/examples/fox.svg) · [Wizard SVG](docs/examples/wizard.svg) · [Flower SVG](docs/examples/botanical.svg) · [Sleeping SVG](docs/examples/sleepy.svg) · [Visor SVG](docs/examples/cyber.svg)
+
+![Fluid flower profile avatar with an away badge](docs/examples/botanical-profile.png)
+
+Reproduce the GIFs using the exact `create_avatar` arguments in [the example manifest](docs/examples/manifest.json). See [sprite coordinates and configs](docs/examples/sprite-manifest.json) for the PNG sheet. All assets are committed to this repository; no external image host is required.
+
 ## Run the website
 
 Requires Node.js 22 or newer and npm.
@@ -53,7 +80,7 @@ Upload the contents of `.pages-site/` to your static host. The generated `index.
 
 ## Connect the MCP server
 
-The local MCP server provides **10 tools** for stable user identities, brand palettes, batch exports, design variants, expression packs, sprite sheets, and SVG/PNG/GIF generation. It shares the website's accessory catalog and shape-fitting accessory renderer. It uses predefined expressions and a deterministic blink animation rather than recording the browser's live state.
+The local MCP server provides **11 tools** for stable user identities, brand palettes, batch exports, design variants, expression packs, sprite sheets, and SVG/PNG/GIF generation. It shares the website's accessory catalog and shape-fitting accessory renderer. It uses predefined expressions and a deterministic blink animation rather than recording the browser's live state.
 
 From the repository checkout, install its separate dependencies and verify the server:
 
@@ -100,7 +127,7 @@ Restart or reconnect your MCP client after saving its configuration. The client 
 
 For example: “Create six branded support agents,” “Make a repeatable profile avatar for user-2048,” or “Build a sprite sheet of my guide's expressions.” See [workflow examples](mcp/README.md#tools-and-real-use-cases) for exact arguments.
 
-Render tools also accept `presentation` for a hex/transparent background, circular or rounded frame, 0–24% padding, and an online/away/busy/offline status badge. These controls are specific to MCP exports. Batch/variant/expression tools produce SVG/PNG at 32–256 pixels; single-avatar generation retains SVG/PNG/GIF support. Results stay in memory and your app owns storage.
+Render tools also accept `presentation` for a hex/transparent background, circular or rounded frame, 0–24% padding, and an online/away/busy/offline status badge. The npm `exportAvatar` helper supports the same presentation controls. Batch/variant/expression tools produce SVG/PNG at 32–256 pixels; single-avatar generation retains SVG/PNG/GIF support. Results stay in memory and your app owns storage.
 
 
 For example, ask your connected agent:

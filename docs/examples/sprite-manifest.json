@@ -1,0 +1,185 @@
+{
+  "id": "sprite-sheet",
+  "width": 512,
+  "height": 256,
+  "frames": [
+    {
+      "id": "classic",
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#182e36",
+        "eyes": "#a3e635",
+        "accessoryColor": "#ffffff",
+        "matchEyes": false,
+        "accessory": "none",
+        "eyeSize": 85,
+        "spacing": -6,
+        "headRoundness": 0,
+        "expression": "idle"
+      },
+      "x": 0,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "music",
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#393b62",
+        "eyes": "#ffe8b6",
+        "accessoryColor": "#ff895b",
+        "matchEyes": false,
+        "accessory": "headphones",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 85,
+        "expression": "happy"
+      },
+      "x": 128,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "royal",
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#593164",
+        "eyes": "#f8eafa",
+        "accessoryColor": "#ffc75b",
+        "matchEyes": false,
+        "accessory": "crown",
+        "eyeSize": 120,
+        "spacing": 0,
+        "headRoundness": 100,
+        "expression": "surprise"
+      },
+      "x": 256,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "fox",
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 472,
+        "body": "#af583d",
+        "eyes": "#fff2db",
+        "accessoryColor": "#fdb678",
+        "matchEyes": false,
+        "accessory": "fox-ears",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "happy"
+      },
+      "x": 384,
+      "y": 0,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "wizard",
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 9921,
+        "body": "#214d65",
+        "eyes": "#77ead9",
+        "accessoryColor": "#a490ff",
+        "matchEyes": false,
+        "accessory": "wizard",
+        "eyeSize": 100,
+        "spacing": 10,
+        "headRoundness": 50,
+        "expression": "idle"
+      },
+      "x": 0,
+      "y": 128,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "botanical",
+      "config": {
+        "antenna": false,
+        "bodyShape": "random",
+        "shapeSeed": 183,
+        "body": "#32624f",
+        "eyes": "#d7f4a0",
+        "accessoryColor": "#ff9cbd",
+        "matchEyes": false,
+        "accessory": "flower",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 50,
+        "expression": "idle"
+      },
+      "x": 128,
+      "y": 128,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "sleepy",
+      "config": {
+        "antenna": true,
+        "bodyShape": "classic",
+        "shapeSeed": 0,
+        "body": "#d6a178",
+        "eyes": "#352a32",
+        "accessoryColor": "#93b8cf",
+        "matchEyes": false,
+        "accessory": "beanie",
+        "eyeSize": 100,
+        "spacing": 0,
+        "headRoundness": 95,
+        "expression": "sleep"
+      },
+      "x": 256,
+      "y": 128,
+      "width": 128,
+      "height": 128
+    },
+    {
+      "id": "cyber",
+      "config": {
+        "antenna": true,
+        "bodyShape": "random",
+        "shapeSeed": 73456,
+        "body": "#24243c",
+        "eyes": "#ff66c4",
+        "accessoryColor": "#ffffff",
+        "matchEyes": true,
+        "accessory": "visor",
+        "eyeSize": 65,
+        "spacing": 12,
+        "headRoundness": 50,
+        "expression": "angry"
+      },
+      "x": 384,
+      "y": 128,
+      "width": 128,
+      "height": 128
+    }
+  ],
+  "presentation": {
+    "background": "#f5f5ef",
+    "frame": "none",
+    "padding": 8,
+    "status": "none"
+  },
+  "format": "png",
+  "mimeType": "image/png",
+  "sha256": "e7e89df94872c5a26cad802a257194c7dbe8f126b1a9ce60b2f2b8220c207646",
+  "bytes": 16562
+}
