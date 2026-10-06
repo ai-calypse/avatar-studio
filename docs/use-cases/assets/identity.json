@@ -1,0 +1,18 @@
+{
+  "recipeVersion": "1",
+  "fingerprint": "6df6cb192f40792dbb6d07113de2de0d91df8c41a4307be56c39e44c2defeaa3",
+  "config": {
+    "antenna": true,
+    "bodyShape": "random",
+    "shapeSeed": 2048,
+    "body": "#204c52",
+    "eyes": "#ffffff",
+    "accessoryColor": "#ffffff",
+    "matchEyes": true,
+    "accessory": "lightning-pin",
+    "eyeSize": 103,
+    "spacing": 6,
+    "headRoundness": 47,
+    "expression": "idle"
+  }
+}

@@ -1,0 +1,434 @@
+[
+  {
+    "id": "user-profile",
+    "label": "User profile",
+    "group": "identity",
+    "type": "profile",
+    "description": "Your own recognizable account picture.",
+    "tool": "create_avatar",
+    "preview": "user-profile.svg"
+  },
+  {
+    "id": "team-chat",
+    "label": "Team chat",
+    "group": "identity",
+    "type": "chat",
+    "description": "Recognizable faces beside every message.",
+    "tool": "create_avatar_batch",
+    "preview": "team-chat.svg"
+  },
+  {
+    "id": "comments",
+    "label": "Comments and replies",
+    "group": "identity",
+    "type": "chat",
+    "description": "Give authors a consistent identity.",
+    "tool": "generate_identity",
+    "preview": "comments.svg"
+  },
+  {
+    "id": "forum",
+    "label": "Community forum",
+    "group": "identity",
+    "type": "list",
+    "description": "Pseudonymous profiles without photo uploads.",
+    "tool": "generate_identity",
+    "preview": "forum.svg"
+  },
+  {
+    "id": "directory",
+    "label": "Team directory",
+    "group": "identity",
+    "type": "list",
+    "description": "Create a coordinated set of team avatars.",
+    "tool": "create_avatar_batch",
+    "preview": "directory.svg"
+  },
+  {
+    "id": "notifications",
+    "label": "Notification sender",
+    "group": "identity",
+    "type": "chat",
+    "description": "Distinguish people, bots, and app events.",
+    "tool": "create_avatar",
+    "preview": "notifications.svg"
+  },
+  {
+    "id": "copilot",
+    "label": "Product copilot",
+    "group": "assistants",
+    "type": "assistant",
+    "description": "Embed a companion beside useful suggestions.",
+    "tool": "create_avatar_component",
+    "preview": "copilot.svg"
+  },
+  {
+    "id": "support",
+    "label": "Support chat",
+    "group": "assistants",
+    "type": "chat",
+    "description": "Use a friendly identity for support agents.",
+    "tool": "create_avatar_component",
+    "preview": "support.svg"
+  },
+  {
+    "id": "command",
+    "label": "Command palette",
+    "group": "assistants",
+    "type": "assistant",
+    "description": "Give your in-app assistant a face.",
+    "tool": "npm component",
+    "preview": "command.svg"
+  },
+  {
+    "id": "onboarding",
+    "label": "Onboarding guide",
+    "group": "assistants",
+    "type": "assistant",
+    "description": "Explain the next step with a character.",
+    "tool": "create_expression_pack",
+    "preview": "onboarding.svg"
+  },
+  {
+    "id": "docs-guide",
+    "label": "Documentation guide",
+    "group": "assistants",
+    "type": "assistant",
+    "description": "Add a recognizable guide to documentation.",
+    "tool": "npm component",
+    "preview": "docs-guide.svg"
+  },
+  {
+    "id": "extension",
+    "label": "Browser extension",
+    "group": "assistants",
+    "type": "assistant",
+    "description": "Fit a tiny helper into an extension popup.",
+    "tool": "npm component",
+    "preview": "extension.svg"
+  },
+  {
+    "id": "neutral",
+    "label": "No presence badge",
+    "group": "presence",
+    "type": "status",
+    "description": "Use the avatar without a state indicator.",
+    "tool": "create_avatar",
+    "preview": "neutral.svg"
+  },
+  {
+    "id": "online",
+    "label": "Online presence",
+    "group": "presence",
+    "type": "status",
+    "description": "Show an available person or assistant.",
+    "tool": "create_avatar",
+    "preview": "online.svg"
+  },
+  {
+    "id": "away",
+    "label": "Away or idle",
+    "group": "presence",
+    "type": "status",
+    "description": "Show a temporary absence with a badge.",
+    "tool": "create_avatar",
+    "preview": "away.svg"
+  },
+  {
+    "id": "busy",
+    "label": "Busy or processing",
+    "group": "presence",
+    "type": "status",
+    "description": "Show an agent working on a request.",
+    "tool": "create_avatar",
+    "preview": "busy.svg"
+  },
+  {
+    "id": "offline",
+    "label": "Offline presence",
+    "group": "presence",
+    "type": "status",
+    "description": "Keep unavailable users visible in a roster.",
+    "tool": "create_avatar",
+    "preview": "offline.svg"
+  },
+  {
+    "id": "outcomes",
+    "label": "Success and error feedback",
+    "group": "presence",
+    "type": "expressions",
+    "description": "Map avatar expressions to app outcomes.",
+    "tool": "create_expression_pack",
+    "preview": "outcomes.svg"
+  },
+  {
+    "id": "kanban",
+    "label": "Task assignees",
+    "group": "collaboration",
+    "type": "workflow",
+    "description": "Identify owners on a project board.",
+    "tool": "create_avatar_batch",
+    "preview": "kanban.svg"
+  },
+  {
+    "id": "editors",
+    "label": "Document collaborators",
+    "group": "collaboration",
+    "type": "list",
+    "description": "Show people currently editing a document.",
+    "tool": "create_avatar_batch",
+    "preview": "editors.svg"
+  },
+  {
+    "id": "reviewers",
+    "label": "Code review participants",
+    "group": "collaboration",
+    "type": "list",
+    "description": "Show authors and reviewers near changes.",
+    "tool": "generate_identity",
+    "preview": "reviewers.svg"
+  },
+  {
+    "id": "calendar",
+    "label": "Meeting attendees",
+    "group": "collaboration",
+    "type": "list",
+    "description": "Represent invitees in calendar events.",
+    "tool": "create_avatar_batch",
+    "preview": "calendar.svg"
+  },
+  {
+    "id": "crm",
+    "label": "Contact directory",
+    "group": "collaboration",
+    "type": "profile",
+    "description": "Give contact records a default identity.",
+    "tool": "generate_identity",
+    "preview": "crm.svg"
+  },
+  {
+    "id": "agent-team",
+    "label": "Multi-agent team",
+    "group": "collaboration",
+    "type": "variants",
+    "description": "Differentiate agents while preserving brand colors.",
+    "tool": "create_avatar_variants",
+    "preview": "agent-team.svg"
+  },
+  {
+    "id": "app-icon",
+    "label": "App icon concept",
+    "group": "branding",
+    "type": "brand",
+    "description": "Start an icon design from a robot mascot.",
+    "tool": "create_avatar",
+    "preview": "app-icon.svg"
+  },
+  {
+    "id": "project-logo",
+    "label": "Project logo",
+    "group": "branding",
+    "type": "brand",
+    "description": "Give side projects an expressive visual mark.",
+    "tool": "create_avatar",
+    "preview": "project-logo.svg"
+  },
+  {
+    "id": "favicon",
+    "label": "Favicon source",
+    "group": "branding",
+    "type": "brand",
+    "description": "Export SVG or PNG as a favicon source.",
+    "tool": "create_avatar",
+    "preview": "favicon.svg"
+  },
+  {
+    "id": "mobile",
+    "label": "Mobile account screen",
+    "group": "branding",
+    "type": "profile",
+    "description": "Use exported assets in a native app.",
+    "tool": "create_avatar",
+    "preview": "mobile.svg"
+  },
+  {
+    "id": "email",
+    "label": "Email signature",
+    "group": "branding",
+    "type": "email",
+    "description": "Add a personal mark to your signature.",
+    "tool": "SVG / PNG export",
+    "preview": "email.svg"
+  },
+  {
+    "id": "slides",
+    "label": "Speaker and slide identity",
+    "group": "branding",
+    "type": "profile",
+    "description": "Use a consistent avatar in presentations.",
+    "tool": "SVG / PNG export",
+    "preview": "slides.svg"
+  },
+  {
+    "id": "portfolio",
+    "label": "Portfolio identity",
+    "group": "content",
+    "type": "profile",
+    "description": "Carry your avatar across a personal site.",
+    "tool": "SVG / PNG export",
+    "preview": "portfolio.svg"
+  },
+  {
+    "id": "stream",
+    "label": "Streaming channel identity",
+    "group": "content",
+    "type": "brand",
+    "description": "Use an avatar as a channel identity asset.",
+    "tool": "GIF / PNG export",
+    "preview": "stream.svg"
+  },
+  {
+    "id": "newsletter",
+    "label": "Newsletter author",
+    "group": "content",
+    "type": "email",
+    "description": "Show the author in newsletter headers.",
+    "tool": "PNG export",
+    "preview": "newsletter.svg"
+  },
+  {
+    "id": "social",
+    "label": "Social profile picture",
+    "group": "content",
+    "type": "profile",
+    "description": "Upload a profile image where supported.",
+    "tool": "PNG export",
+    "preview": "social.svg"
+  },
+  {
+    "id": "members",
+    "label": "Membership cards",
+    "group": "content",
+    "type": "profile",
+    "description": "Personalize fictional community member cards.",
+    "tool": "create_avatar_batch",
+    "preview": "members.svg"
+  },
+  {
+    "id": "launch",
+    "label": "Launch and milestone graphics",
+    "group": "content",
+    "type": "brand",
+    "description": "Add a mascot to launch announcements.",
+    "tool": "SVG / GIF export",
+    "preview": "launch.svg"
+  },
+  {
+    "id": "character",
+    "label": "Game character portrait",
+    "group": "learning",
+    "type": "game",
+    "description": "Give players a customizable portrait.",
+    "tool": "create_avatar",
+    "preview": "character.svg"
+  },
+  {
+    "id": "leaderboard",
+    "label": "Leaderboard players",
+    "group": "learning",
+    "type": "list",
+    "description": "Use repeatable avatars beside player scores.",
+    "tool": "generate_identity",
+    "preview": "leaderboard.svg"
+  },
+  {
+    "id": "tutor",
+    "label": "Learning companion",
+    "group": "learning",
+    "type": "assistant",
+    "description": "Add a character beside lesson guidance.",
+    "tool": "create_avatar_component",
+    "preview": "tutor.svg"
+  },
+  {
+    "id": "quiz",
+    "label": "Quiz feedback",
+    "group": "learning",
+    "type": "expressions",
+    "description": "Celebrate answers or show retry feedback.",
+    "tool": "create_expression_pack",
+    "preview": "quiz.svg"
+  },
+  {
+    "id": "achievement",
+    "label": "Achievement card",
+    "group": "learning",
+    "type": "game",
+    "description": "Personalize an achievement illustration.",
+    "tool": "create_avatar",
+    "preview": "achievement.svg"
+  },
+  {
+    "id": "collectibles",
+    "label": "Collectible character cards",
+    "group": "learning",
+    "type": "variants",
+    "description": "Generate visual character collections.",
+    "tool": "create_avatar_variants",
+    "preview": "collectibles.svg"
+  },
+  {
+    "id": "identicons",
+    "label": "Repeatable default identities",
+    "group": "developer",
+    "type": "fixture",
+    "description": "Generate a stable look from an opaque ID.",
+    "tool": "generate_identity",
+    "preview": "identicons.svg"
+  },
+  {
+    "id": "brand-kit",
+    "label": "Brand-matched variants",
+    "group": "developer",
+    "type": "variants",
+    "description": "Keep colors fixed while varying accessories.",
+    "tool": "suggest_brand_palette + create_avatar_variants",
+    "preview": "brand-kit.svg"
+  },
+  {
+    "id": "expression-pack",
+    "label": "Expression asset pack",
+    "group": "developer",
+    "type": "expressions",
+    "description": "Export six named states for app logic.",
+    "tool": "create_expression_pack",
+    "preview": "expression-pack.svg"
+  },
+  {
+    "id": "sprites",
+    "label": "Sprite sheet coordinates",
+    "group": "developer",
+    "type": "sprites",
+    "description": "Use frame coordinates in canvas or games.",
+    "tool": "create_sprite_sheet",
+    "preview": "sprites.svg"
+  },
+  {
+    "id": "fixtures",
+    "label": "Demo and test fixtures",
+    "group": "developer",
+    "type": "list",
+    "description": "Create named users for mock interfaces.",
+    "tool": "create_avatar_batch",
+    "preview": "fixtures.svg"
+  },
+  {
+    "id": "interactive",
+    "label": "Interactive browser component",
+    "group": "developer",
+    "type": "assistant",
+    "description": "Generate npm integration code for live controls.",
+    "tool": "create_avatar_component",
+    "preview": "interactive.svg"
+  }
+]
