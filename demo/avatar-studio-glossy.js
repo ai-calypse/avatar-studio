@@ -5,11 +5,14 @@ import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
 import { accessoryMarkup, HEADWEAR } from '../src/avatar-studio-accessories.js';
 
 const loader=new SVGLoader();
-function vinyl(color) {
- return new THREE.MeshPhysicalMaterial({color,roughness:.19,metalness:0,clearcoat:1,clearcoatRoughness:.07,envMapIntensity:1.25});
+function vinyl(color,opacity=1,cache) {
+ const key=`${color}:${opacity}`;
+ if(cache?.has(key))return cache.get(key);
+ const material=new THREE.MeshPhysicalMaterial({color,opacity,transparent:opacity<1,roughness:.19,metalness:0,clearcoat:1,clearcoatRoughness:.07,envMapIntensity:1.25});
+ cache?.set(key,material);return material;
 }
 function release(group) {
- group.traverse(object=>{object.geometry?.dispose();if(object.material)for(const material of [].concat(object.material))material.dispose();});
+ group.traverse(object=>object.geometry?.dispose());
  group.clear();
 }
 // Loft the existing silhouette into a smooth closed volume, rather than a flat extrusion.
@@ -30,7 +33,7 @@ function bodyGeometry(face) {
  const smooth=mergeVertices(geometry,.001);geometry.dispose();smooth.computeVertexNormals();
  return smooth;
 }
-function addAccessories(group,face,config) {
+function addAccessories(group,face,config,materials) {
  const color=config.matchEyes?config.eyes:config.accessoryColor;
  const markup=accessoryMarkup(face,config).replaceAll('var(--robot-accessory-color)',color);
  const paths=loader.parse(`<svg xmlns="http://www.w3.org/2000/svg">${markup}</svg>`).paths;
@@ -41,7 +44,7 @@ function addAccessories(group,face,config) {
   const z=(rear?24:72)+layer++*.8;
   if(style.fill&&style.fill!=='none')for(const shape of path.toShapes()) {
    const geometry=new THREE.ExtrudeGeometry(shape,{depth:8,bevelEnabled:true,bevelSegments:4,steps:1,bevelSize:2,bevelThickness:3,curveSegments:20});
-   const material=vinyl(style.fill);material.transparent=Number(style.fillOpacity)<1;material.opacity=Number(style.fillOpacity??1);
+   const material=vinyl(style.fill,Number(style.fillOpacity??1)*Number(style.opacity??1),materials);
    const mesh=new THREE.Mesh(geometry,material);mesh.scale.y=-1;mesh.position.set(-120,120,z);group.add(mesh);
   }
   if(style.stroke&&style.stroke!=='none')for(const subpath of path.subPaths) {
@@ -49,7 +52,7 @@ function addAccessories(group,face,config) {
    if(points.length<2)continue;
    const curve=new THREE.CatmullRomCurve3(points,false,'centripetal');
    const geometry=new THREE.TubeGeometry(curve,Math.min(160,points.length*3),Math.max(.6,Number(style.strokeWidth)/2),8,false);
-   group.add(new THREE.Mesh(geometry,vinyl(style.stroke)));
+   group.add(new THREE.Mesh(geometry,vinyl(style.stroke,Number(style.strokeOpacity??1)*Number(style.opacity??1),materials)));
   }
  }
 }
@@ -71,6 +74,8 @@ export function createGlossyPreview(container,face,readConfig) {
   const light=new THREE.DirectionalLight(color,intensity);light.position.set(x,y,z);scene.add(light);
  }
  const toy=new THREE.Group();scene.add(toy);
+ const materials=new Map();
+ const paint=color=>vinyl(color,1,materials);
  let eyes=[],bulb,config,active=false,frame=0,disposed=false,exporting=false;
  let pointer={x:0,y:0};
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -79,19 +84,21 @@ export function createGlossyPreview(container,face,readConfig) {
  container.addEventListener('pointermove',move);container.addEventListener('pointerleave',leave);
  function rebuild() {
   if(disposed)return;
-  config=readConfig();release(toy);bulb=undefined;
-  toy.add(new THREE.Mesh(bodyGeometry(face),vinyl(config.body)));
+  config=readConfig();bulb?.material.dispose();release(toy);bulb=undefined;
+  toy.add(new THREE.Mesh(bodyGeometry(face),paint(config.body)));
   eyes=[-1,1].map(side=>{
-   const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),vinyl(config.eyes));
+   const mesh=new THREE.Mesh(new THREE.SphereGeometry(1,32,24),paint(config.eyes));
    mesh.position.set(side*(34+config.spacing),-6,66);
    toy.add(mesh);return mesh;
   });
   if(config.antenna&&!HEADWEAR.has(config.accessory)) {
    const top=Math.max(...face._parseHeadPoints(face._headShape.getAttribute('d')).map(point=>(120-point.y)*.94));
-   const stem=new THREE.Mesh(new THREE.CylinderGeometry(4,5,28,16),vinyl(config.body));stem.position.set(0,top+8,0);toy.add(stem);
-   bulb=new THREE.Mesh(new THREE.SphereGeometry(15,24,20),vinyl(config.body));bulb.position.set(0,top+28,0);toy.add(bulb);
+   const stem=new THREE.Mesh(new THREE.CylinderGeometry(4,5,28,16),paint(config.body));stem.position.set(0,top+8,0);toy.add(stem);
+   bulb=new THREE.Mesh(new THREE.SphereGeometry(15,24,20),vinyl(config.body,1,materials));bulb.material=bulb.material.clone();bulb.position.set(0,top+28,0);toy.add(bulb);
   }
-  addAccessories(toy,face,config);
+  addAccessories(toy,face,config,materials);
+  // Keep shader programs warm across design changes, with a bounded color cache.
+  if(materials.size>64){const used=new Set();toy.traverse(object=>{if(object.material)used.add(object.material);});for(const [key,material] of materials){if(materials.size<=32)break;if(!used.has(material)){material.dispose();materials.delete(key);}}}
   container.dataset.accessory=config.accessory;container.dataset.shape=config.bodyShape;
   render(0);
  }
@@ -150,6 +157,6 @@ export function createGlossyPreview(container,face,readConfig) {
     return new Blob([encodeGIF(frames,320,320,100)],{type:'image/gif'});
    }finally{exporting=false;render(performance.now());}
   },
-  dispose(){disposed=true;cancelAnimationFrame(frame);resize.disconnect();container.removeEventListener('pointermove',move);container.removeEventListener('pointerleave',leave);release(toy);environment.dispose();renderer.dispose();renderer.domElement.remove();}
+  dispose(){disposed=true;cancelAnimationFrame(frame);resize.disconnect();container.removeEventListener('pointermove',move);container.removeEventListener('pointerleave',leave);bulb?.material.dispose();release(toy);for(const material of materials.values())material.dispose();materials.clear();environment.dispose();renderer.dispose();renderer.domElement.remove();}
  };
 }
