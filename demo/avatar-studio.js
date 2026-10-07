@@ -1,6 +1,6 @@
 import { avatarSVG, saveDownload } from './agent-robot-avatar-demo-customize.js';
 import { exportAvatar, customizeAvatar } from '../agent-robot-avatar.js';
-import { translateStudio } from './avatar-studio-i18n.js';
+import { translateStudio, translatePhrase } from './avatar-studio-i18n.js';
 import { mountUseCases } from './avatar-studio-use-cases.js';
 
 const canvas = document.getElementById('canvas');
@@ -101,6 +101,55 @@ const reset = document.getElementById('robot-custom-reset');
 shell.querySelector('.editor-heading').appendChild(reset);
 fields.append(colorGroup, faceGroup, accessoryGroup);
 const status = document.getElementById('export-status');
+const renderStyle = document.createElement('fieldset');
+renderStyle.className = 'custom-group render-style';
+renderStyle.innerHTML = '<legend>Style</legend><div class="render-style-options"><button type="button" data-render-style="svg" aria-pressed="true">Classic SVG</button><button type="button" data-render-style="glossy" aria-pressed="false">Glossy 3D</button></div><p>Glossy 3D is a preview. Export PNG or GIF; SVG keeps the classic look.</p>';
+fields.prepend(renderStyle);
+const glossyContainer = document.createElement('div');
+glossyContainer.className = 'glossy-preview';
+glossyContainer.hidden = true;
+stage.appendChild(glossyContainer);
+let glossy, selectedStyle = 'svg';
+function glossyConfig() {
+  const design = Object.fromEntries([...fields.querySelectorAll('[data-setting]')].map(input => [input.dataset.setting, input.type === 'checkbox' ? input.checked : input.type === 'range' ? Number(input.value) : input.value]));
+  return { ...design, antenna: antennaControl.checked, antennaFlash: document.getElementById('demoAntennaFlash').checked, pointerFollow: document.getElementById('demoPointerFollow').checked, motion: face.getAttribute('motion') };
+}
+async function selectStyle(style) {
+  renderStyle.querySelectorAll('button').forEach(button => button.disabled = true);
+  try {
+    if (style === 'glossy' && !glossy) {
+      const { createGlossyPreview } = await import('./generated/glossy.js');
+      glossy = createGlossyPreview(glossyContainer, face, glossyConfig);
+    }
+    selectedStyle = style;
+    glossy?.setActive(style === 'glossy');
+    home.style.visibility = style === 'glossy' ? 'hidden' : '';
+    if (hint) hint.hidden = style === 'glossy';
+    stage.classList.toggle('is-glossy', style === 'glossy');
+    renderStyle.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.renderStyle === style)));
+  } catch {
+    glossy?.dispose(); glossy = undefined; glossyContainer.hidden = true;
+    home.style.visibility = ''; selectedStyle = 'svg'; stage.classList.remove('is-glossy');
+    if (hint) hint.hidden = false;
+    status.textContent = translatePhrase('Glossy 3D could not start. You can still use Classic SVG.', document.documentElement.lang);
+  } finally {
+    renderStyle.querySelectorAll('button').forEach(button => button.disabled = false);
+  }
+}
+renderStyle.addEventListener('click', event => {
+  const button = event.target.closest('[data-render-style]');
+  if (button) void selectStyle(button.dataset.renderStyle);
+});
+let glossyUpdate;
+function updateGlossy() {
+  clearTimeout(glossyUpdate);
+  glossyUpdate = setTimeout(() => { if (selectedStyle === 'glossy') glossy?.update(); }, 80);
+}
+shell.addEventListener('input', updateGlossy);
+shell.addEventListener('change', updateGlossy);
+reset.addEventListener('click', updateGlossy);
+document.getElementById('robot-shape-shuffle').addEventListener('click', updateGlossy);
+window.addEventListener('pagehide', event => { if (!event.persisted) glossy?.dispose(); });
 let exporting = false;
 async function download(format) {
   if (exporting) return;
@@ -108,8 +157,8 @@ async function download(format) {
   shell.querySelectorAll('.download-row button').forEach(button => button.disabled = true);
   try {
     if (format === 'gif') status.textContent = 'Recording two seconds of your live avatar…';
-    const blob = await exportAvatar(face, { format });
-    saveDownload(blob, `my-avatar.${format}`);
+    const blob = selectedStyle === 'glossy' && format !== 'svg' ? await glossy[format]() : await exportAvatar(face, { format });
+    saveDownload(blob, `my-avatar${selectedStyle === 'glossy' && format !== 'svg' ? '-3d' : ''}.${format}`);
     status.textContent = `Your ${format.toUpperCase()} is ready. Make yourself at home anywhere.`;
   } catch {
     status.textContent = 'The download couldn’t be created. Please try again.';

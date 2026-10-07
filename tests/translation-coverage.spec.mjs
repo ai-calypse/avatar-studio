@@ -25,7 +25,7 @@ test('every supported studio locale covers text, options, tooltips, and accessib
 
 test('dynamic export feedback translates when overwritten and languages switch', async ({page})=>{
   await page.goto('/demo/?lang=es', {waitUntil:'networkidle'});
-  await page.getByRole('button',{name:'SVG',exact:false}).click();
+  await page.locator('#studio-svg').click();
   await expect(page.locator('#export-status')).toHaveText('Tu SVG está listo. Siéntete en casa en cualquier lugar.');
   await page.locator('.studio-language').selectOption('fr');
   await expect(page.locator('#export-status')).not.toContainText('Tu SVG');

@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import globals from 'globals';
 
 export default [
-  { ignores: ['node_modules/**', 'mcp/node_modules/**', 'dist/**', '.pages-site/**', 'test-results/**', 'playwright-report/**'] },
+  { ignores: ['node_modules/**', 'mcp/node_modules/**', 'dist/**', 'demo/generated/**', '.pages-site/**', 'test-results/**', 'playwright-report/**'] },
   js.configs.recommended,
   { rules: { 'no-empty': ['error', { allowEmptyCatch: true }] } },
   { files: ['src/**/*.js', 'demo/**/*.js', 'docs/**/*.js', 'agent-robot-avatar.js'], languageOptions: { globals: globals.browser } },

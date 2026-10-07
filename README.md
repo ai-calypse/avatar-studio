@@ -11,6 +11,14 @@ Built on [Agent Robot Avatar by CX ArtLab](https://github.com/CX-ArtLab/agent-ro
 
 The documentation covers creator guides, npm integration, MCP setup, API controls, and visual use cases.
 
+## Glossy 3D preview
+
+The creator includes an optional **Glossy 3D** style with rounded vinyl bodies, reflective materials, raised eyes, and the existing shape-fitting accessory catalog. Switch styles in the editor; colors, eye controls, and body shapes carry over. PNG captures the transparent 3D view; GIF records a floating and blinking loop. SVG retains the original vector appearance.
+
+This first version requires browser WebGL. Devices without it keep the SVG editor. Reduced-motion preferences stop the floating motion. Accessories are currently converted from their SVG outlines into raised 3D shapes; individually sculpted accessories and full gesture parity are future work. The npm component and local MCP image tools continue to render the existing SVG style.
+
+The creator loads its self-hosted [Three.js](https://threejs.org/) renderer only when 3D is selected. For local development, `npm run dev` builds the renderer automatically; `npm run build:glossy` rebuilds it after changes. Three.js is MIT licensed; its license is included in the deployed bundle directory.
+
 ## Avatar examples
 
 Try the [live creator](https://ai-calypse.github.io/avatar-studio/) or use MCP to make your own. These **24 GIF examples were generated through the Avatar Studio MCP server**, using different colors, accessories, expressions, classic and seeded fluid bodies, and profile badges. Each preview links to its downloadable GIF.

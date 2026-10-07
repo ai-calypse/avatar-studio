@@ -13,3 +13,6 @@ mcp/client-config.local.json
 # Generated documentation pages (source: README and MCP guides).
 docs/*.html
 docs/search-index.json
+
+# Generated, self-hosted glossy renderer bundle.
+demo/generated/
