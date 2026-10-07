@@ -208,9 +208,12 @@ export function createGlossyPreview(container,face,readConfig) {
  }
  function tick(time) {
   if(disposed)return;
-  if(active&&!document.hidden&&!exporting)render(time);
+  // Static reduced-motion views redraw on edits, expressions, resize, or preference changes.
+  if(active&&!document.hidden&&!exporting&&!reduced.matches&&config.motion!=='reduce')render(time);
   frame=requestAnimationFrame(tick);
  }
+ const motionPreferenceChanged=()=>{if(active&&!exporting)render(performance.now());};
+ reduced.addEventListener('change',motionPreferenceChanged);
  const resize=new ResizeObserver(()=>{
   const {width,height}=container.getBoundingClientRect();
   if(width&&height){renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();render(0);}
@@ -245,6 +248,6 @@ export function createGlossyPreview(container,face,readConfig) {
     return new Blob([encodeGIF(frames,320,320,100)],{type:'image/gif'});
    }finally{exporting=false;render(performance.now());}
   },
-  dispose(){disposed=true;cancelAnimationFrame(frame);resize.disconnect();container.removeEventListener('pointermove',move);container.removeEventListener('pointerleave',leave);bulb?.material.dispose();release(toy);for(const material of materials.values())material.dispose();materials.clear();environment.dispose();renderer.dispose();renderer.domElement.remove();expressionLabel.remove();}
+  dispose(){disposed=true;reduced.removeEventListener('change',motionPreferenceChanged);cancelAnimationFrame(frame);resize.disconnect();container.removeEventListener('pointermove',move);container.removeEventListener('pointerleave',leave);bulb?.material.dispose();release(toy);for(const material of materials.values())material.dispose();materials.clear();environment.dispose();renderer.dispose();renderer.domElement.remove();expressionLabel.remove();}
  };
 }
