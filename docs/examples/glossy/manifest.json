@@ -1,0 +1,15 @@
+{
+  "renderer": "Avatar Studio Glossy 3D browser preview",
+  "format": { "gif": { "width": 320, "height": 320, "frames": 40, "frameDelayMs": 100 }, "png": { "width": 512, "height": 512 } },
+  "defaults": { "matchEyes": false, "eyeSize": 95, "spacing": 0, "bodyShape": "classic", "shapeSeed": 0, "headRoundness": 65, "antenna": true },
+  "examples": [
+    { "id": "music", "name": "Music lover", "action": "idle", "appearance": { "body": "#153a67", "eyes": "#9af5ff", "accessoryColor": "#ff923b", "accessory": "headphones", "bodyShape": "random", "shapeSeed": 42 } },
+    { "id": "botanical", "name": "Botanical love", "action": "love", "appearance": { "body": "#17644c", "eyes": "#ddff86", "accessoryColor": "#ff73b3", "accessory": "flower", "bodyShape": "random", "shapeSeed": 137 } },
+    { "id": "royal", "name": "Royal surprise", "action": "surprise", "appearance": { "body": "#632eaa", "eyes": "#fff4cf", "accessoryColor": "#ffc341", "accessory": "crown", "headRoundness": 100 } },
+    { "id": "wizard", "name": "Happy wizard", "action": "success", "appearance": { "body": "#123a58", "eyes": "#6ffff1", "accessoryColor": "#8f69ff", "accessory": "wizard", "headRoundness": 45 } },
+    { "id": "sleepy", "name": "Sleepy beanie", "action": "sleep", "appearance": { "body": "#e6a13c", "eyes": "#523612", "accessoryColor": "#88b7ff", "accessory": "beanie", "headRoundness": 95 } },
+    { "id": "fox", "name": "Curious fox", "action": "inspect", "appearance": { "body": "#d55715", "eyes": "#fff0d8", "accessoryColor": "#ffae58", "accessory": "fox-ears", "bodyShape": "random", "shapeSeed": 812 } },
+    { "id": "bookworm", "name": "Bookworm", "action": "bored", "appearance": { "body": "#244862", "eyes": "#ffcab0", "accessoryColor": "#ff9d72", "accessory": "round-glasses", "headRoundness": 20 } },
+    { "id": "party", "name": "Party hearts", "action": "love", "appearance": { "body": "#a52eaa", "eyes": "#ffecff", "accessoryColor": "#5dddff", "accessory": "party", "bodyShape": "random", "shapeSeed": 2001 } }
+  ]
+}
