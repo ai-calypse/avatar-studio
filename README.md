@@ -19,6 +19,17 @@ This first version requires browser WebGL. Devices without it keep the SVG edito
 
 The creator loads its self-hosted [Three.js](https://threejs.org/) renderer only when 3D is selected. For local development, `npm run dev` builds the renderer automatically; `npm run build:glossy` rebuilds it after changes. Three.js is MIT licensed; its license is included in the deployed bundle directory.
 
+## Glossy 3D examples
+
+Eight animated examples rendered with the creator’s actual **Glossy 3D** renderer: reflective vinyl bodies, shape-fitting accessories, fluid silhouettes, and different expressions. Click an animation to open its GIF, or download its transparent PNG. These are browser renders; the npm component and MCP exports currently use the 2D SVG style below.
+
+| | | | |
+| --- | --- | --- | --- |
+| **Music lover**<br>[![Music lover glossy 3D animated avatar](docs/examples/glossy/music.gif)](docs/examples/glossy/music.gif)<br>[PNG](docs/examples/glossy/music.png) | **Botanical love**<br>[![Botanical love glossy 3D animated avatar](docs/examples/glossy/botanical.gif)](docs/examples/glossy/botanical.gif)<br>[PNG](docs/examples/glossy/botanical.png) | **Royal surprise**<br>[![Royal surprise glossy 3D animated avatar](docs/examples/glossy/royal.gif)](docs/examples/glossy/royal.gif)<br>[PNG](docs/examples/glossy/royal.png) | **Happy wizard**<br>[![Happy wizard glossy 3D animated avatar](docs/examples/glossy/wizard.gif)](docs/examples/glossy/wizard.gif)<br>[PNG](docs/examples/glossy/wizard.png) |
+| **Sleepy beanie**<br>[![Sleepy beanie glossy 3D animated avatar](docs/examples/glossy/sleepy.gif)](docs/examples/glossy/sleepy.gif)<br>[PNG](docs/examples/glossy/sleepy.png) | **Curious fox**<br>[![Curious fox glossy 3D animated avatar](docs/examples/glossy/fox.gif)](docs/examples/glossy/fox.gif)<br>[PNG](docs/examples/glossy/fox.png) | **Bookworm**<br>[![Bookworm glossy 3D animated avatar](docs/examples/glossy/bookworm.gif)](docs/examples/glossy/bookworm.gif)<br>[PNG](docs/examples/glossy/bookworm.png) | **Party hearts**<br>[![Party hearts glossy 3D animated avatar](docs/examples/glossy/party.gif)](docs/examples/glossy/party.gif)<br>[PNG](docs/examples/glossy/party.png) |
+
+Try **Glossy 3D** in the [live creator](https://ai-calypse.github.io/avatar-studio/). The [glossy example manifest](docs/examples/glossy/manifest.json) records each design, expression, and shape seed. To regenerate these assets from a local checkout, install the development dependencies and Playwright Chromium, then run `node scripts/build-glossy-examples.mjs`. For smaller GIF files with adaptive color palettes, run `python3 scripts/optimize-glossy-examples.py` afterward (requires Pillow).
+
 ## Avatar examples
 
 Try the [live creator](https://ai-calypse.github.io/avatar-studio/) or use MCP to make your own. These **24 GIF examples were generated through the Avatar Studio MCP server**, using different colors, accessories, expressions, classic and seeded fluid bodies, and profile badges. Each preview links to its downloadable GIF.
