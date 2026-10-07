@@ -60,7 +60,7 @@ function curvedAccessory(geometry,surface,offset) {
    else{const m=c.clone().add(a).multiplyScalar(.5);triangle(a,b,m,depth+1);triangle(m,b,c,depth+1);}
    return;
   }
-  for(const p of [a,b,c]){const x=p.x-120,y=120-p.y;vertices.push(x,y,surface(x,y)+offset+p.z);}
+  for(const p of [a,b,c]){const x=p.x-120,y=120-p.y;vertices.push(x,y,surface(x,y)+offset(x,y)+p.z);}
  }
  for(let i=0;i<position.count;i+=3)triangle(...[0,1,2].map(j=>new THREE.Vector3().fromBufferAttribute(position,i+j)));
  if(source!==geometry)source.dispose();geometry.dispose();
@@ -92,7 +92,9 @@ function addAccessories(group,face,config,materials,outline) {
  let layer=0;
  const eyewear=/glasses|goggles|visor|aviators|cat-eye|monocle|eye-patch/.test(config.accessory);
  for(const path of paths) {
-  const style=path.userData.style,offset=(eyewear?16:2)+layer++*.8;
+  const style=path.userData.style,layerOffset=layer++*.8;
+  // Keep lenses in front of raised eyes, but bring their arms back to the rim.
+  const offset=(x,y)=>(eyewear?16*Math.min(1,surface(x,y)/32):2)+layerOffset;
   if(style.fill&&style.fill!=='none')for(const shape of path.toShapes()) {
    const flat=new THREE.ExtrudeGeometry(shape,{depth:6,bevelEnabled:true,bevelSegments:3,steps:1,bevelSize:1.5,bevelThickness:2,curveSegments:20});
    const material=vinyl(style.fill,Number(style.fillOpacity??1)*Number(style.opacity??1),materials);
@@ -100,7 +102,7 @@ function addAccessories(group,face,config,materials,outline) {
   }
   if(style.stroke&&style.stroke!=='none')for(const subpath of path.subPaths) {
    const radius=Math.max(.6,Number(style.strokeWidth)/2);
-   const points=subpath.getPoints(100).map(point=>{const x=point.x-120,y=120-point.y;return new THREE.Vector3(x,y,surface(x,y)+offset+radius);});
+   const points=subpath.getPoints(100).map(point=>{const x=point.x-120,y=120-point.y;return new THREE.Vector3(x,y,surface(x,y)+offset(x,y)+radius);});
    if(points.length<2)continue;
    const geometry=new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points,false,'centripetal'),Math.min(300,points.length*3),radius,8,false);
    group.add(new THREE.Mesh(geometry,vinyl(style.stroke,Number(style.strokeOpacity??1)*Number(style.opacity??1),materials)));
