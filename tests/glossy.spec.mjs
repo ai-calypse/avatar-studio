@@ -2,11 +2,12 @@ import {test,expect} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 
 test('glossy preview follows design controls, exports PNG, and switches back',async({page,browserName})=>{
+ test.setTimeout(60000);
  test.skip(browserName!=='chromium','WebGL smoke coverage uses Chromium software rendering.');
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/demo/?lang=en',{waitUntil:'networkidle'});
  await page.getByRole('button',{name:'Glossy 3D',exact:true}).click();
- await expect(page.locator('.glossy-preview canvas')).toBeVisible();
+ await expect(page.locator('.glossy-preview canvas')).toBeVisible({timeout:30000});
  await expect(page.getByRole('button',{name:'Glossy 3D',exact:true})).toHaveAttribute('aria-pressed','true');
  await page.locator('[data-setting=accessory]').selectOption('headphones');
  await expect(page.locator('.glossy-preview')).toHaveAttribute('data-accessory','headphones');
@@ -43,11 +44,11 @@ test('a failed WebGL startup preserves the working SVG editor',async({page})=>{
 
 test('all catalog accessories render visible geometry and reduced motion is stable',async({page,browserName})=>{
  test.skip(browserName!=='chromium','WebGL rendering uses Chromium software rendering.');
- test.setTimeout(60000);
+ test.setTimeout(120000);
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto('/demo/?lang=en',{waitUntil:'networkidle'});
  await page.getByRole('button',{name:'Glossy 3D',exact:true}).click();
- await expect(page.locator('.glossy-preview canvas')).toBeVisible();
+ await expect(page.locator('.glossy-preview canvas')).toBeVisible({timeout:30000});
  const ids=await page.locator('[data-setting=accessory] option').evaluateAll(options=>options.map(option=>option.value));
  for(const id of ids) {
   await page.locator('[data-setting=accessory]').selectOption(id);

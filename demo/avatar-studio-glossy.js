@@ -87,8 +87,9 @@ export function createGlossyPreview(container,face,readConfig) {
    toy.add(mesh);return mesh;
   });
   if(config.antenna&&!HEADWEAR.has(config.accessory)) {
-   const stem=new THREE.Mesh(new THREE.CylinderGeometry(4,5,22,16),vinyl(config.body));stem.position.set(0,105,0);toy.add(stem);
-   bulb=new THREE.Mesh(new THREE.SphereGeometry(15,24,20),vinyl(config.body));bulb.position.set(0,124,0);toy.add(bulb);
+   const top=Math.max(...face._parseHeadPoints(face._headShape.getAttribute('d')).map(point=>(120-point.y)*.94));
+   const stem=new THREE.Mesh(new THREE.CylinderGeometry(4,5,28,16),vinyl(config.body));stem.position.set(0,top+8,0);toy.add(stem);
+   bulb=new THREE.Mesh(new THREE.SphereGeometry(15,24,20),vinyl(config.body));bulb.position.set(0,top+28,0);toy.add(bulb);
   }
   addAccessories(toy,face,config);
   container.dataset.accessory=config.accessory;container.dataset.shape=config.bodyShape;
