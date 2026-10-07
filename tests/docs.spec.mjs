@@ -6,7 +6,7 @@ test('documentation navigation, anchored guides, and all visual assets work',asy
  await expect(page.getByRole('heading',{name:'Start here',exact:true})).toBeVisible();
  await page.locator('#docs-sidebar').getByRole('link',{name:'Examples and use cases',exact:true}).click();
  await expect(page.getByRole('heading',{name:'Avatars in real applications',exact:false})).toBeVisible();
- await expect(page.locator('article img')).toHaveCount(34);
+ await expect(page.locator('article img')).toHaveCount(42);
  const broken=await page.locator('article img').evaluateAll(async images=>{
   await Promise.all(images.map(image=>{image.loading='eager';return image.decode().catch(()=>{});}));
   return images.filter(image=>!image.naturalWidth).map(image=>image.src);
