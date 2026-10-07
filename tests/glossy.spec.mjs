@@ -61,5 +61,7 @@ test('all catalog accessories render visible geometry and reduced motion is stab
   expect(visiblePixels,id).toBeGreaterThan(100);
  }
  const initial=await page.locator('.glossy-preview canvas').evaluate(canvas=>canvas.toDataURL());
- await expect.poll(()=>page.locator('.glossy-preview canvas').evaluate(canvas=>canvas.toDataURL())).toBe(initial);
+ await page.mouse.move(150,220);
+ await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+ expect(await page.locator('.glossy-preview canvas').evaluate(canvas=>canvas.toDataURL())).toBe(initial);
 });
