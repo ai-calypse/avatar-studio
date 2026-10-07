@@ -8,6 +8,11 @@ Avatar Studio uses Semantic Versioning for the browser package. The local MCP se
 
 - Optional glossy 3D creator preview with shared colors, body shapes, and all 50 accessories; transparent PNG and animated GIF exports; reduced-motion support and SVG fallback when WebGL is unavailable.
 
+### Fixed
+
+- Glossy accessories now bend around the body surface instead of floating on a flat plane; headphone bands and cushions attach to classic and fluid silhouettes.
+- Glossy expression buttons now control 3D eye shapes and gestures directly, preserve the selected expression during customization and exports, and retain static expressions with reduced motion.
+
 ## [Avatar Studio 0.2.0] - 2026-10-06
 
 ### Added
