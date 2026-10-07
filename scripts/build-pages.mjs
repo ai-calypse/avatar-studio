@@ -2,6 +2,8 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { buildGlossy } from './build-glossy.mjs';
+
 import { buildDocs } from './build-docs.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -20,11 +22,12 @@ if (pagesHtml === html) {
 
 await writeFile(path.join(output, 'index.html'), pagesHtml);
 await writeFile(path.join(output, '.nojekyll'), '');
+await buildGlossy(path.join(output,'generated'));
 await cp(path.join(root, 'agent-robot-avatar.js'), path.join(output, 'agent-robot-avatar.js'));
 await cp(path.join(root, 'src'), path.join(output, 'src'), { recursive: true });
 
 for (const entry of await readdir(demo, { withFileTypes: true })) {
-  if (entry.isFile() && /\.(js|css)$/.test(entry.name)) {
+  if (entry.isFile() && entry.name !== 'avatar-studio-glossy.js' && /\.(js|css)$/.test(entry.name)) {
     if (entry.name === 'agent-robot-avatar-demo-customize.js' || entry.name === 'avatar-studio-accessories.js' || entry.name === 'avatar-studio-gif.js') {
       const source = await readFile(path.join(demo, entry.name), 'utf8');
       await writeFile(path.join(output, entry.name), source.replaceAll('../agent-robot-avatar.js', './agent-robot-avatar.js').replaceAll('../src/', './src/'));

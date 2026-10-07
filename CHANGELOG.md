@@ -4,7 +4,9 @@ Avatar Studio uses Semantic Versioning for the browser package. The local MCP se
 
 ## Unreleased
 
-No unreleased changes recorded.
+### Added
+
+- Optional glossy 3D creator preview with shared colors, body shapes, and all 50 accessories; transparent PNG and animated GIF exports; reduced-motion support and SVG fallback when WebGL is unavailable.
 
 ## [Avatar Studio 0.2.0] - 2026-10-06
 

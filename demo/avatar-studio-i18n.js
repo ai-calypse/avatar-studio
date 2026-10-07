@@ -1375,6 +1375,19 @@ const attributeKeys = {
   'Your avatar as a chat profile':'Chat profile avatar', 'Your avatar on a profile card':'Profile avatar',
   'Your avatar as an app assistant':'App assistant avatar', 'Your avatar as a project logo':'Project logo avatar'
 };
+const glossyPhrases = ['Style','Classic SVG','Glossy 3D','Glossy 3D is a preview. Export PNG or GIF; SVG keeps the classic look.','Glossy 3D could not start. You can still use Classic SVG.','Glossy 3D avatar'];
+const glossyLocales = {
+ es: ['Estilo','SVG clásico','3D brillante','El 3D brillante es una vista previa. Exporta PNG o GIF; SVG conserva el aspecto clásico.','No se pudo iniciar el 3D brillante. Puedes seguir usando SVG clásico.','Avatar 3D brillante'],
+ fr: ['Style','SVG classique','3D brillant','Le 3D brillant est un aperçu. Exportez en PNG ou GIF ; le SVG conserve le style classique.','Le 3D brillant n’a pas pu démarrer. Le SVG classique reste disponible.','Avatar 3D brillant'],
+ de: ['Stil','Klassisches SVG','Glänzendes 3D','Glänzendes 3D ist eine Vorschau. Exportiere PNG oder GIF; SVG behält den klassischen Stil.','Glänzendes 3D konnte nicht starten. Klassisches SVG bleibt verfügbar.','Glänzender 3D-Avatar'],
+ pt: ['Estilo','SVG clássico','3D brilhante','O 3D brilhante é uma prévia. Exporte PNG ou GIF; SVG mantém o visual clássico.','Não foi possível iniciar o 3D brilhante. O SVG clássico continua disponível.','Avatar 3D brilhante'],
+ ja: ['スタイル','クラシックSVG','光沢3D','光沢3Dはプレビューです。PNGまたはGIFで書き出せます。SVGは従来の見た目です。','光沢3Dを開始できませんでした。クラシックSVGは引き続き使えます。','光沢3Dアバター'],
+ ko: ['스타일','기본 SVG','광택 3D','광택 3D는 미리보기입니다. PNG 또는 GIF로 내보내세요. SVG는 기본 스타일을 유지합니다.','광택 3D를 시작하지 못했습니다. 기본 SVG는 계속 사용할 수 있습니다.','광택 3D 아바타'],
+ 'zh-CN': ['风格','经典SVG','光泽3D','光泽3D为预览功能。可导出PNG或GIF；SVG保留经典外观。','无法启动光泽3D。你仍可使用经典SVG。','光泽3D头像'],
+ 'zh-TW': ['風格','經典SVG','光澤3D','光澤3D為預覽功能。可匯出PNG或GIF；SVG保留經典外觀。','無法啟動光澤3D。你仍可使用經典SVG。','光澤3D頭像'],
+};
+for (const [language, values] of Object.entries(glossyLocales)) Object.assign(translations[language],Object.fromEntries(glossyPhrases.map((phrase,index)=>[phrase,values[index]])));
+
 export const supportedLanguages = ['en', ...Object.keys(translations)];
 export function translatePhrase(key, language) {
   return translations[language]?.[key] ?? key;
