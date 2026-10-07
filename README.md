@@ -13,9 +13,9 @@ The documentation covers creator guides, npm integration, MCP setup, API control
 
 ## Glossy 3D preview
 
-The creator includes an optional **Glossy 3D** style with rounded vinyl bodies, reflective materials, raised eyes, and the existing shape-fitting accessory catalog. Switch styles in the editor; colors, eye controls, and body shapes carry over. PNG captures the transparent 3D view; GIF records a floating and blinking loop. SVG retains the original vector appearance.
+The creator includes an optional **Glossy 3D** style with rounded vinyl bodies, reflective materials, raised eyes, and the existing shape-fitting accessory catalog. Switch styles in the editor; colors, eye controls, and body shapes carry over. Expression buttons control the 3D face directly, including heart eyes, happy arcs, sleeping eyes, and error crosses. PNG captures the transparent 3D view; GIF records the selected expression with floating and blinking motion. SVG retains the original vector appearance.
 
-This first version requires browser WebGL. Devices without it keep the SVG editor. Reduced-motion preferences stop the floating motion. Accessories are currently converted from their SVG outlines into raised 3D shapes; individually sculpted accessories and full gesture parity are future work. The npm component and local MCP image tools continue to render the existing SVG style.
+This first version requires browser WebGL. Devices without it keep the SVG editor. Reduced-motion preferences stop the floating motion. Accessory outlines curve around the actual body surface, and headphone bands and cushions fit the silhouette. Individually sculpted accessories and full gesture parity are future work. The npm component and local MCP image tools continue to render the existing SVG style.
 
 The creator loads its self-hosted [Three.js](https://threejs.org/) renderer only when 3D is selected. For local development, `npm run dev` builds the renderer automatically; `npm run build:glossy` rebuilds it after changes. Three.js is MIT licensed; its license is included in the deployed bundle directory.
 

@@ -112,7 +112,7 @@ stage.appendChild(glossyContainer);
 let glossy, selectedStyle = 'svg';
 function glossyConfig() {
   const design = Object.fromEntries([...fields.querySelectorAll('[data-setting]')].map(input => [input.dataset.setting, input.type === 'checkbox' ? input.checked : input.type === 'range' ? Number(input.value) : input.value]));
-  return { ...design, antenna: antennaControl.checked, antennaFlash: document.getElementById('demoAntennaFlash').checked, pointerFollow: document.getElementById('demoPointerFollow').checked, motion: face.getAttribute('motion') };
+  return { ...design, loop: document.getElementById('demoLoop').checked, antenna: antennaControl.checked, antennaFlash: document.getElementById('demoAntennaFlash').checked, pointerFollow: document.getElementById('demoPointerFollow').checked, motion: face.getAttribute('motion') };
 }
 async function selectStyle(style) {
   renderStyle.querySelectorAll('button').forEach(button => button.disabled = true);
@@ -123,6 +123,7 @@ async function selectStyle(style) {
     }
     selectedStyle = style;
     glossy?.setActive(style === 'glossy');
+    if (style === 'glossy') glossy?.play(shell.querySelector('button[data-action].demo-active')?.dataset.action || 'idle');
     home.style.visibility = style === 'glossy' ? 'hidden' : '';
     if (hint) hint.hidden = style === 'glossy';
     stage.classList.toggle('is-glossy', style === 'glossy');
@@ -147,7 +148,12 @@ function updateGlossy() {
 }
 shell.addEventListener('input', updateGlossy);
 shell.addEventListener('change', updateGlossy);
-reset.addEventListener('click', updateGlossy);
+// Capture on the ancestor: the original SVG controls consume clicks at their own capture listener.
+shell.addEventListener('click', event => {
+  const button = event.target.closest('button[data-action]');
+  if (button && selectedStyle === 'glossy') glossy?.play(button.dataset.action);
+}, true);
+reset.addEventListener('click', () => { glossy?.play('idle'); updateGlossy(); });
 document.getElementById('robot-shape-shuffle').addEventListener('click', updateGlossy);
 window.addEventListener('pagehide', event => { if (!event.persisted) glossy?.dispose(); });
 let exporting = false;
